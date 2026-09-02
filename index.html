@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ALPACA TOOLS — 업무와 일상에 쓰는 도구</title>
+<meta name="description" content="직접 만든 웹 도구와 Windows 프로그램을 무료로 배포하는 ALPACA TOOLS. 설치 없이 바로 쓰거나 필요한 것만 내려받으세요.">
+<link rel="icon" type="image/png" href="./assets/logo.png">
+<meta property="og:title" content="ALPACA TOOLS">
+<meta property="og:description" content="업무와 일상에 필요한 도구를 가볍게 찾아 쓰세요.">
+<meta property="og:image" content="./assets/logo.png">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#FAFAF9;
+    --surface:#FFFFFF;
+    --ink:#16181C;
+    --muted:#6E7178;
+    --line:#E6E6E2;
+    --accent:#315CFF;
+    --accent-tint:#EEF1FF;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Manrope',sans-serif;
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit; text-decoration:none;}
+  a:focus-visible, button:focus-visible, input:focus-visible{
+    outline:2px solid var(--accent); outline-offset:2px;
+  }
+  .wrap{max-width:1120px; margin:0 auto; padding:0 28px;}
+
+  /* ===== Header ===== */
+  header{border-bottom:1px solid var(--line); background:var(--paper);}
+  .header-inner{
+    display:flex; align-items:center; gap:36px; padding:14px 0;
+  }
+  .logo{font-weight:800; font-size:17px; letter-spacing:-0.01em; display:flex; align-items:center; gap:10px;}
+  .logo img{width:34px; height:34px; border-radius:9px; display:block;}
+  nav{display:flex; gap:26px; margin-left:8px; font-size:14.5px; font-weight:600; color:var(--muted);}
+  nav a{display:flex; align-items:center; gap:4px;}
+  nav a:hover{color:var(--ink);}
+  nav .ext-icon{font-size:11px; opacity:.7;}
+  .gh-btn{
+    margin-left:auto; display:flex; align-items:center; gap:7px;
+    background:var(--ink); color:var(--paper); padding:9px 16px;
+    border-radius:8px; font-size:13.5px; font-weight:700;
+  }
+  .gh-btn:hover{background:var(--accent);}
+
+  /* ===== Hero (search-first) ===== */
+  .hero{padding:60px 0 40px;}
+  .hero h1{
+    font-size:clamp(30px,4.2vw,46px); font-weight:800; letter-spacing:-0.02em;
+    line-height:1.18; margin:0 0 14px; max-width:640px;
+  }
+  .hero p{
+    font-size:16px; color:var(--muted); margin:0 0 32px; max-width:480px;
+  }
+  .search-panel{
+    background:var(--surface); border:1px solid var(--line); border-radius:14px;
+    padding:8px; display:flex; gap:8px; align-items:center; max-width:640px;
+  }
+  .search-panel input{
+    flex:1; border:none; outline:none; background:transparent;
+    font-family:inherit; font-size:15px; padding:10px 12px; color:var(--ink);
+  }
+  .search-panel input::placeholder{color:var(--muted);}
+  .search-go{
+    background:var(--accent); color:#fff; border:none; border-radius:9px;
+    padding:11px 18px; font-family:inherit; font-weight:700; font-size:14px; cursor:pointer;
+  }
+  .search-go:hover{background:#2748D6;}
+  .hero-meta{display:flex; gap:22px; margin-top:18px; font-size:13px; color:var(--muted);}
+  .hero-meta b{color:var(--ink); font-weight:700;}
+
+  /* ===== Filter row ===== */
+  .filter-row{
+    display:flex; align-items:center; gap:8px; flex-wrap:wrap;
+    padding:0 0 26px;
+  }
+  .chip{
+    border:1px solid var(--line); background:var(--surface); color:var(--muted);
+    border-radius:999px; padding:7px 15px; font-size:13.5px; font-weight:600;
+    cursor:pointer; font-family:inherit;
+  }
+  .chip[data-active="true"]{background:var(--ink); color:#fff; border-color:var(--ink);}
+  .filter-count{margin-left:auto; font-size:13px; color:var(--muted);}
+
+  /* ===== Tool grid ===== */
+  .grid{
+    display:grid; grid-template-columns:repeat(3,1fr); gap:16px;
+    padding-bottom:56px; min-height:120px;
+  }
+  @media (max-width:900px){.grid{grid-template-columns:repeat(2,1fr);}}
+  @media (max-width:600px){.grid{grid-template-columns:1fr;}}
+
+  .card{
+    background:var(--surface); border:1px solid var(--line); border-radius:14px;
+    padding:22px; display:flex; flex-direction:column; transition:border-color .15s ease;
+    position:relative;
+  }
+  .card:hover{border-color:var(--ink);}
+  .card-top{display:flex; align-items:center; justify-content:space-between; margin-bottom:14px;}
+  .card-icon{
+    width:38px; height:38px; border-radius:9px; background:var(--accent-tint);
+    display:flex; align-items:center; justify-content:center; font-size:18px;
+    overflow:hidden; flex-shrink:0;
+  }
+  .card-icon img{width:100%; height:100%; object-fit:cover; display:block;}
+  .card-icon .icon-fallback{display:none; align-items:center; justify-content:center; width:100%; height:100%;}
+  .tag-group{display:flex; gap:6px; align-items:center;}
+  .tag{
+    font-size:11.5px; font-weight:700; color:var(--muted); background:var(--paper);
+    border:1px solid var(--line); border-radius:6px; padding:3px 8px;
+  }
+  .tag-new{color:var(--accent); border-color:var(--accent-tint); background:var(--accent-tint);}
+  .card h3{font-size:16.5px; font-weight:700; margin:0 0 6px; letter-spacing:-0.01em;}
+  .card p{font-size:13.5px; color:var(--muted); margin:0 0 18px; flex:1;}
+  .card-foot{
+    display:flex; align-items:center; justify-content:space-between;
+    padding-top:14px; border-top:1px solid var(--line);
+  }
+  .card-foot .ver{font-size:12px; color:var(--muted);}
+  .card-cta{
+    font-size:13.5px; font-weight:700; color:var(--accent); padding:6px 0;
+  }
+  .card-cta:hover{text-decoration:underline;}
+
+  /* ===== Recent updates (list, not cards — reflects real chronology) ===== */
+  .section-head{
+    display:flex; align-items:baseline; justify-content:space-between;
+    margin-bottom:18px;
+  }
+  .section-head h2{font-size:21px; font-weight:800; margin:0; letter-spacing:-0.01em;}
+  .section-head span{font-size:13px; color:var(--muted);}
+  .updates{border-top:1px solid var(--line); margin-bottom:60px;}
+  .update-row{
+    display:flex; align-items:center; gap:18px; padding:16px 4px;
+    border-bottom:1px solid var(--line); border-radius:8px;
+  }
+  .update-row:hover{background:var(--surface);}
+  .update-date{
+    width:86px; flex-shrink:0; font-size:12.5px; color:var(--muted); font-weight:600;
+  }
+  .update-desc{font-size:14.5px; font-weight:600; color:var(--ink);}
+  .update-badge{
+    font-size:13px; font-weight:700; padding:3px 9px; border-radius:6px;
+    color:var(--muted); flex-shrink:0;
+  }
+  @media (max-width:700px){
+    .update-row{flex-wrap:wrap;}
+  }
+
+  /* ===== Notice banner (external Tistory link) ===== */
+  .notice{
+    display:flex; align-items:center; gap:12px;
+    background:var(--surface); border:1px solid var(--line); border-radius:12px;
+    padding:14px 18px; margin-bottom:56px; transition:border-color .15s ease;
+  }
+  .notice:hover{border-color:var(--ink);}
+  .notice .notice-tag{
+    font-size:11.5px; font-weight:700; color:var(--accent); background:var(--accent-tint);
+    border-radius:6px; padding:3px 9px; flex-shrink:0;
+  }
+  .notice .notice-text{font-size:13.5px; flex:1; color:var(--ink);}
+  .notice .notice-link{font-size:13px; font-weight:700; color:var(--accent); flex-shrink:0;}
+  .notice .notice-link:hover{text-decoration:underline;}
+
+  /* ===== About ===== */
+  .about{border-top:1px solid var(--line); padding:56px 0 64px; display:grid; grid-template-columns:1fr 1fr; gap:48px;}
+  @media (max-width:760px){.about{grid-template-columns:1fr;}}
+  .about h2{font-size:21px; font-weight:800; margin:0 0 14px; letter-spacing:-0.01em;}
+  .about p{font-size:14.5px; color:var(--muted); max-width:440px;}
+  .info-list{list-style:none; padding:0; margin:0;}
+  .info-list li{
+    display:flex; justify-content:space-between; padding:13px 0; border-bottom:1px solid var(--line);
+    font-size:14px;
+  }
+  .info-list li span:first-child{color:var(--muted);}
+  .info-list li span:last-child{font-weight:700;}
+
+  footer{border-top:1px solid var(--line);}
+  .footer-inner{
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px;
+    padding:22px 0; font-size:13px; color:var(--muted);
+  }
+  .footer-inner a{margin-right:18px;}
+  .footer-inner a:hover{color:var(--ink);}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap header-inner">
+    <div class="logo"><img src="./assets/logo.png" alt="ALPACA TOOLS 로고">ALPACA TOOLS</div>
+    <nav>
+      <a href="#tools">도구</a>
+      <a href="#notices">공지사항</a>
+    </nav>
+    <a class="gh-btn" data-site-link="github" href="#" target="_blank" rel="noopener">GitHub</a>
+  </div>
+</header>
+
+<div class="wrap">
+  <section class="hero">
+    <h1>업무와 일상에 필요한 도구를<br>가볍게 찾아 쓰세요</h1>
+    <p>직접 만든 웹 도구와 Windows 프로그램을 모아둔 공간입니다. 설치 없이 바로 쓰거나, 필요한 것만 내려받으세요.</p>
+    <div class="search-panel">
+      <input id="searchInput" type="text" placeholder="도구 이름 또는 기능으로 검색 (예: 파일명, 계산기)">
+      <button class="search-go" onclick="document.getElementById('tools').scrollIntoView({behavior:'smooth'})">검색</button>
+    </div>
+    <div class="hero-meta">
+      <span><b id="statTotal">-</b>개 도구</span>
+      <span>모두 <b>무료</b></span>
+      <span>소스 <b>GitHub 공개</b></span>
+    </div>
+  </section>
+
+  <a class="notice" id="latestNotice" href="#" target="_blank" rel="noopener">
+    <span class="notice-tag">공지</span>
+    <span class="notice-text" id="latestNoticeText">공지사항을 불러오는 중…</span>
+    <span class="notice-link">블로그에서 보기 ↗</span>
+  </a>
+
+  <section id="tools">
+    <div class="filter-row">
+      <button class="chip" data-filter="all" data-active="true">전체</button>
+      <button class="chip" data-filter="work">업무</button>
+      <button class="chip" data-filter="life">생활</button>
+      <button class="chip" data-filter="dev">개발자</button>
+      <div class="filter-count"><span id="visibleCount">-</span>개 표시 중</div>
+    </div>
+    <div class="grid" id="toolGrid"></div>
+  </section>
+
+  <section id="notices">
+    <div class="section-head">
+      <h2>공지사항</h2>
+      <span>티스토리 블로그</span>
+    </div>
+    <div class="updates" id="noticeList"></div>
+  </section>
+
+  <section class="about" id="about">
+    <div>
+      <h2>ALPACA TOOLS 소개</h2>
+      <p>매번 새로 찾기 번거로운 자잘한 프로그램들을 한곳에 모아두고 싶어서 시작했습니다. 모든 도구는 GitHub에 소스가 공개되어 있고, 필요하면 직접 빌드하거나 수정해서 쓸 수 있습니다.</p>
+    </div>
+    <ul class="info-list">
+      <li><span>배포 방식</span><span>GitHub Pages + Releases</span></li>
+      <li><span>라이선스</span><span>MIT (도구별 상이할 수 있음)</span></li>
+      <li><span>업데이트 주기</span><span>비정기 · 완성되는 대로 공개</span></li>
+      <li><span>공지사항</span><span>티스토리 블로그 (notice.json 연동)</span></li>
+    </ul>
+  </section>
+</div>
+
+<footer>
+  <div class="wrap footer-inner">
+    <div>
+      <a data-site-link="github" href="#" target="_blank" rel="noopener">GitHub</a>
+      <a data-site-link="blog" href="#" target="_blank" rel="noopener">블로그</a>
+      <a href="./LICENSE">License</a>
+    </div>
+    <div>© 2026 ALPACA TOOLS</div>
+  </div>
+</footer>
+
+<script>
+// ===== 사이트 공통 링크 설정 =====
+// GitHub 저장소 주소와 티스토리 블로그 주소를 실제 값으로 바꿔주세요.
+const SITE = {
+  githubUrl: "https://github.com/YOUR-USERNAME/alpaca-tools",
+  blogUrl: "https://alpaca.tistory.com",
+};
+document.querySelectorAll('[data-site-link="github"]').forEach(el => el.href = SITE.githubUrl);
+document.querySelectorAll('[data-site-link="blog"]').forEach(el => el.href = SITE.blogUrl);
+
+// 카테고리 한글 라벨 / 플랫폼 라벨 매핑
+const CATEGORY_LABEL = { work:"업무", life:"생활", dev:"개발자" };
+const PLATFORM_LABEL = { web:"Web", windows:"Windows", mac:"macOS" };
+
+// updatedAt이 오늘로부터 7일 이내면 "신규" 배지 표시 (isNew 필드 없이 날짜만으로 자동 판단)
+const NEW_BADGE_DAYS = 7;
+function isNewApp(updatedAt){
+  const diffMs = new Date() - new Date(updatedAt);
+  const diffDays = diffMs / (1000 * 60 * 60 * 24);
+  return diffDays >= 0 && diffDays <= NEW_BADGE_DAYS;
+}
+
+let APPS = [];
+
+// icon 값이 이미지 파일 경로(.ico/.png/.svg 등)면 <img>로, 아니면 이모지 텍스트로 그대로 표시합니다.
+// 이미지 로드에 실패하면 앱 이름 첫 글자로 된 기본 아이콘을 대신 보여줍니다.
+function iconMarkup(a){
+  const isImagePath = /\.(ico|png|svg|jpg|jpeg|webp)$/i.test(a.icon || "");
+  if(!isImagePath){
+    return a.icon;
+  }
+  const fallbackChar = (a.name || "?").trim().charAt(0);
+  return `<img src="${a.icon}" alt="${a.name} 아이콘" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"><span class="icon-fallback">${fallbackChar}</span>`;
+}
+
+function renderCards(list){
+  const grid = document.getElementById("toolGrid");
+  if(list.length === 0){
+    grid.innerHTML = `<p style="color:var(--muted); font-size:14px; grid-column:1/-1; padding:24px 0;">조건에 맞는 도구가 없습니다.</p>`;
+    document.getElementById("visibleCount").textContent = 0;
+    return;
+  }
+  grid.innerHTML = list.map(a => {
+    const isDownload = !a.url && a.downloadUrl;
+    const ctaLabel = isDownload ? "다운로드" : "바로 열기";
+    const ctaHref = isDownload ? a.downloadUrl : a.url;
+    return `
+    <div class="card">
+      <div class="card-top">
+        <div class="card-icon">${iconMarkup(a)}</div>
+        <div class="tag-group">
+          ${isNewApp(a.updatedAt) ? '<span class="tag tag-new">신규</span>' : ''}
+          <span class="tag">${PLATFORM_LABEL[a.platform] || a.platform}</span>
+        </div>
+      </div>
+      <h3>${a.name}</h3>
+      <p>${a.description}</p>
+      <div class="card-foot">
+        <span class="ver">v${a.version}</span>
+        <a class="card-cta" href="${ctaHref}" target="_blank" rel="noopener">${ctaLabel}</a>
+      </div>
+    </div>`;
+  }).join("");
+  document.getElementById("visibleCount").textContent = list.length;
+}
+
+function renderNotices(list){
+  const sorted = [...list].sort((a,b)=> new Date(b.date) - new Date(a.date));
+
+  // 히어로 바로 아래 배너 = 가장 최근 공지 1건
+  const latest = sorted[0];
+  if(latest){
+    document.getElementById("latestNoticeText").textContent = latest.title;
+    document.getElementById("latestNotice").href = latest.url;
+  }
+
+  // 공지사항 섹션 = 전체 목록
+  document.getElementById("noticeList").innerHTML = sorted.map(n => {
+    const d = new Date(n.date);
+    const label = `${d.getFullYear()}.${String(d.getMonth()+1).padStart(2,"0")}.${String(d.getDate()).padStart(2,"0")}`;
+    return `
+    <a class="update-row" href="${n.url}" target="_blank" rel="noopener">
+      <div class="update-date">${label}</div>
+      <div class="update-desc" style="flex:1;">${n.title}</div>
+      <div class="update-badge">↗</div>
+    </a>`;
+  }).join("");
+}
+
+function applyFilters(){
+  const active = document.querySelector('.chip[data-active="true"]').dataset.filter;
+  const q = document.getElementById("searchInput").value.trim().toLowerCase();
+  const filtered = APPS.filter(a =>
+    (active === "all" || a.category === active) &&
+    (q === "" || a.name.toLowerCase().includes(q) || a.description.toLowerCase().includes(q))
+  );
+  renderCards(filtered);
+}
+
+document.querySelectorAll(".chip").forEach(chip=>{
+  chip.addEventListener("click", ()=>{
+    document.querySelectorAll(".chip").forEach(c=>c.dataset.active="false");
+    chip.dataset.active="true";
+    applyFilters();
+  });
+});
+document.getElementById("searchInput").addEventListener("input", applyFilters);
+
+async function loadApps(){
+  try{
+    const res = await fetch("./apps.json");
+    if(!res.ok) throw new Error("apps.json fetch failed");
+    const data = await res.json();
+    APPS = data.apps;
+    document.getElementById("statTotal").textContent = APPS.length;
+    renderCards(APPS);
+  }catch(e){
+    console.error(e);
+    document.getElementById("toolGrid").innerHTML =
+      `<p style="color:var(--muted); font-size:14px; grid-column:1/-1; padding:24px 0;">도구 목록을 불러오지 못했습니다. apps.json 파일 위치를 확인해주세요.</p>`;
+  }
+}
+
+async function loadNotices(){
+  try{
+    const res = await fetch("./notice.json");
+    if(!res.ok) throw new Error("notice.json fetch failed");
+    const data = await res.json();
+    renderNotices(data.notices);
+  }catch(e){
+    console.error(e);
+    document.getElementById("latestNoticeText").textContent = "공지사항을 불러오지 못했습니다.";
+    document.getElementById("noticeList").innerHTML =
+      `<p style="color:var(--muted); font-size:14px; padding:16px 0;">notice.json 파일 위치를 확인해주세요.</p>`;
+  }
+}
+
+loadApps();
+loadNotices();
+</script>
+
+</body>
+</html>
