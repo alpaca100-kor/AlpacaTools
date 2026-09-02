@@ -15,6 +15,20 @@
       "tags": []
     },
     {
+      "id": "ae",
+      "name": "알파카 파일 탐색기",
+      "description": "macOS Finder 스타일의 윈도우 파일 탐색기",
+      "icon": "assets/icons/ae.ico",
+      "category": "dev",
+      "platform": "windows",
+      "version": "1.0",
+      "updatedAt": "2026-08-20",
+      "url": null,
+      "downloadUrl": "https://github.com/alpaca100-kor/AlpacaExplorer/releases",
+      "repoUrl": "https://alpaca100.tistory.com/389",
+      "tags": []
+    },
+    {
       "id": "aie-exe",
       "name": "알파카 이미지 편집기(EXE)",
       "description": "이미지 병합/뒤집기/회전/크기조정/자르기/ICO 변환",
@@ -30,7 +44,7 @@
     },
     {
       "id": "aie-web",
-      "name": "알파카 이미지 편집기(EXE)",
+      "name": "알파카 이미지 편집기(WEB)",
       "description": "이미지 병합/뒤집기/회전/크기조정/자르기/ICO 변환",
       "icon": "assets/icons/aie.ico",
       "category": "work",
@@ -40,6 +54,34 @@
       "url": "https://alpaca100-kor.github.io/AlpacaImageEditor/",
       "downloadUrl": null,
       "repoUrl": "https://alpaca100.tistory.com/390",
+      "tags": []
+    },
+    {
+      "id": "an",
+      "name": "알파카 메모장(EXE)",
+      "description": "간단한 메모 작성 프로그램",
+      "icon": "assets/icons/an.ico",
+      "category": "work",
+      "platform": "windows",
+      "version": "1.0",
+      "updatedAt": "2026-08-10",
+      "url": null,
+      "downloadUrl": "https://github.com/alpaca100-kor/AlpacaNotepad/releases",
+      "repoUrl": "https://alpaca100.tistory.com/384",
+      "tags": []
+    },
+    {
+      "id": "pdf2jpg",
+      "name": "PDF to JPG",
+      "description": "PDF 파일을 JPG 파일로 변환",
+      "icon": null,
+      "category": "work",
+      "platform": "web",
+      "version": "0.1",
+      "updatedAt": "2026-09-01",
+      "url": "https://alpaca100-kor.github.io/ai-code-sample/PDF2JPG/Claude-PDF2JPG.html",
+      "downloadUrl": null,
+      "repoUrl": null,
       "tags": []
     }
   ]
