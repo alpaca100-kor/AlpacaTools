@@ -1,56 +1,46 @@
 {
   "apps": [
     {
-      "id": "excel-to-markdown",
-      "name": "엑셀 표 → 마크다운 변환기",
-      "description": "붙여넣기만 하면 마크다운 표로 즉시 변환하는 웹 도구.",
-      "icon": "assets/icons/excel-to-markdown.ico",
-      "category": "dev",
-      "platform": "web",
-      "version": "1.0.0",
-      "updatedAt": "2026-08-30",
-      "url": "https://alpaca.github.io/excel-to-markdown/",
-      "downloadUrl": null,
-      "repoUrl": "https://github.com/alpaca/excel-to-markdown",
-      "tags": [
-        "엑셀",
-        "마크다운",
-        "변환"
-      ]
-    },
-    {
-      "id": "short-url-generator",
-      "name": "단축 URL 생성기",
-      "description": "QR코드까지 함께 생성하는 가벼운 웹 유틸리티.",
-      "icon": "assets/icons/short-url.ico",
+      "id": "ac",
+      "name": "알파카 달력",
+      "description": "알파카 달력",
+      "icon": "assets/icons/ac.ico",
       "category": "life",
       "platform": "web",
-      "version": "2.0.0",
-      "updatedAt": "2026-08-29",
-      "url": "https://alpaca.github.io/short-url/",
+      "version": "1.0",
+      "updatedAt": "2026-09-03",
+      "url": "https://alpaca100-kor.github.io/AlpacaCalendar/",
       "downloadUrl": null,
-      "repoUrl": "https://github.com/alpaca/short-url",
-      "tags": [
-        "url",
-        "qr코드"
-      ]
+      "repoUrl": null,
+      "tags": []
     },
     {
-      "id": "filename-organizer",
-      "name": "파일명 일괄 정리기",
-      "description": "날짜·순번 규칙으로 폴더 내 파일명을 한 번에 정리하는 Windows 프로그램.",
-      "icon": "assets/icons/filename-organizer.ico",
+      "id": "aie-exe",
+      "name": "알파카 이미지 편집기(EXE)",
+      "description": "이미지 병합/뒤집기/회전/크기조정/자르기/ICO 변환",
+      "icon": "assets/icons/aie.ico",
       "category": "work",
       "platform": "windows",
-      "version": "1.4.0",
-      "updatedAt": "2026-08-15",
+      "version": "1.0",
+      "updatedAt": "2026-07-31",
       "url": null,
-      "downloadUrl": "https://github.com/alpaca/filename-organizer/releases/latest/download/filename-organizer-setup.exe",
-      "repoUrl": "https://github.com/alpaca/filename-organizer",
-      "tags": [
-        "파일정리",
-        "일괄처리"
-      ]
+      "downloadUrl": "https://github.com/alpaca100-kor/AlpacaImageEditor/releases"
+      "repoUrl": "https://alpaca100.tistory.com/381",
+      "tags": []
+    },
+    {
+      "id": "aie-web",
+      "name": "알파카 이미지 편집기(EXE)",
+      "description": "이미지 병합/뒤집기/회전/크기조정/자르기/ICO 변환",
+      "icon": "assets/icons/aie.ico",
+      "category": "work",
+      "platform": "web",
+      "version": "1.0",
+      "updatedAt": "2026-08-26",
+      "url": "https://alpaca100-kor.github.io/AlpacaImageEditor/",
+      "downloadUrl": null,
+      "repoUrl": "https://alpaca100.tistory.com/390",
+      "tags": []
     }
   ]
 }
