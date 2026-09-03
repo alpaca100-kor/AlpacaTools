@@ -3,7 +3,7 @@
     {
       "id": "ac",
       "name": "알파카 달력",
-      "description": "알파카 달력",
+      "description": "월별 또는 1년 전체 날짜를 간편하게 확인할 수 있는 달력",
       "icon": "assets/icons/ac.ico",
       "category": "life",
       "platform": "web",
@@ -85,15 +85,43 @@
       "tags": []
     },
     {
+      "id": "md-ve",
+      "name": "Markdown Viewer & Editor",
+      "description": "마크다운 파일 뷰어 및 편집기",
+      "icon": "📄",
+      "category": "dev",
+      "platform": "web",
+      "version": "0.1",
+      "updatedAt": "2026-09-01",
+      "url": "https://alpaca100-kor.github.io/ai-code-sample/MD-VE/Claude-MD-Viewer&Editor.html",
+      "downloadUrl": null,
+      "repoUrl": null,
+      "tags": []
+    }
+    {
       "id": "pdf2jpg",
       "name": "PDF to JPG",
       "description": "PDF 파일을 JPG 파일로 변환",
-      "icon": null,
+      "icon": "📄",
       "category": "work",
       "platform": "web",
       "version": "0.1",
       "updatedAt": "2026-09-01",
       "url": "https://alpaca100-kor.github.io/ai-code-sample/PDF2JPG/Claude-PDF2JPG.html",
+      "downloadUrl": null,
+      "repoUrl": null,
+      "tags": []
+    },
+    {
+      "id": "png-be",
+      "name": "PNG Background Eraser",
+      "description": "PNG 이미지 파일 배경 지우기",
+      "icon": "🖼️",
+      "category": "work",
+      "platform": "web",
+      "version": "0.1",
+      "updatedAt": "2026-09-01",
+      "url": "https://alpaca100-kor.github.io/ai-code-sample/PNG/Claude-PNG-Background-Eraser.html",
       "downloadUrl": null,
       "repoUrl": null,
       "tags": []
