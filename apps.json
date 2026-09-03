@@ -117,7 +117,7 @@
       "name": "PNG Background Eraser",
       "description": "PNG 이미지 파일 배경 지우기",
       "icon": "🖼️",
-      "category": "work",
+      "category": "dev",
       "platform": "web",
       "version": "0.1",
       "updatedAt": "2026-09-01",
