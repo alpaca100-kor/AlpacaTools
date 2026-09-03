@@ -58,7 +58,7 @@
     },
     {
       "id": "an",
-      "name": "알파카 메모장(EXE)",
+      "name": "알파카 메모장",
       "description": "간단한 메모 작성 프로그램",
       "icon": "assets/icons/an.ico",
       "category": "work",
@@ -68,6 +68,20 @@
       "url": null,
       "downloadUrl": "https://github.com/alpaca100-kor/AlpacaNotepad/releases",
       "repoUrl": "https://alpaca100.tistory.com/384",
+      "tags": []
+    },
+    {
+      "id": "EdgeCM",
+      "name": "엣지(Edge) 컬렉션 매니저",
+      "description": "엣지(Edge) 브라우저에서 사라진 컬렉션 기능을 구현한 프로그램",
+      "icon": "assets/icons/EdgeCM.ico",
+      "category": "work",
+      "platform": "windows",
+      "version": "1.0",
+      "updatedAt": "2026-07-27",
+      "url": null,
+      "downloadUrl": "https://github.com/alpaca100-kor/EdgeCollectionManager/releases",
+      "repoUrl": "https://alpaca100.tistory.com/377",
       "tags": []
     },
     {
