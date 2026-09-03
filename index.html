@@ -97,7 +97,7 @@
   /* ===== Tool grid ===== */
   .grid{
     display:grid; grid-template-columns:repeat(3,1fr); gap:16px;
-    padding-bottom:56px; min-height:120px;
+    padding-bottom:24px; min-height:120px;
   }
   @media (max-width:900px){.grid{grid-template-columns:repeat(2,1fr);}}
   @media (max-width:600px){.grid{grid-template-columns:1fr;}}
@@ -141,7 +141,7 @@
   }
   .section-head h2{font-size:21px; font-weight:800; margin:0; letter-spacing:-0.01em;}
   .section-head span{font-size:13px; color:var(--muted);}
-  .updates{border-top:1px solid var(--line); margin-bottom:60px;}
+  .updates{border-top:1px solid var(--line); margin-bottom:0;}
   .update-row{
     display:flex; align-items:center; gap:18px; padding:16px 4px;
     border-bottom:1px solid var(--line); border-radius:8px;
@@ -175,17 +175,27 @@
   .notice .notice-link:hover{text-decoration:underline;}
 
   /* ===== About ===== */
-  .about{border-top:1px solid var(--line); padding:56px 0 64px; display:grid; grid-template-columns:1fr 1fr; gap:48px;}
-  @media (max-width:760px){.about{grid-template-columns:1fr;}}
+  .about{border-top:1px solid var(--line); padding:56px 0 64px;}
   .about h2{font-size:21px; font-weight:800; margin:0 0 14px; letter-spacing:-0.01em;}
-  .about p{font-size:14.5px; color:var(--muted); max-width:440px;}
-  .info-list{list-style:none; padding:0; margin:0;}
-  .info-list li{
-    display:flex; justify-content:space-between; padding:13px 0; border-bottom:1px solid var(--line);
-    font-size:14px;
+  .about p{font-size:14.5px; color:var(--muted); max-width:560px;}
+
+  /* ===== Pagination ===== */
+  .pagination{
+    display:flex; align-items:center; justify-content:center; gap:6px;
+    padding:4px 0 56px;
   }
-  .info-list li span:first-child{color:var(--muted);}
-  .info-list li span:last-child{font-weight:700;}
+  .pagination button{
+    min-width:34px; height:34px; padding:0 8px;
+    border:1px solid var(--line); background:var(--surface); color:var(--muted);
+    border-radius:8px; font-family:inherit; font-size:13.5px; font-weight:700;
+    cursor:pointer;
+  }
+  .pagination button:hover:not(:disabled){border-color:var(--ink); color:var(--ink);}
+  .pagination button[data-active="true"]{background:var(--ink); color:#fff; border-color:var(--ink);}
+  .pagination button:disabled{opacity:.4; cursor:default;}
+  .pagination .page-ellipsis{
+    color:var(--muted); font-size:13px; padding:0 4px; user-select:none;
+  }
 
   footer{border-top:1px solid var(--line);}
   .footer-inner{
@@ -239,6 +249,7 @@
       <div class="filter-count"><span id="visibleCount">-</span>개 표시 중</div>
     </div>
     <div class="grid" id="toolGrid"></div>
+    <div class="pagination" id="toolPagination"></div>
   </section>
 
   <section id="notices">
@@ -247,6 +258,7 @@
       <span>티스토리 블로그</span>
     </div>
     <div class="updates" id="noticeList"></div>
+    <div class="pagination" id="noticePagination"></div>
   </section>
 
   <section class="about" id="about">
@@ -254,12 +266,6 @@
       <h2>ALPACA TOOLS 소개</h2>
       <p>매번 새로 찾기 번거로운 자잘한 프로그램들을 한곳에 모아두고 싶어서 시작했습니다. 모든 도구는 GitHub에 소스가 공개되어 있고, 필요하면 직접 빌드하거나 수정해서 쓸 수 있습니다.</p>
     </div>
-    <ul class="info-list">
-      <li><span>배포 방식</span><span>GitHub Pages + Releases</span></li>
-      <li><span>라이선스</span><span>MIT (도구별 상이할 수 있음)</span></li>
-      <li><span>업데이트 주기</span><span>비정기 · 완성되는 대로 공개</span></li>
-      <li><span>공지사항</span><span>티스토리 블로그 (notice.json 연동)</span></li>
-    </ul>
   </section>
 </div>
 
@@ -268,6 +274,7 @@
     <div>
       <a data-site-link="github" href="#" target="_blank" rel="noopener">GitHub</a>
       <a data-site-link="blog" href="#" target="_blank" rel="noopener">블로그</a>
+      <a href="https://alpaca100-kor.github.io/ai-code-sample/" target="_blank" rel="noopener">실험실</a>
       <a href="./LICENSE">License</a>
     </div>
     <div>© 2026 ALPACA TOOLS</div>
@@ -296,7 +303,49 @@ function isNewApp(updatedAt){
   return diffDays >= 0 && diffDays <= NEW_BADGE_DAYS;
 }
 
+// 페이지당 표시 개수
+const APPS_PER_PAGE = 6;
+const NOTICES_PER_PAGE = 5;
+
 let APPS = [];
+let currentAppList = [];
+let currentAppPage = 1;
+let currentNoticeList = [];
+let currentNoticePage = 1;
+
+// 공통 페이지네이션 렌더러
+function renderPagination(containerId, totalItems, perPage, currentPage, onPageChange){
+  const container = document.getElementById(containerId);
+  const totalPages = Math.ceil(totalItems / perPage);
+  if(totalPages <= 1){
+    container.innerHTML = "";
+    return;
+  }
+  const buttons = [];
+  buttons.push(`<button data-nav="prev" ${currentPage === 1 ? "disabled" : ""}>이전</button>`);
+
+  const pageNumbers = new Set([1, totalPages, currentPage, currentPage - 1, currentPage + 1]);
+  let prevShown = 0;
+  for(let p = 1; p <= totalPages; p++){
+    if(!pageNumbers.has(p)) continue;
+    if(prevShown && p - prevShown > 1){
+      buttons.push(`<span class="page-ellipsis">…</span>`);
+    }
+    buttons.push(`<button data-page="${p}" data-active="${p === currentPage}">${p}</button>`);
+    prevShown = p;
+  }
+
+  buttons.push(`<button data-nav="next" ${currentPage === totalPages ? "disabled" : ""}>다음</button>`);
+  container.innerHTML = buttons.join("");
+
+  container.querySelectorAll("button[data-page]").forEach(btn=>{
+    btn.addEventListener("click", ()=> onPageChange(Number(btn.dataset.page)));
+  });
+  const prevBtn = container.querySelector('button[data-nav="prev"]');
+  const nextBtn = container.querySelector('button[data-nav="next"]');
+  if(prevBtn) prevBtn.addEventListener("click", ()=>{ if(currentPage > 1) onPageChange(currentPage - 1); });
+  if(nextBtn) nextBtn.addEventListener("click", ()=>{ if(currentPage < totalPages) onPageChange(currentPage + 1); });
+}
 
 // icon 값이 이미지 파일 경로(.ico/.png/.svg 등)면 <img>로, 아니면 이모지 텍스트로 그대로 표시합니다.
 // 이미지 로드에 실패하면 앱 이름 첫 글자로 된 기본 아이콘을 대신 보여줍니다.
@@ -309,14 +358,23 @@ function iconMarkup(a){
   return `<img src="${a.icon}" alt="${a.name} 아이콘" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"><span class="icon-fallback">${fallbackChar}</span>`;
 }
 
-function renderCards(list){
+function renderCards(list, page = 1){
+  currentAppList = list;
+  currentAppPage = page;
   const grid = document.getElementById("toolGrid");
   if(list.length === 0){
     grid.innerHTML = `<p style="color:var(--muted); font-size:14px; grid-column:1/-1; padding:24px 0;">조건에 맞는 도구가 없습니다.</p>`;
     document.getElementById("visibleCount").textContent = 0;
+    document.getElementById("toolPagination").innerHTML = "";
     return;
   }
-  grid.innerHTML = list.map(a => {
+  const totalPages = Math.max(1, Math.ceil(list.length / APPS_PER_PAGE));
+  if(page > totalPages) page = totalPages;
+  currentAppPage = page;
+  const start = (page - 1) * APPS_PER_PAGE;
+  const pageItems = list.slice(start, start + APPS_PER_PAGE);
+
+  grid.innerHTML = pageItems.map(a => {
     const isDownload = !a.url && a.downloadUrl;
     const ctaLabel = isDownload ? "다운로드" : "바로 열기";
     const ctaHref = isDownload ? a.downloadUrl : a.url;
@@ -338,10 +396,15 @@ function renderCards(list){
     </div>`;
   }).join("");
   document.getElementById("visibleCount").textContent = list.length;
+  renderPagination("toolPagination", list.length, APPS_PER_PAGE, currentAppPage, (p)=>{
+    renderCards(currentAppList, p);
+    document.getElementById("tools").scrollIntoView({behavior:"smooth", block:"start"});
+  });
 }
 
-function renderNotices(list){
+function renderNotices(list, page = 1){
   const sorted = [...list].sort((a,b)=> new Date(b.date) - new Date(a.date));
+  currentNoticeList = sorted;
 
   // 히어로 바로 아래 배너 = 가장 최근 공지 1건
   const latest = sorted[0];
@@ -350,8 +413,14 @@ function renderNotices(list){
     document.getElementById("latestNotice").href = latest.url;
   }
 
-  // 공지사항 섹션 = 전체 목록
-  document.getElementById("noticeList").innerHTML = sorted.map(n => {
+  const totalPages = Math.max(1, Math.ceil(sorted.length / NOTICES_PER_PAGE));
+  if(page > totalPages) page = totalPages;
+  currentNoticePage = page;
+  const start = (page - 1) * NOTICES_PER_PAGE;
+  const pageItems = sorted.slice(start, start + NOTICES_PER_PAGE);
+
+  // 공지사항 섹션 = 현재 페이지 목록
+  document.getElementById("noticeList").innerHTML = pageItems.map(n => {
     const d = new Date(n.date);
     const label = `${d.getFullYear()}.${String(d.getMonth()+1).padStart(2,"0")}.${String(d.getDate()).padStart(2,"0")}`;
     return `
@@ -361,6 +430,11 @@ function renderNotices(list){
       <div class="update-badge">↗</div>
     </a>`;
   }).join("");
+
+  renderPagination("noticePagination", sorted.length, NOTICES_PER_PAGE, currentNoticePage, (p)=>{
+    renderNotices(currentNoticeList, p);
+    document.getElementById("notices").scrollIntoView({behavior:"smooth", block:"start"});
+  });
 }
 
 function applyFilters(){
@@ -370,7 +444,7 @@ function applyFilters(){
     (active === "all" || a.category === active) &&
     (q === "" || a.name.toLowerCase().includes(q) || a.description.toLowerCase().includes(q))
   );
-  renderCards(filtered);
+  renderCards(filtered, 1);
 }
 
 document.querySelectorAll(".chip").forEach(chip=>{
