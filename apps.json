@@ -125,6 +125,20 @@
       "downloadUrl": null,
       "repoUrl": null,
       "tags": []
+    },
+    {
+      "id": "retirement-age-calc",
+      "name": "은퇴나이 계산기",
+      "description": "현재 순자산과 목표 순자산, 연간 저축액을 입력하면 은퇴에 필요한 시간을 계산합니다.",
+      "icon": "🧮",
+      "category": "life",
+      "platform": "web",
+      "version": "0.1",
+      "updatedAt": "2026-09-09",
+      "url": "https://alpaca100-kor.github.io/ai-code-sample/ETC/Retirement-Age-Calculator.html",
+      "downloadUrl": null,
+      "repoUrl": null,
+      "tags": []
     }
   ]
 }
