@@ -47,6 +47,7 @@
   nav{display:flex; gap:26px; margin-left:8px; font-size:14.5px; font-weight:600; color:var(--muted);}
   nav a{display:flex; align-items:center; gap:4px;}
   nav a:hover{color:var(--ink);}
+  nav a.active{color:var(--ink);}
   nav .ext-icon{font-size:11px; opacity:.7;}
   .gh-btn{
     margin-left:auto; display:flex; align-items:center; gap:7px;
@@ -215,17 +216,7 @@
 </head>
 <body>
 
-<header>
-  <div class="wrap header-inner">
-    <div class="logo"><img src="./assets/logo.png" alt="ALPACA TOOLS 로고">ALPACA TOOLS</div>
-    <nav>
-      <a href="about.html">소개</a>
-      <a href="#tools">도구</a>
-      <a href="#notices">공지사항</a>
-    </nav>
-    <a class="gh-btn" data-site-link="github" href="#" target="_blank" rel="noopener">GitHub</a>
-  </div>
-</header>
+<!--#include header-->
 
 <div class="wrap">
   <section class="hero">
@@ -277,29 +268,9 @@
   </section>
 </div>
 
-<footer>
-  <div class="wrap footer-inner">
-    <div>
-      <a data-site-link="github" href="#" target="_blank" rel="noopener">GitHub</a>
-      <a data-site-link="blog" href="#" target="_blank" rel="noopener">블로그</a>
-      <a href="https://alpaca100-kor.github.io/ai-code-sample/" target="_blank" rel="noopener">실험실</a>
-      <a href="./privacy.html">개인정보처리방침</a>
-      <a href="./LICENSE">License</a>
-    </div>
-    <div>© 2026 ALPACA TOOLS</div>
-  </div>
-</footer>
+<!--#include footer-->
 
 <script>
-// ===== 사이트 공통 링크 설정 =====
-// GitHub 저장소 주소와 티스토리 블로그 주소를 실제 값으로 바꿔주세요.
-const SITE = {
-  githubUrl: "https://github.com/alpaca100-kor/AlpacaTools",
-  blogUrl: "https://alpaca100.tistory.com",
-};
-document.querySelectorAll('[data-site-link="github"]').forEach(el => el.href = SITE.githubUrl);
-document.querySelectorAll('[data-site-link="blog"]').forEach(el => el.href = SITE.blogUrl);
-
 // 카테고리 한글 라벨 / 플랫폼 라벨 매핑
 const CATEGORY_LABEL = { work:"업무", life:"생활", dev:"개발자" };
 const PLATFORM_LABEL = { web:"Web", windows:"Windows", mac:"macOS" };

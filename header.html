@@ -1,0 +1,32 @@
+<header>
+  <div class="wrap header-inner">
+    <a class="logo" href="./index.html" aria-label="ALPACA TOOLS 홈">
+      <img src="./assets/logo.png" alt="ALPACA TOOLS 로고">
+      ALPACA TOOLS
+    </a>
+    <nav aria-label="주요 메뉴">
+      <a href="./about.html">소개</a>
+      <a href="./index.html#tools">도구</a>
+      <a href="./index.html#notices">공지사항</a>
+    </nav>
+    <a
+      class="gh-btn"
+      href="https://github.com/alpaca100-kor/AlpacaTools"
+      target="_blank"
+      rel="noopener"
+    >
+      GitHub ↗
+    </a>
+  </div>
+</header>
+<script>
+// 현재 페이지에 해당하는 nav 링크에 active 클래스를 자동으로 부여합니다.
+// (헤더가 모든 페이지에서 동일한 HTML을 쓰기 때문에 페이지별로 직접 표시할 수 없어 스크립트로 처리)
+(function () {
+  var current = (location.pathname.split("/").pop() || "index.html");
+  document.querySelectorAll("header nav a").forEach(function (a) {
+    var target = a.getAttribute("href").split("#")[0].replace("./", "") || "index.html";
+    if (target === current) a.classList.add("active");
+  });
+})();
+</script>
