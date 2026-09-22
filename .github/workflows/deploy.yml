@@ -26,6 +26,9 @@ jobs:
           mkdir -p _site
           rsync -a --exclude='.git' --exclude='.github' --exclude='_site' ./ _site/
 
+      - name: Inject shared header/footer
+        run: node scripts/build-includes.js _site
+
       - name: Inject AdSense code into HTML files
         run: |
           python3 - <<'PY'
