@@ -12,7 +12,8 @@
       "url": "https://alpaca100-kor.github.io/AlpacaCalendar/",
       "downloadUrl": null,
       "repoUrl": "https://alpaca100.tistory.com/396",
-      "tags": []
+      "tags": [],
+      "github": "https://github.com/alpaca100-kor/AlpacaCalendar"
     },
     {
       "id": "ae",
@@ -26,7 +27,8 @@
       "url": null,
       "downloadUrl": "https://github.com/alpaca100-kor/AlpacaExplorer/releases",
       "repoUrl": "https://alpaca100.tistory.com/389",
-      "tags": []
+      "tags": [],
+      "github": "https://github.com/alpaca100-kor/AlpacaExplorer"
     },
     {
       "id": "aie-exe",
@@ -40,7 +42,8 @@
       "url": null,
       "downloadUrl": "https://github.com/alpaca100-kor/AlpacaImageEditor/releases",
       "repoUrl": "https://alpaca100.tistory.com/381",
-      "tags": []
+      "tags": [],
+      "github": "https://github.com/alpaca100-kor/AlpacaImageEditor"
     },
     {
       "id": "aie-web",
@@ -54,7 +57,8 @@
       "url": "https://alpaca100-kor.github.io/AlpacaImageEditor/",
       "downloadUrl": null,
       "repoUrl": "https://alpaca100.tistory.com/390",
-      "tags": []
+      "tags": [],
+      "github": "https://github.com/alpaca100-kor/AlpacaImageEditor"
     },
     {
       "id": "an",
@@ -68,7 +72,8 @@
       "url": null,
       "downloadUrl": "https://github.com/alpaca100-kor/AlpacaNotepad/releases",
       "repoUrl": "https://alpaca100.tistory.com/384",
-      "tags": []
+      "tags": [],
+      "github": "https://github.com/alpaca100-kor/AlpacaNotepad"
     },
     {
       "id": "EdgeCM",
@@ -82,7 +87,8 @@
       "url": null,
       "downloadUrl": "https://github.com/alpaca100-kor/EdgeCollectionManager/releases",
       "repoUrl": "https://alpaca100.tistory.com/377",
-      "tags": []
+      "tags": [],
+      "github": "https://github.com/alpaca100-kor/EdgeCollectionManager"
     },
     {
       "id": "md-ve",
@@ -96,7 +102,8 @@
       "url": "https://alpaca100-kor.github.io/ai-code-sample/MD-VE/Claude-MD-Viewer&Editor.html",
       "downloadUrl": null,
       "repoUrl": null,
-      "tags": []
+      "tags": [],
+      "github": "https://github.com/alpaca100-kor/ai-code-sample"
     },
     {
       "id": "pdf2jpg",
@@ -110,7 +117,8 @@
       "url": "https://alpaca100-kor.github.io/ai-code-sample/PDF2JPG/Claude-PDF2JPG.html",
       "downloadUrl": null,
       "repoUrl": null,
-      "tags": []
+      "tags": [],
+      "github": "https://github.com/alpaca100-kor/ai-code-sample"
     },
     {
       "id": "png-be",
@@ -124,7 +132,8 @@
       "url": "https://alpaca100-kor.github.io/ai-code-sample/PNG/Claude-PNG-Background-Eraser.html",
       "downloadUrl": null,
       "repoUrl": null,
-      "tags": []
+      "tags": [],
+      "github": "https://github.com/alpaca100-kor/ai-code-sample"
     },
     {
       "id": "retirement-age-calc",
@@ -138,7 +147,8 @@
       "url": "https://alpaca100-kor.github.io/ai-code-sample/ETC/Retirement-Age-Calculator.html",
       "downloadUrl": null,
       "repoUrl": null,
-      "tags": []
+      "tags": [],
+      "github": "https://github.com/alpaca100-kor/ai-code-sample"
     }
   ]
 }
