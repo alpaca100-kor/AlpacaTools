@@ -6,40 +6,29 @@
 <title>개인정보처리방침 - ALPACA TOOLS</title>
 <meta name="description" content="ALPACA TOOLS의 개인정보처리방침입니다. 쿠키 및 광고(Google AdSense) 이용에 관한 안내를 포함합니다.">
 <link rel="icon" type="image/png" href="./assets/logo.png">
+
+<meta property="og:title" content="개인정보처리방침 - ALPACA TOOLS">
+<meta property="og:description" content="ALPACA TOOLS의 개인정보처리방침입니다. 쿠키 및 광고(Google AdSense) 이용에 관한 안내를 포함합니다.">
+<meta property="og:image" content="./assets/logo.png">
+<meta property="og:type" content="website">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --paper:#FAFAF9;
-    --surface:#FFFFFF;
-    --ink:#16181C;
-    --muted:#6E7178;
-    --line:#E6E6E2;
-    --accent:#315CFF;
-    --accent-tint:#EEF1FF;
-  }
-  *{box-sizing:border-box;}
-  html,body{margin:0;padding:0;}
-  body{
-    background:var(--paper);
-    color:var(--ink);
-    font-family:'Manrope',sans-serif;
-    line-height:1.6;
-    -webkit-font-smoothing:antialiased;
-  }
-  a{color:var(--accent); text-decoration:none;}
-  a:hover{text-decoration:underline;}
-  .wrap{max-width:760px; margin:0 auto; padding:0 28px;}
 
-  header{border-bottom:1px solid var(--line); background:var(--paper);}
-  .header-inner{
-    display:flex; align-items:center; gap:12px; padding:14px 0;
-    max-width:1120px; margin:0 auto; padding-left:28px; padding-right:28px;
-  }
-  .logo{font-weight:800; font-size:17px; letter-spacing:-0.01em; display:flex; align-items:center; gap:10px;}
-  .logo img{width:34px; height:34px; border-radius:9px; display:block;}
-  .back-link{margin-left:auto; font-size:13.5px; font-weight:700; color:var(--muted);}
-  .back-link:hover{color:var(--ink); text-decoration:none;}
+<!-- 모든 페이지 공통 스타일 (색상 변수, 리셋, 헤더, 푸터, scroll-behavior 등) -->
+<link rel="stylesheet" href="./style.css">
+
+<style>
+  /* ===== 이 페이지에서만 쓰는 스타일 ===== */
+  /* 공통 색상 변수 / 리셋 / 헤더 / 푸터 / scroll-behavior는 style.css에 있습니다 */
+  body{ line-height:1.6; }
+
+  /* 본문은 style.css의 .wrap(1120px)보다 좁게 읽기 좋은 폭으로 */
+  .doc{max-width:760px; margin:0 auto; padding:0 28px;}
+
+  /* 본문 링크만 강조 색상 + 밑줄. header/footer 링크는 style.css 기본값을 따름 */
+  main a{color:var(--accent);}
+  main a:hover{text-decoration:underline;}
 
   main{padding:56px 0 72px;}
   h1{font-size:clamp(24px,3.4vw,32px); font-weight:800; letter-spacing:-0.02em; margin:0 0 6px;}
@@ -53,24 +42,14 @@
     background:var(--surface); border:1px solid var(--line); border-radius:12px;
     padding:18px 20px; margin:20px 0;
   }
-
-  footer{border-top:1px solid var(--line); margin-top:40px;}
-  .footer-inner{
-    max-width:1120px; margin:0 auto; padding:22px 28px;
-    font-size:13px; color:var(--muted);
-  }
 </style>
 </head>
 <body>
 
-<header>
-  <div class="header-inner">
-    <div class="logo"><img src="./assets/logo.png" alt="ALPACA TOOLS 로고">ALPACA TOOLS</div>
-    <a class="back-link" href="./index.html">← 홈으로</a>
-  </div>
-</header>
+<!--#include header-->
 
-<main class="wrap">
+<main>
+  <div class="doc">
   <h1>개인정보처리방침</h1>
   <p class="updated">시행일: 2026년 9월 3일</p>
 
@@ -114,11 +93,10 @@
 
   <h2>8. 고지의 의무</h2>
   <p class="muted">본 개인정보처리방침은 법령 및 서비스 변경사항에 따라 수정될 수 있으며, 변경 시 본 페이지를 통해 고지합니다.</p>
+  </div>
 </main>
 
-<footer>
-  <div class="footer-inner wrap">© 2026 ALPACA TOOLS</div>
-</footer>
+<!--#include footer-->
 
 </body>
 </html>
