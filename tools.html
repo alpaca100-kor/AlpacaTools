@@ -15,109 +15,6 @@
 <link rel="stylesheet" href="./style.css">
 
 <style>
-  body{line-height:1.5;}
-
-  .tools-hero{padding:58px 0 34px;}
-  .tools-hero h1{
-    font-size:clamp(30px,4.2vw,44px);
-    font-weight:800;
-    letter-spacing:-0.025em;
-    line-height:1.2;
-    margin:0 0 14px;
-  }
-  .tools-hero p{
-    font-size:16px;
-    color:var(--muted);
-    max-width:620px;
-    margin:0;
-  }
-
-  .search-section{padding:0 0 26px;}
-  .search-panel{
-    background:var(--surface);
-    border:1px solid var(--line);
-    border-radius:14px;
-    padding:8px;
-    display:flex;
-    gap:8px;
-    align-items:center;
-    max-width:760px;
-  }
-  .search-panel:focus-within{border-color:#B9C2F3;}
-  .search-panel input{
-    flex:1;
-    min-width:0;
-    border:none;
-    outline:none;
-    background:transparent;
-    font-family:inherit;
-    font-size:15px;
-    padding:10px 12px;
-    color:var(--ink);
-  }
-  .search-panel input::placeholder{color:var(--muted);}
-  .search-button{
-    border:none;
-    background:var(--accent);
-    color:#fff;
-    border-radius:9px;
-    padding:11px 18px;
-    font-family:inherit;
-    font-size:14px;
-    font-weight:700;
-    cursor:pointer;
-    flex-shrink:0;
-  }
-  .search-button:hover{background:#2748D6;}
-  .search-clear{
-    border:none;
-    background:transparent;
-    color:var(--muted);
-    font-family:inherit;
-    font-size:13px;
-    font-weight:700;
-    cursor:pointer;
-    padding:8px 4px;
-    flex-shrink:0;
-  }
-  .search-clear:hover{color:var(--ink);}
-  .search-hint{
-    margin:9px 0 0 4px;
-    font-size:12.5px;
-    color:var(--muted);
-  }
-
-  .filter-row{
-    display:flex;
-    align-items:center;
-    gap:8px;
-    flex-wrap:wrap;
-    padding:0 0 18px;
-  }
-  .chip{
-    border:1px solid var(--line);
-    background:var(--surface);
-    color:var(--muted);
-    border-radius:999px;
-    padding:7px 15px;
-    font-size:13.5px;
-    font-weight:600;
-    cursor:pointer;
-    font-family:inherit;
-  }
-  .chip:hover{color:var(--ink); border-color:#CFCFCB;}
-  .chip[data-active="true"]{
-    background:var(--ink);
-    color:#fff;
-    border-color:var(--ink);
-  }
-  .filter-count{
-    margin-left:auto;
-    font-size:13px;
-    color:var(--muted);
-  }
-  .filter-count b{color:var(--ink);}
-
   .tool-list{
     border-top:1px solid var(--line);
     margin-bottom:6px;
@@ -234,71 +131,7 @@
     pointer-events:none;
   }
 
-  .empty-state{
-    padding:34px 4px 38px;
-    color:var(--muted);
-    font-size:14px;
-    text-align:center;
-  }
-
-  .pagination{
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    gap:6px;
-    padding:24px 0 58px;
-  }
-  .pagination button{
-    min-width:34px;
-    height:34px;
-    padding:0 8px;
-    border:1px solid var(--line);
-    background:var(--surface);
-    color:var(--muted);
-    border-radius:8px;
-    font-family:inherit;
-    font-size:13.5px;
-    font-weight:700;
-    cursor:pointer;
-  }
-  .pagination button:hover:not(:disabled){
-    border-color:var(--ink);
-    color:var(--ink);
-  }
-  .pagination button[data-active="true"]{
-    background:var(--ink);
-    color:#fff;
-    border-color:var(--ink);
-  }
-  .pagination button:disabled{opacity:.4; cursor:default;}
-  .pagination .page-ellipsis{
-    color:var(--muted);
-    font-size:13px;
-    padding:0 4px;
-    user-select:none;
-  }
-
-  .about{
-    border-top:1px solid var(--line);
-    padding:52px 0 64px;
-  }
-  .about h2{
-    font-size:21px;
-    font-weight:800;
-    margin:0 0 14px;
-    letter-spacing:-0.01em;
-  }
-  .about p{
-    font-size:14.5px;
-    color:var(--muted);
-    max-width:650px;
-    margin:0;
-  }
-
   @media (max-width:700px){
-    .tools-hero{padding-top:42px;}
-    .search-panel{max-width:none;}
-    .search-button{padding:11px 14px;}
     .tool-row{
       align-items:flex-start;
       gap:13px;
@@ -316,21 +149,9 @@
       font-size:12.5px;
       padding-left:4px;
     }
-    .filter-count{
-      width:100%;
-      margin-left:0;
-      margin-top:2px;
-    }
   }
 
   @media (max-width:460px){
-    .search-panel{
-      gap:4px;
-      padding:6px;
-    }
-    .search-panel input{padding:10px 8px;}
-    .search-clear{font-size:12px;}
-    .search-button{padding:10px 12px;}
     .tool-row{flex-wrap:wrap;}
     .tool-main{width:calc(100% - 65px);}
     .tool-action{
@@ -347,7 +168,7 @@
 <!--#include header-->
 
 <div class="wrap">
-  <section class="tools-hero">
+  <section class="page-hero">
     <h1>ALPACA TOOLS의 모든 도구</h1>
     <p>업무와 일상 생활에 도움이 되는 웹 애플리케이션과 Windows용 프로그램을 한곳에서 확인할 수 있습니다.</p>
   </section>
