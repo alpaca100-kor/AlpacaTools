@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ALPACA TOOLS의 모든 도구</title>
+<meta name="description" content="ALPACA TOOLS에서 제공하는 웹 애플리케이션과 Windows용 프로그램을 한곳에서 확인하고 필요한 도구를 찾아보세요.">
+<link rel="icon" type="image/png" href="./assets/logo.png">
+<meta property="og:title" content="ALPACA TOOLS의 모든 도구">
+<meta property="og:description" content="ALPACA TOOLS에서 제공하는 모든 도구를 한곳에서 확인하세요.">
+<meta property="og:image" content="./assets/logo.png">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./style.css">
+
+<style>
+  body{line-height:1.5;}
+
+  .tools-hero{padding:58px 0 34px;}
+  .tools-hero h1{
+    font-size:clamp(30px,4.2vw,44px);
+    font-weight:800;
+    letter-spacing:-0.025em;
+    line-height:1.2;
+    margin:0 0 14px;
+  }
+  .tools-hero p{
+    font-size:16px;
+    color:var(--muted);
+    max-width:620px;
+    margin:0;
+  }
+
+  .search-section{padding:0 0 26px;}
+  .search-panel{
+    background:var(--surface);
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:8px;
+    display:flex;
+    gap:8px;
+    align-items:center;
+    max-width:760px;
+  }
+  .search-panel:focus-within{border-color:#B9C2F3;}
+  .search-panel input{
+    flex:1;
+    min-width:0;
+    border:none;
+    outline:none;
+    background:transparent;
+    font-family:inherit;
+    font-size:15px;
+    padding:10px 12px;
+    color:var(--ink);
+  }
+  .search-panel input::placeholder{color:var(--muted);}
+  .search-button{
+    border:none;
+    background:var(--accent);
+    color:#fff;
+    border-radius:9px;
+    padding:11px 18px;
+    font-family:inherit;
+    font-size:14px;
+    font-weight:700;
+    cursor:pointer;
+    flex-shrink:0;
+  }
+  .search-button:hover{background:#2748D6;}
+  .search-clear{
+    border:none;
+    background:transparent;
+    color:var(--muted);
+    font-family:inherit;
+    font-size:13px;
+    font-weight:700;
+    cursor:pointer;
+    padding:8px 4px;
+    flex-shrink:0;
+  }
+  .search-clear:hover{color:var(--ink);}
+  .search-hint{
+    margin:9px 0 0 4px;
+    font-size:12.5px;
+    color:var(--muted);
+  }
+
+  .filter-row{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    flex-wrap:wrap;
+    padding:0 0 18px;
+  }
+  .chip{
+    border:1px solid var(--line);
+    background:var(--surface);
+    color:var(--muted);
+    border-radius:999px;
+    padding:7px 15px;
+    font-size:13.5px;
+    font-weight:600;
+    cursor:pointer;
+    font-family:inherit;
+  }
+  .chip:hover{color:var(--ink); border-color:#CFCFCB;}
+  .chip[data-active="true"]{
+    background:var(--ink);
+    color:#fff;
+    border-color:var(--ink);
+  }
+  .filter-count{
+    margin-left:auto;
+    font-size:13px;
+    color:var(--muted);
+  }
+  .filter-count b{color:var(--ink);}
+
+  .tool-list{
+    border-top:1px solid var(--line);
+    margin-bottom:6px;
+  }
+  .tool-row{
+    display:flex;
+    align-items:center;
+    gap:18px;
+    min-height:104px;
+    padding:16px 4px;
+    border-bottom:1px solid var(--line);
+    transition:background .15s ease, border-color .15s ease;
+  }
+  .tool-row:hover{background:var(--surface);}
+  .tool-icon-link{
+    width:52px;
+    height:52px;
+    border-radius:12px;
+    background:var(--accent-tint);
+    border:1px solid transparent;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    overflow:hidden;
+    flex-shrink:0;
+  }
+  .tool-icon-link:hover{border-color:#C8D0FF;}
+  .tool-icon-link img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+  }
+  .tool-icon-fallback{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    width:100%;
+    height:100%;
+    color:var(--accent);
+    font-size:18px;
+    font-weight:800;
+  }
+  .tool-main{
+    min-width:0;
+    flex:1;
+    padding:2px 0;
+  }
+  .tool-name-line{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    flex-wrap:wrap;
+    margin-bottom:5px;
+  }
+  .tool-name{
+    font-size:16px;
+    font-weight:700;
+    letter-spacing:-0.01em;
+    color:var(--ink);
+  }
+  .tool-name:hover{
+    color:var(--accent);
+    text-decoration:underline;
+    text-underline-offset:3px;
+  }
+  .tool-badge{
+    font-size:11px;
+    font-weight:700;
+    color:var(--muted);
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-radius:6px;
+    padding:3px 8px;
+  }
+  .tool-badge-new{
+    color:var(--accent);
+    border-color:var(--accent-tint);
+    background:var(--accent-tint);
+  }
+  .tool-description{
+    margin:0 0 7px;
+    color:var(--muted);
+    font-size:13.5px;
+    overflow-wrap:anywhere;
+  }
+  .tool-meta{
+    display:flex;
+    align-items:center;
+    gap:7px;
+    flex-wrap:wrap;
+    color:var(--muted);
+    font-size:12px;
+  }
+  .tool-meta .dot{opacity:.55;}
+  .tool-action{
+    display:flex;
+    align-items:center;
+    justify-content:flex-end;
+    flex-shrink:0;
+    align-self:flex-end;
+    padding-bottom:2px;
+  }
+  .tool-cta{
+    font-size:13.5px;
+    font-weight:700;
+    color:var(--accent);
+    padding:6px 2px 6px 8px;
+    white-space:nowrap;
+  }
+  .tool-cta:hover{text-decoration:underline; text-underline-offset:3px;}
+  .tool-cta[aria-disabled="true"]{
+    color:var(--muted);
+    pointer-events:none;
+  }
+
+  .empty-state{
+    padding:34px 4px 38px;
+    color:var(--muted);
+    font-size:14px;
+    text-align:center;
+  }
+
+  .pagination{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:6px;
+    padding:24px 0 58px;
+  }
+  .pagination button{
+    min-width:34px;
+    height:34px;
+    padding:0 8px;
+    border:1px solid var(--line);
+    background:var(--surface);
+    color:var(--muted);
+    border-radius:8px;
+    font-family:inherit;
+    font-size:13.5px;
+    font-weight:700;
+    cursor:pointer;
+  }
+  .pagination button:hover:not(:disabled){
+    border-color:var(--ink);
+    color:var(--ink);
+  }
+  .pagination button[data-active="true"]{
+    background:var(--ink);
+    color:#fff;
+    border-color:var(--ink);
+  }
+  .pagination button:disabled{opacity:.4; cursor:default;}
+  .pagination .page-ellipsis{
+    color:var(--muted);
+    font-size:13px;
+    padding:0 4px;
+    user-select:none;
+  }
+
+  .about{
+    border-top:1px solid var(--line);
+    padding:52px 0 64px;
+  }
+  .about h2{
+    font-size:21px;
+    font-weight:800;
+    margin:0 0 14px;
+    letter-spacing:-0.01em;
+  }
+  .about p{
+    font-size:14.5px;
+    color:var(--muted);
+    max-width:650px;
+    margin:0;
+  }
+
+  @media (max-width:700px){
+    .tools-hero{padding-top:42px;}
+    .search-panel{max-width:none;}
+    .search-button{padding:11px 14px;}
+    .tool-row{
+      align-items:flex-start;
+      gap:13px;
+      min-height:0;
+      padding:15px 2px;
+    }
+    .tool-icon-link{width:46px; height:46px; border-radius:10px;}
+    .tool-main{padding:0;}
+    .tool-action{
+      align-self:flex-start;
+      padding-top:1px;
+      padding-bottom:0;
+    }
+    .tool-cta{
+      font-size:12.5px;
+      padding-left:4px;
+    }
+    .filter-count{
+      width:100%;
+      margin-left:0;
+      margin-top:2px;
+    }
+  }
+
+  @media (max-width:460px){
+    .search-panel{
+      gap:4px;
+      padding:6px;
+    }
+    .search-panel input{padding:10px 8px;}
+    .search-clear{font-size:12px;}
+    .search-button{padding:10px 12px;}
+    .tool-row{flex-wrap:wrap;}
+    .tool-main{width:calc(100% - 65px);}
+    .tool-action{
+      width:calc(100% - 65px);
+      margin-left:65px;
+      justify-content:flex-start;
+    }
+    .tool-cta{padding-left:0;}
+  }
+</style>
+</head>
+<body>
+
+<!--#include header-->
+
+<div class="wrap">
+  <section class="tools-hero">
+    <h1>ALPACA TOOLS의 모든 도구</h1>
+    <p>업무와 일상 생활에 도움이 되는 웹 애플리케이션과 Windows용 프로그램을 한곳에서 확인할 수 있습니다.</p>
+  </section>
+
+  <section class="search-section" aria-label="도구 검색">
+    <div class="search-panel">
+      <input
+        id="searchInput"
+        type="search"
+        autocomplete="off"
+        placeholder="도구 이름 또는 기능으로 검색"
+        aria-label="도구 이름 또는 기능으로 검색"
+      >
+      <button id="searchClear" class="search-clear" type="button" hidden>지우기</button>
+      <button id="searchButton" class="search-button" type="button">검색</button>
+    </div>
+    <p class="search-hint">예: 메모장, 이미지, PDF, 계산기, 파일 탐색기</p>
+  </section>
+
+  <section id="tools" aria-label="도구 목록">
+    <div class="filter-row">
+      <button class="chip" data-filter="all" data-active="true" type="button">전체</button>
+      <button class="chip" data-filter="work" type="button">업무</button>
+      <button class="chip" data-filter="life" type="button">생활</button>
+      <button class="chip" data-filter="dev" type="button">개발자</button>
+      <div class="filter-count" aria-live="polite">
+        전체 <b id="totalCount">-</b>개 · 현재 <b id="visibleCount">-</b>개
+      </div>
+    </div>
+
+    <div class="tool-list" id="toolList"></div>
+    <div class="pagination" id="toolPagination" aria-label="도구 목록 페이지"></div>
+  </section>
+
+  <section class="about">
+    <h2>ALPACA TOOLS 소개</h2>
+    <p>업무와 일상 생활에 도움이 되는 도구를 AI를 활용하여 제작하고 배포하는 공간입니다. 웹 애플리케이션은 설치 없이 사용할 수 있고, Windows용 프로그램은 필요한 경우 내려받아 사용할 수 있습니다.</p>
+  </section>
+</div>
+
+<!--#include footer-->
+
+<script>
+const CATEGORY_LABEL = {
+  work: "업무",
+  life: "생활",
+  dev: "개발자"
+};
+
+const PLATFORM_LABEL = {
+  web: "Web",
+  windows: "Windows",
+  mac: "macOS"
+};
+
+const APPS_PER_PAGE = 10;
+const NEW_BADGE_DAYS = 7;
+
+let APPS = [];
+let currentList = [];
+let currentPage = 1;
+let detailHrefMap = new Map();
+
+function escapeHtml(value){
+  return String(value ?? "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
+function isImagePath(icon){
+  return /\.(ico|png|svg|jpg|jpeg|webp)$/i.test(icon || "");
+}
+
+function isNewApp(updatedAt){
+  const date = new Date(updatedAt);
+  if(Number.isNaN(date.getTime())) return false;
+
+  const diffDays = (Date.now() - date.getTime()) / (1000 * 60 * 60 * 24);
+  return diffDays >= 0 && diffDays <= NEW_BADGE_DAYS;
+}
+
+function formatDate(value){
+  const date = new Date(value);
+  if(Number.isNaN(date.getTime())) return value || "";
+
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+  return year + "." + month + "." + day;
+}
+
+function getPrimaryAction(app){
+  if(app.platform === "web"){
+    return {
+      label: "바로 열기",
+      href: app.url || app.downloadUrl || app.repoUrl || ""
+    };
+  }
+
+  if(app.platform === "windows" || app.platform === "mac"){
+    return {
+      label: "다운로드",
+      href: app.downloadUrl || app.url || app.repoUrl || ""
+    };
+  }
+
+  return {
+    label: app.url ? "바로 열기" : "다운로드",
+    href: app.url || app.downloadUrl || app.repoUrl || ""
+  };
+}
+
+function getFallbackHref(app){
+  return app.repoUrl || app.url || app.downloadUrl || "https://github.com/alpaca100-kor/AlpacaTools";
+}
+
+async function detailPageExists(app){
+  const detailPath = "./tools/" + encodeURIComponent(app.id) + ".html";
+
+  try{
+    const response = await fetch(detailPath, {
+      method: "HEAD",
+      cache: "no-store"
+    });
+    return response.ok ? detailPath : null;
+  }catch(error){
+    console.warn("상세 페이지 확인 실패:", app.id, error);
+    return null;
+  }
+}
+
+async function resolveDetailLinks(){
+  const results = await Promise.all(
+    APPS.map(async app => {
+      const detailPath = await detailPageExists(app);
+      return {
+        id: app.id,
+        href: detailPath || getFallbackHref(app)
+      };
+    })
+  );
+
+  detailHrefMap = new Map(results.map(item => [item.id, item.href]));
+}
+
+function iconMarkup(app){
+  const icon = app.icon || "";
+  const fallback = escapeHtml((app.name || "?").trim().charAt(0) || "?");
+
+  if(!isImagePath(icon)){
+    return '<span class="tool-icon-fallback" aria-hidden="true">' + escapeHtml(icon || fallback) + '</span>';
+  }
+
+  return (
+    '<img src="' + escapeHtml(icon) + '" alt="' + escapeHtml(app.name) + ' 아이콘" ' +
+    'onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\';">' +
+    '<span class="tool-icon-fallback" style="display:none" aria-hidden="true">' + fallback + '</span>'
+  );
+}
+
+function renderPagination(totalItems, perPage, page){
+  const container = document.getElementById("toolPagination");
+  const totalPages = Math.ceil(totalItems / perPage);
+
+  if(totalPages <= 1){
+    container.innerHTML = "";
+    return;
+  }
+
+  const buttons = [];
+  buttons.push(
+    '<button type="button" data-nav="prev" ' +
+    (page === 1 ? "disabled" : "") +
+    '>이전</button>'
+  );
+
+  const pageNumbers = new Set([1, totalPages, page, page - 1, page + 1]);
+  let previousPage = 0;
+
+  for(let p = 1; p <= totalPages; p++){
+    if(!pageNumbers.has(p)) continue;
+
+    if(previousPage && p - previousPage > 1){
+      buttons.push('<span class="page-ellipsis">…</span>');
+    }
+
+    buttons.push(
+      '<button type="button" data-page="' + p + '" data-active="' + (p === page) + '">' +
+      p +
+      '</button>'
+    );
+
+    previousPage = p;
+  }
+
+  buttons.push(
+    '<button type="button" data-nav="next" ' +
+    (page === totalPages ? "disabled" : "") +
+    '>다음</button>'
+  );
+
+  container.innerHTML = buttons.join("");
+
+  container.querySelectorAll("button[data-page]").forEach(button => {
+    button.addEventListener("click", () => {
+      renderList(Number(button.dataset.page));
+    });
+  });
+
+  const prevButton = container.querySelector('button[data-nav="prev"]');
+  const nextButton = container.querySelector('button[data-nav="next"]');
+
+  if(prevButton){
+    prevButton.addEventListener("click", () => {
+      if(page > 1) renderList(page - 1);
+    });
+  }
+
+  if(nextButton){
+    nextButton.addEventListener("click", () => {
+      if(page < totalPages) renderList(page + 1);
+    });
+  }
+}
+
+function renderList(page = 1){
+  const listElement = document.getElementById("toolList");
+  const totalPages = Math.max(1, Math.ceil(currentList.length / APPS_PER_PAGE));
+
+  currentPage = Math.min(Math.max(page, 1), totalPages);
+
+  if(currentList.length === 0){
+    listElement.innerHTML = '<div class="empty-state">검색 조건에 맞는 도구가 없습니다.</div>';
+    document.getElementById("visibleCount").textContent = "0";
+    document.getElementById("toolPagination").innerHTML = "";
+    return;
+  }
+
+  const start = (currentPage - 1) * APPS_PER_PAGE;
+  const pageItems = currentList.slice(start, start + APPS_PER_PAGE);
+
+  listElement.innerHTML = pageItems.map(app => {
+    const detailHref = detailHrefMap.get(app.id) || getFallbackHref(app);
+    const action = getPrimaryAction(app);
+    const category = CATEGORY_LABEL[app.category] || app.category || "";
+    const platform = PLATFORM_LABEL[app.platform] || app.platform || "";
+    const isInternalDetail = detailHref.startsWith("./tools/");
+
+    const actionLink = action.href
+      ? '<a class="tool-cta" href="' + escapeHtml(action.href) + '" target="_blank" rel="noopener">' +
+        escapeHtml(action.label) + ' ↗</a>'
+      : '<span class="tool-cta" aria-disabled="true">' + escapeHtml(action.label) + '</span>';
+
+    const targetAttr = isInternalDetail
+      ? 'target="_self"'
+      : 'target="_blank" rel="noopener"';
+
+    return (
+      '<article class="tool-row">' +
+        '<a class="tool-icon-link" href="' + escapeHtml(detailHref) + '" ' + targetAttr +
+          ' aria-label="' + escapeHtml(app.name) + ' 상세 페이지">' +
+          iconMarkup(app) +
+        '</a>' +
+        '<div class="tool-main">' +
+          '<div class="tool-name-line">' +
+            '<a class="tool-name" href="' + escapeHtml(detailHref) + '" ' + targetAttr + '>' +
+              escapeHtml(app.name) +
+            '</a>' +
+            (isNewApp(app.updatedAt) ? '<span class="tool-badge tool-badge-new">신규</span>' : '') +
+            '<span class="tool-badge">' + escapeHtml(platform) + '</span>' +
+          '</div>' +
+          '<p class="tool-description">' + escapeHtml(app.description) + '</p>' +
+          '<div class="tool-meta">' +
+            '<span>' + escapeHtml(category) + '</span>' +
+            '<span class="dot">·</span>' +
+            '<span>v' + escapeHtml(app.version) + '</span>' +
+            '<span class="dot">·</span>' +
+            '<span>' + escapeHtml(formatDate(app.updatedAt)) + ' 업데이트</span>' +
+          '</div>' +
+        '</div>' +
+        '<div class="tool-action">' + actionLink + '</div>' +
+      '</article>'
+    );
+  }).join("");
+
+  document.getElementById("visibleCount").textContent = String(currentList.length);
+  renderPagination(currentList.length, APPS_PER_PAGE, currentPage);
+}
+
+function applyFilters(resetPage = true){
+  const activeFilter = document.querySelector('.chip[data-active="true"]').dataset.filter;
+  const query = document.getElementById("searchInput").value.trim().toLowerCase();
+
+  currentList = APPS.filter(app => {
+    const categoryMatch = activeFilter === "all" || app.category === activeFilter;
+
+    const searchableText = [
+      app.name,
+      app.description,
+      CATEGORY_LABEL[app.category],
+      PLATFORM_LABEL[app.platform],
+      ...(Array.isArray(app.tags) ? app.tags : [])
+    ].filter(Boolean).join(" ").toLowerCase();
+
+    const searchMatch = !query || searchableText.includes(query);
+    return categoryMatch && searchMatch;
+  });
+
+  renderList(resetPage ? 1 : currentPage);
+}
+
+async function loadApps(){
+  const listElement = document.getElementById("toolList");
+
+  try{
+    const response = await fetch("./apps.json", {cache:"no-store"});
+    if(!response.ok) throw new Error("apps.json을 불러오지 못했습니다.");
+
+    const data = await response.json();
+    APPS = Array.isArray(data.apps) ? data.apps : [];
+
+    document.getElementById("totalCount").textContent = String(APPS.length);
+    currentList = APPS.slice();
+
+    await resolveDetailLinks();
+    renderList(1);
+  }catch(error){
+    console.error(error);
+    document.getElementById("totalCount").textContent = "0";
+    document.getElementById("visibleCount").textContent = "0";
+    listElement.innerHTML = '<div class="empty-state">도구 목록을 불러오지 못했습니다. apps.json 파일을 확인해주세요.</div>';
+  }
+}
+
+document.querySelectorAll(".chip").forEach(chip => {
+  chip.addEventListener("click", () => {
+    document.querySelectorAll(".chip").forEach(item => {
+      item.dataset.active = "false";
+    });
+    chip.dataset.active = "true";
+    applyFilters(true);
+  });
+});
+
+function runSearch(){
+  applyFilters(true);
+  document.getElementById("tools").scrollIntoView({
+    behavior:"smooth",
+    block:"start"
+  });
+}
+
+document.getElementById("searchButton").addEventListener("click", runSearch);
+
+document.getElementById("searchInput").addEventListener("keydown", event => {
+  if(event.key === "Enter"){
+    event.preventDefault();
+    runSearch();
+  }
+});
+
+document.getElementById("searchInput").addEventListener("input", () => {
+  const clearButton = document.getElementById("searchClear");
+  clearButton.hidden = document.getElementById("searchInput").value.length === 0;
+  applyFilters(true);
+});
+
+document.getElementById("searchClear").addEventListener("click", () => {
+  const input = document.getElementById("searchInput");
+  input.value = "";
+  input.focus();
+  document.getElementById("searchClear").hidden = true;
+  applyFilters(true);
+});
+
+loadApps();
+</script>
+
+</body>
+</html>
