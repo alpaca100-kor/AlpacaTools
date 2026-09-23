@@ -14,6 +14,7 @@ body{
   background:var(--paper);
   color:var(--ink);
   font-family:'Manrope',sans-serif;
+  line-height:1.5;
   -webkit-font-smoothing:antialiased;
 }
 a{color:inherit; text-decoration:none;}
@@ -49,3 +50,171 @@ footer{border-top:1px solid var(--line);}
 }
 .footer-inner a{margin-right:18px;}
 .footer-inner a:hover{color:var(--ink);}
+
+/* ===== Shared page content ===== */
+.page-hero{padding:58px 0 34px;}
+.page-hero h1{
+  font-size:clamp(30px,4.2vw,44px);
+  font-weight:800;
+  letter-spacing:-0.025em;
+  line-height:1.2;
+  margin:0 0 14px;
+}
+.page-hero p{
+  font-size:16px;
+  color:var(--muted);
+  max-width:620px;
+  margin:0;
+}
+.search-section{padding:0 0 26px;}
+.search-section--spacious{padding-bottom:28px;}
+.search-panel{
+  background:var(--surface);
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:8px;
+  display:flex;
+  gap:8px;
+  align-items:center;
+  max-width:760px;
+}
+.search-panel:focus-within{border-color:#B9C2F3;}
+.search-panel input{
+  flex:1;
+  min-width:0;
+  border:none;
+  outline:none;
+  background:transparent;
+  color:var(--ink);
+  font:inherit;
+  font-size:15px;
+  padding:10px 12px;
+}
+.search-panel input::placeholder{color:var(--muted);}
+.search-button{
+  border:none;
+  background:var(--accent);
+  color:#fff;
+  border-radius:9px;
+  padding:11px 18px;
+  font:inherit;
+  font-size:14px;
+  font-weight:700;
+  cursor:pointer;
+  flex-shrink:0;
+  white-space:nowrap;
+}
+.search-button:hover{background:#2748D6;}
+.search-clear{
+  border:none;
+  background:transparent;
+  color:var(--muted);
+  font:inherit;
+  font-size:13px;
+  font-weight:700;
+  cursor:pointer;
+  padding:8px 4px;
+  flex-shrink:0;
+}
+.search-clear:hover{color:var(--ink);}
+.search-hint{
+  margin:9px 0 0 4px;
+  font-size:12.5px;
+  color:var(--muted);
+}
+.filter-row{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  flex-wrap:wrap;
+  padding:0 0 18px;
+}
+.chip{
+  border:1px solid var(--line);
+  background:var(--surface);
+  color:var(--muted);
+  border-radius:999px;
+  padding:7px 15px;
+  font-size:13.5px;
+  font-weight:600;
+  cursor:pointer;
+  font-family:inherit;
+}
+.chip:hover{color:var(--ink); border-color:#CFCFCB;}
+.chip[data-active="true"]{background:var(--ink); color:#fff; border-color:var(--ink);}
+.filter-count,
+.result-summary{font-size:13px; color:var(--muted);}
+.filter-count{margin-left:auto;}
+.result-summary{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  padding:0 0 14px;
+}
+.filter-count b,
+.result-summary b{color:var(--ink);}
+.empty-state{
+  padding:34px 4px 38px;
+  color:var(--muted);
+  font-size:14px;
+  text-align:center;
+}
+.pagination{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:6px;
+  padding:24px 0 58px;
+}
+.pagination--spacious{padding-bottom:60px;}
+.pagination button{
+  min-width:34px;
+  height:34px;
+  padding:0 8px;
+  border:1px solid var(--line);
+  background:var(--surface);
+  color:var(--muted);
+  border-radius:8px;
+  font:inherit;
+  font-size:13.5px;
+  font-weight:700;
+  cursor:pointer;
+}
+.pagination button:hover:not(:disabled){border-color:var(--ink); color:var(--ink);}
+.pagination button[data-active="true"]{background:var(--ink); color:#fff; border-color:var(--ink);}
+.pagination button:disabled{opacity:.4; cursor:default;}
+.pagination .page-ellipsis{color:var(--muted); font-size:13px; padding:0 4px; user-select:none;}
+.about{
+  border-top:1px solid var(--line);
+  padding:52px 0 64px;
+}
+.about h2{
+  font-size:21px;
+  font-weight:800;
+  margin:0 0 14px;
+  letter-spacing:-0.01em;
+}
+.about p{font-size:14.5px; color:var(--muted); max-width:650px; margin:0;}
+
+@media (max-width:700px){
+  .page-hero{padding-top:42px;}
+  .search-panel{max-width:none;}
+  .search-button{padding:11px 14px;}
+  .filter-count{width:100%; margin-left:0; margin-top:2px;}
+}
+
+@media (max-width:460px){
+  .search-panel{gap:4px; padding:6px;}
+  .search-panel input{padding:10px 8px;}
+  .search-clear{font-size:12px;}
+  .search-button{padding:10px 12px;}
+}
+
+@media (max-width:500px){
+  .search-section--spacious .search-panel{gap:4px; padding:6px;}
+  .search-section--spacious .search-panel input{padding:10px 8px;}
+  .search-section--spacious .search-clear{font-size:12px;}
+  .search-section--spacious .search-button{padding:10px 12px;}
+  .result-summary{font-size:12.5px;}
+}
