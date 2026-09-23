@@ -3,72 +3,86 @@
     {
       "title": "알파카 메모장 업데이트 안내 - 달력메모 추가",
       "url": "https://alpaca100.tistory.com/406",
-      "date": "2026-09-19"
+      "date": "2026-09-19",
+      "appId": "an"
     },
     {
       "title": "ALPACA TOOLS 오픈",
       "url": "https://alpaca100.tistory.com/397",
-      "date": "2026-09-04"
+      "date": "2026-09-04",
+      "appId": null
     },
     {
       "title": "알파카 달력 출시",
       "url": "https://alpaca100.tistory.com/396",
-      "date": "2026-09-03"
+      "date": "2026-09-03",
+      "appId": "ac"
     },
     {
       "title": "알파카 이미지 편집기 웹버전 출시",
       "url": "https://alpaca100.tistory.com/390",
-      "date": "2026-08-26"
+      "date": "2026-08-26",
+      "appId": "aie-web"
     },
     {
       "title": "알파카 탐색기 출시",
       "url": "https://alpaca100.tistory.com/389",
-      "date": "2026-08-20"
+      "date": "2026-08-20",
+      "appId": "ae"
     },
     {
       "title": "알파카 메모장 업데이트 안내 - 날짜 및 시간, 빠른 입력 기능 추가",
       "url": "https://alpaca100.tistory.com/384",
-      "date": "2026-08-10"
+      "date": "2026-08-10",
+      "appId": "an"
     },
     {
       "title": "알파카 이미지 편집기 업데이트 안내 - 이미지 병합 기능 개선",
       "url": "https://alpaca100.tistory.com/381",
-      "date": "2026-07-31"
+      "date": "2026-07-31",
+      "appId": "aie-exe"
     },
     {
       "title": "엣지(Edge) 컬렉션 매너저 출시",
       "url": "https://alpaca100.tistory.com/377",
-      "date": "2026-07-27"
+      "date": "2026-07-27",
+      "appId": "EdgeCM"
     },
     {
       "title": "알파카 이미지 편집기 업데이트 안내 - 이미지 크기 조정/자르기/ICO 변환 기능 추가",
       "url": "https://alpaca100.tistory.com/373",
-      "date": "2026-07-16"
+      "date": "2026-07-16",
+      "appId": "aie-exe"
     },
     {
       "title": "알파카 메모장 업데이트 안내 - 클립보드 복사 기능 개선",
       "url": "https://alpaca100.tistory.com/187",
-      "date": "2025-11-12"
+      "date": "2025-11-12",
+      "appId": "an"
     },
     {
       "title": "알파카 이미지 편집기 출시",
       "url": "https://alpaca100.tistory.com/183",
-      "date": "2025-11-06"
+      "date": "2025-11-06",
+      "appId": "aie-exe"
     },
     {
       "title": "알파카 메모장 업데이트 안내 - 클립보드 복사 기능 추가",
       "url": "https://alpaca100.tistory.com/173",
-      "date": "2025-10-25"
+      "date": "2025-10-25",
+      "appId": "an"
     },
     {
       "title": "알파카 메모장 업데이트 안내 - 단축키 추가",
       "url": "https://alpaca100.tistory.com/109",
-      "date": "2025-07-07"
+      "date": "2025-07-07",
+      "appId": "an"
     },
     {
       "title": "알파카 메모장 출시",
       "url": "https://alpaca100.tistory.com/100",
-      "date": "2025-06-13"
+      "date": "2025-06-13",
+      "appId": "an"
     }
   ]
 }
