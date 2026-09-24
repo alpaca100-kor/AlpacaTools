@@ -24,23 +24,63 @@ a:focus-visible, button:focus-visible, input:focus-visible{
 .wrap{max-width:1120px; margin:0 auto; padding:0 28px;}
 
 /* ===== Header ===== */
-header{border-bottom:1px solid var(--line); background:var(--paper);}
+header{border-bottom:1px solid var(--line); background:var(--paper); position:relative;}
 .header-inner{
   display:flex; align-items:center; gap:36px; padding:14px 0;
 }
-.logo{font-weight:800; font-size:17px; letter-spacing:-0.01em; display:flex; align-items:center; gap:10px;}
-.logo img{width:34px; height:34px; border-radius:9px; display:block;}
+.logo{
+  font-weight:800; font-size:17px; letter-spacing:-0.01em;
+  display:flex; align-items:center; gap:10px; white-space:nowrap;
+}
+.logo img{width:34px; height:34px; border-radius:9px; display:block; flex-shrink:0;}
 nav{display:flex; gap:26px; margin-left:8px; font-size:14.5px; font-weight:600; color:var(--muted);}
-nav a{display:flex; align-items:center; gap:4px;}
+nav a{display:flex; align-items:center; gap:4px; white-space:nowrap;}
 nav a:hover{color:var(--ink);}
 nav a.active{color:var(--ink);}
 nav .ext-icon{font-size:11px; opacity:.7;}
+nav .nav-github{display:none;} /* 데스크톱에서는 별도 GitHub 버튼(.gh-btn)이 있으므로 nav 안에서는 숨김 */
 .gh-btn{
-  margin-left:auto; display:flex; align-items:center; gap:7px;
+  margin-left:auto; display:flex; align-items:center; gap:7px; flex-shrink:0;
   background:var(--ink); color:var(--paper); padding:9px 16px;
-  border-radius:8px; font-size:13.5px; font-weight:700;
+  border-radius:8px; font-size:13.5px; font-weight:700; white-space:nowrap;
 }
 .gh-btn:hover{background:var(--accent);}
+
+/* 햄버거 버튼 (기본값: 데스크톱에서는 숨김) */
+.menu-toggle{
+  display:none; flex-direction:column; justify-content:center; gap:4px;
+  width:34px; height:34px; margin-left:auto;
+  background:none; border:none; padding:0; cursor:pointer; flex-shrink:0;
+}
+.menu-toggle span{
+  display:block; width:100%; height:2px; background:var(--ink); border-radius:2px;
+  transition:transform .2s ease, opacity .2s ease;
+}
+.menu-toggle.is-active span:nth-child(1){transform:translateY(6px) rotate(45deg);}
+.menu-toggle.is-active span:nth-child(2){opacity:0;}
+.menu-toggle.is-active span:nth-child(3){transform:translateY(-6px) rotate(-45deg);}
+
+/* 화면이 좁아지면(모바일) 가로 메뉴 대신 햄버거 메뉴로 전환 */
+/* → 메뉴 항목이 앞으로 더 늘어나도 이 구조는 그대로 확장됩니다 */
+@media (max-width:680px){
+  .header-inner{gap:12px;}
+  .logo{font-size:15px;}
+  .gh-btn{display:none;}
+  .menu-toggle{display:flex;}
+
+  nav{
+    display:none; position:absolute; top:100%; left:0; right:0;
+    flex-direction:column; gap:0; margin-left:0;
+    background:var(--paper); border-bottom:1px solid var(--line);
+    box-shadow:0 8px 16px rgba(0,0,0,.06); padding:8px 0;
+  }
+  nav.nav-open{display:flex;}
+  nav a{padding:12px 28px; white-space:normal;}
+  nav a.active{background:var(--accent-tint);}
+  nav .nav-github{
+    display:flex; border-top:1px solid var(--line); margin-top:4px; padding-top:14px;
+  }
+}
 
 /* ===== Footer ===== */
 footer{border-top:1px solid var(--line);}
