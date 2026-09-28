@@ -424,18 +424,9 @@
 
   const APP_ID = "YOUR_APP_ID";
 
-  /*
-   * ==========================================================
-   * 앱별 상세 콘텐츠
-   * ==========================================================
-   *
-   * 이 부분만 앱마다 수정합니다.
-   *
-   * intro      : 앱 상세 소개
-   * features   : 주요 기능
-   * usage      : 사용 방법
-   * additional: 추가 안내(선택)
-   */
+  /* ==========================================================
+     앱별 상세 콘텐츠
+     ========================================================== */
 
   const APP_CONTENT = {
     intro: `
@@ -464,17 +455,8 @@
       "세 번째 사용 방법을 작성합니다."
     ],
 
-    /*
-     * 추가 안내가 필요하지 않은 경우 빈 문자열로 둡니다.
-     * HTML을 직접 작성할 수 있습니다.
-     */
     additional: ""
   };
-
-
-  /* ==========================================================
-     공통 함수
-     ========================================================== */
 
   const $ = (selector) => document.querySelector(selector);
 
@@ -493,52 +475,25 @@
   }
 
   function categoryName(category) {
-    const names = {
-      work: "업무",
-      life: "생활",
-      dev: "개발자"
-    };
-
+    const names = { work:"업무", life:"생활", dev:"개발자" };
     return names[category] || category || "-";
   }
 
   function platformName(platform) {
-    const names = {
-      web: "Web",
-      windows: "Windows"
-    };
-
+    const names = { web:"Web", windows:"Windows" };
     return names[platform] || platform || "-";
   }
 
-  /*
-   * platform에 따라 Hero의 대표 버튼을 결정합니다.
-   * Web      → 바로 열기
-   * Windows → 다운로드
-   */
   function getPrimaryAction(app) {
     if (app.platform === "web" && app.url) {
-      return {
-        text: "바로 열기 ↗",
-        url: app.url
-      };
+      return { text:"바로 열기 ↗", url:app.url };
     }
-
     if (app.platform === "windows" && app.downloadUrl) {
-      return {
-        text: "다운로드 ↗",
-        url: app.downloadUrl
-      };
+      return { text:"다운로드 ↗", url:app.downloadUrl };
     }
-
     return null;
   }
 
-  /*
-   * 관련 도구 선정 규칙
-   * - 현재 앱을 제외한 같은 category의 앱 최대 3개
-   * - 같은 category 앱이 3개 미만이면 있는 앱만 표시
-   */
   function getRelatedApps(app, allApps) {
     return allApps
       .filter(item => item.id !== app.id)
@@ -547,52 +502,40 @@
   }
 
   /*
-   * 관련 도구 링크 규칙 (tools.html과 동일)
+   * 관련 도구 링크 규칙
    * - tools/{id}.html 상세 페이지가 있으면 해당 페이지로 이동
-   * - 없으면 repoUrl → url → downloadUrl → GitHub 저장소 순서로 이동
+   * - 없으면 repoUrl → url → downloadUrl → github 순서로 이동
    */
   function getFallbackHref(item) {
-    return item.repoUrl
-      || item.url
-      || item.downloadUrl
-      || "https://github.com/alpaca100-kor/AlpacaTools";
+    if (item.repoUrl) return item.repoUrl;
+    if (item.url) return item.url;
+    if (item.downloadUrl) return item.downloadUrl;
+    if (item.github) return item.github;
+    return "../tools.html";
   }
 
-  async function resolveRelatedLink(item) {
-    const detailPath = `../tools/${encodeURIComponent(item.id)}.html`;
+  function getToolPageIds() {
+    return new Set([
+      "ac",
+      "ae",
+      "aie-exe",
+      "aie-web",
+      "an",
+      "EdgeCM"
+    ]);
+  }
 
-    try {
-      const response = await fetch(detailPath, {
-        method: "HEAD",
-        cache: "no-store"
-      });
+  function getRelatedLink(item) {
+    const toolPageIds = getToolPageIds();
 
-      if (response.ok) {
-        return { href: detailPath, internal: true };
-      }
-    } catch (error) {
-      console.warn("상세 페이지 확인 실패:", item.id, error);
+    if (toolPageIds.has(item.id)) {
+      return { href:`./${encodeURIComponent(item.id)}.html`, internal:true };
     }
 
-    return { href: getFallbackHref(item), internal: false };
+    return { href:getFallbackHref(item), internal:false };
   }
 
-  async function resolveRelatedLinks(relatedApps) {
-    const results = await Promise.all(
-      relatedApps.map(async item => [item.id, await resolveRelatedLink(item)])
-    );
-
-    return new Map(results);
-  }
-
-
-  /* ==========================================================
-     페이지 렌더링
-     ========================================================== */
-
-  function renderPage(app, notices, allApps, relatedLinks) {
-    document.title = `${app.name} | ALPACA TOOLS`;
-
+  function renderPage(app, allApps, notices) {
     const primary = getPrimaryAction(app);
 
     const primaryButton = primary
@@ -617,10 +560,6 @@
       `
       : "";
 
-    /*
-     * downloadUrl이 있는 경우 별도의 다운로드 버튼을 제공합니다.
-     * 대표 버튼이 Windows 다운로드 버튼인 경우 중복하지 않습니다.
-     */
     const secondaryDownloadButton =
       app.downloadUrl && app.platform !== "windows"
         ? `
@@ -646,52 +585,38 @@
       .map(step => `<li>${escapeHtml(step)}</li>`)
       .join("");
 
-    /*
-     * notice.json에서 appId가 현재 앱 id와 같은 공지만
-     * 가져온 뒤 최신 날짜 순으로 표시합니다.
-     */
     const noticesHtml = notices.length
       ? notices.map(notice => `
           <a class="notice-item"
              href="${escapeHtml(notice.url)}"
              target="_blank"
              rel="noopener">
-            <span class="notice-date">
-              ${escapeHtml(formatDate(notice.date))}
-            </span>
-
-            <span class="notice-title">
-              ${escapeHtml(notice.title)}
-            </span>
-
+            <span class="notice-date">${escapeHtml(formatDate(notice.date))}</span>
+            <span class="notice-title">${escapeHtml(notice.title)}</span>
             <span class="notice-arrow">↗</span>
           </a>
         `).join("")
       : `
-        <div class="notice-empty">
-          아직 등록된 관련 공지사항이 없습니다.
-        </div>
+        <div class="notice-empty">아직 등록된 관련 공지사항이 없습니다.</div>
       `;
 
     const relatedApps = getRelatedApps(app, allApps);
 
     const relatedHtml = relatedApps
       .map(item => {
-        const link = (relatedLinks && relatedLinks.get(item.id))
-          || { href: getFallbackHref(item), internal: false };
-
+        const link = getRelatedLink(item);
         const targetAttr = link.internal
           ? 'target="_self"'
           : 'target="_blank" rel="noopener"';
 
         return `
-        <a class="related-card"
-           href="${escapeHtml(link.href)}"
-           ${targetAttr}>
-          <h3>${escapeHtml(item.name)}</h3>
-          <p>${escapeHtml(item.description || "")}</p>
-        </a>
-      `;
+          <a class="related-card"
+             href="${escapeHtml(link.href)}"
+             ${targetAttr}>
+            <h3>${escapeHtml(item.name)}</h3>
+            <p>${escapeHtml(item.description || "")}</p>
+          </a>
+        `;
       })
       .join("");
 
@@ -699,16 +624,13 @@
       ? `
         <section class="detail-section">
           <h2>추가 안내</h2>
-          <div class="detail-content">
-            ${APP_CONTENT.additional}
-          </div>
+          <div class="detail-content">${APP_CONTENT.additional}</div>
         </section>
       `
       : "";
 
     $("#app-detail").innerHTML = `
       <div class="wrap">
-
         <div class="breadcrumb" aria-label="현재 위치">
           <a href="../index.html">ALPACA TOOLS</a>
           <span class="breadcrumb-separator">›</span>
@@ -717,262 +639,120 @@
           <span>${escapeHtml(app.name)}</span>
         </div>
 
-
-        <!-- =================================================
-             앱 기본 정보
-             ================================================= -->
-
         <section class="app-hero">
-
+          <!--
+            중요: 상세 페이지는 tools/ 폴더에 있으므로
+            apps.json의 아이콘 경로(예: assets/icons/ac.ico)는
+            반드시 ../ 를 붙여 루트 기준 경로로 보정합니다.
+          -->
           <img class="app-icon"
-               src="${escapeHtml(app.icon || "")}"
+               src="../${escapeHtml(app.icon || "")}"
                alt="${escapeHtml(app.name)} 아이콘"
                onerror="this.style.display='none';">
 
           <div class="app-hero-content">
-
             <h1>${escapeHtml(app.name)}</h1>
-
-            <p class="app-description">
-              ${escapeHtml(app.description || "")}
-            </p>
-
+            <p class="app-description">${escapeHtml(app.description || "")}</p>
             <div class="app-meta">
-              <span class="app-meta-item">
-                ${escapeHtml(categoryName(app.category))}
-              </span>
-
-              <span class="app-meta-item">
-                ${escapeHtml(platformName(app.platform))}
-              </span>
-
-              <span class="app-meta-item">
-                v${escapeHtml(app.version || "-")}
-              </span>
-
-              <span class="app-meta-item">
-                ${escapeHtml(formatDate(app.updatedAt))} 업데이트
-              </span>
+              <span class="app-meta-item">${escapeHtml(categoryName(app.category))}</span>
+              <span class="app-meta-item">${escapeHtml(platformName(app.platform))}</span>
+              <span class="app-meta-item">v${escapeHtml(app.version || "-")}</span>
+              <span class="app-meta-item">${escapeHtml(formatDate(app.updatedAt))} 업데이트</span>
             </div>
-
           </div>
         </section>
-
-
-        <!-- =================================================
-             주요 버튼
-             ================================================= -->
 
         <div class="app-actions">
           ${primaryButton}
-          ${secondaryDownloadButton}
           ${githubButton}
+          ${secondaryDownloadButton}
+          ${app.repoUrl ? `<a class="app-button" href="${escapeHtml(app.repoUrl)}" target="_blank" rel="noopener">소개 글 ↗</a>` : ""}
         </div>
 
-
-        <!-- =================================================
-             앱 소개
-             ================================================= -->
-
         <section class="detail-section">
-          <h2>${escapeHtml(app.name)} 소개</h2>
-
-          <div class="detail-content">
-            ${APP_CONTENT.intro}
-          </div>
+          <h2>앱 소개</h2>
+          <div class="detail-content">${APP_CONTENT.intro || ""}</div>
         </section>
-
-
-        <!-- =================================================
-             주요 기능
-             ================================================= -->
 
         <section class="detail-section">
           <h2>주요 기능</h2>
-
-          <div class="feature-grid">
-            ${featuresHtml}
-          </div>
+          <div class="feature-grid">${featuresHtml}</div>
         </section>
-
-
-        <!-- =================================================
-             사용 방법
-             ================================================= -->
 
         <section class="detail-section">
           <h2>사용 방법</h2>
-
-          <ol class="steps">
-            ${usageHtml}
-          </ol>
+          <ol class="steps">${usageHtml}</ol>
         </section>
-
-
-        <!-- =================================================
-             이용 환경
-             ================================================= -->
 
         <section class="detail-section">
-          <h2>이용 환경</h2>
-
+          <h2>실행 환경</h2>
           <div class="environment">
-
-            <div class="environment-item">
-              <span class="environment-label">플랫폼</span>
-              <span class="environment-value">
-                ${escapeHtml(platformName(app.platform))}
-              </span>
-            </div>
-
-            <div class="environment-item">
-              <span class="environment-label">버전</span>
-              <span class="environment-value">
-                ${escapeHtml(app.version || "-")}
-              </span>
-            </div>
-
-            <div class="environment-item">
-              <span class="environment-label">최종 업데이트</span>
-              <span class="environment-value">
-                ${escapeHtml(formatDate(app.updatedAt))}
-              </span>
-            </div>
-
-            <div class="environment-item">
-              <span class="environment-label">GitHub</span>
-              <span class="environment-value">
-                ${app.github ? "공개" : "미제공"}
-              </span>
-            </div>
-
+            <div class="environment-item"><span class="environment-label">플랫폼</span><span class="environment-value">${escapeHtml(platformName(app.platform))}</span></div>
+            <div class="environment-item"><span class="environment-label">버전</span><span class="environment-value">v${escapeHtml(app.version || "-")}</span></div>
+            <div class="environment-item"><span class="environment-label">최근 업데이트</span><span class="environment-value">${escapeHtml(formatDate(app.updatedAt))}</span></div>
           </div>
         </section>
-
 
         ${additionalHtml}
 
-
-        <!-- =================================================
-             관련 공지사항
-             ================================================= -->
-
         <section class="detail-section">
           <h2>관련 공지사항</h2>
-
-          <div class="notice-list">
-            ${noticesHtml}
-          </div>
+          <div class="notice-list">${noticesHtml}</div>
         </section>
-
-
-        <!-- =================================================
-             관련 도구
-             ================================================= -->
 
         <section class="detail-section">
           <h2>관련 도구</h2>
-
           <div class="related-grid">
-            ${relatedHtml}
+            ${relatedHtml || '<div class="detail-content"><p>같은 카테고리의 관련 도구가 없습니다.</p></div>'}
           </div>
         </section>
 
-
-        <!-- =================================================
-             하단 CTA
-             ================================================= -->
-
-        <section class="bottom-cta">
-          <h2>${escapeHtml(app.name)}을 사용해 보세요.</h2>
-
+        <div class="bottom-cta">
+          <h2>${escapeHtml(app.name)}를 사용해 보세요.</h2>
           <div class="app-actions">
             ${primaryButton}
-            ${secondaryDownloadButton}
-            ${githubButton}
           </div>
-        </section>
+        </div>
 
-
-        <a class="back-link" href="../tools.html">
-          ← 모든 도구 보기
-        </a>
-
+        <a class="back-link" href="../tools.html">← 도구 목록으로 돌아가기</a>
       </div>
     `;
   }
 
-
-  /* ==========================================================
-     JSON 데이터 로드
-     ========================================================== */
+  async function loadJson(path) {
+    const response = await fetch(path);
+    if (!response.ok) {
+      throw new Error(`${path} 불러오기 실패`);
+    }
+    return response.json();
+  }
 
   async function loadData() {
     try {
-      if (!APP_ID || APP_ID === "YOUR_APP_ID") {
-        throw new Error("APP_ID를 설정하지 않았습니다.");
-      }
-
-      /*
-       * 상세페이지는 tools 폴더 안에 있으므로
-       * apps.json과 notice.json은 한 단계 위에 있습니다.
-       */
-      const [appsResponse, noticesResponse] = await Promise.all([
-        fetch("../apps.json"),
-        fetch("../notice.json")
+      const [appsData, noticesData] = await Promise.all([
+        loadJson("../apps.json"),
+        loadJson("../notice.json")
       ]);
 
-      if (!appsResponse.ok) {
-        throw new Error("apps.json을 불러오지 못했습니다.");
-      }
-
-      if (!noticesResponse.ok) {
-        throw new Error("notice.json을 불러오지 못했습니다.");
-      }
-
-      const appsData = await appsResponse.json();
-      const noticesData = await noticesResponse.json();
-
-      /*
-       * 현재 JSON이
-       *
-       * { "apps": [...] }
-       * { "notices": [...] }
-       *
-       * 형태인 경우를 기본으로 사용합니다.
-       */
-      const apps = Array.isArray(appsData)
+      const allApps = Array.isArray(appsData)
         ? appsData
         : (appsData.apps || []);
 
-      const notices = Array.isArray(noticesData)
+      const allNotices = Array.isArray(noticesData)
         ? noticesData
         : (noticesData.notices || []);
 
-      const app = apps.find(item => item.id === APP_ID);
+      const app = allApps.find(item => item.id === APP_ID);
 
       if (!app) {
-        throw new Error(
-          `apps.json에서 "${APP_ID}" 앱을 찾을 수 없습니다.`
-        );
+        throw new Error(`apps.json에서 "${APP_ID}" 앱을 찾을 수 없습니다.`);
       }
 
-      /*
-       * 현재 앱과 연결된 공지만 선택합니다.
-       * appId가 null인 공지는 특정 앱 상세페이지에 표시되지 않습니다.
-       */
-      const relatedNotices = notices
+      const relatedNotices = allNotices
         .filter(notice => notice.appId === APP_ID)
-        .sort((a, b) =>
-          String(b.date || "").localeCompare(String(a.date || ""))
-        );
+        .sort((a, b) => String(b.date).localeCompare(String(a.date)));
 
-      const relatedLinks = await resolveRelatedLinks(
-        getRelatedApps(app, apps)
-      );
-
-      renderPage(app, relatedNotices, apps, relatedLinks);
-
+      renderPage(app, allApps, relatedNotices);
     } catch (error) {
       console.error(error);
 
@@ -987,14 +767,10 @@
     }
   }
 
-
   /*
    * 모바일 햄버거 메뉴 토글은 partials/header.html에 포함된
-   * 공통 스크립트(#menu-toggle, #site-nav)가 처리합니다.
-   * 여기서 별도로 처리하면 같은 버튼에 클릭 이벤트가 두 번 걸려
-   * 토글이 서로 상쇄되므로 중복 구현하지 않습니다.
+   * 공통 스크립트가 처리합니다.
    */
-
   loadData();
 </script>
 
