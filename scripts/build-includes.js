@@ -9,6 +9,11 @@
 // 이 스크립트는 GitHub Actions가 만든 임시 _site 사본에서만 동작하므로
 // 원본 소스 파일은 절대 덮어쓰지 않습니다.
 //
+// partials/header.html, partials/footer.html은 사이트 최상위 기준
+// 상대 경로("./index.html" 등)로 작성되어 있습니다. tools/*.html처럼
+// 하위 폴더에 있는 페이지에 삽입할 때는 그만큼 "../"를 덧붙여야
+// 링크와 로고 이미지 경로가 깨지지 않습니다.
+//
 // 사용법: node scripts/build-includes.js [_site 경로 (기본값: _site)]
 
 const fs = require('fs');
@@ -49,12 +54,20 @@ for (const filePath of targets) {
   const original = fs.readFileSync(filePath, 'utf8');
   const missing = [];
 
+  // SITE_DIR 바로 아래(깊이 0)면 "./"를 그대로 두고,
+  // tools/ac.html처럼 한 단계 아래(깊이 1)면 "../"를 붙이는 식으로
+  // 페이지 위치에 맞춰 partial 안의 루트 상대 경로를 보정합니다.
+  const depth = path.relative(SITE_DIR, filePath).split(path.sep).length - 1;
+  const prefix = '../'.repeat(depth);
+
   const updated = original.replace(/<!--#include (\w+)-->/g, (match, name) => {
     if (!partials[name]) {
       missing.push(name);
       return match;
     }
-    return partials[name];
+    return depth > 0
+      ? partials[name].replace(/(href|src)="\.\//g, `$1="${prefix}`)
+      : partials[name];
   });
 
   if (missing.length) {
