@@ -543,19 +543,12 @@
   /*
    * 관련 도구 선정 규칙
    * - 현재 앱을 제외한 같은 category의 앱 최대 3개
-   * - 같은 category 앱이 3개 미만이면 현재 앱을 제외한 앞쪽 3개
+   * - 같은 category 앱이 3개 미만이면 있는 앱만 표시
    */
   function getRelatedApps(app, allApps) {
-    const sameCategory = allApps
-      .filter(item => item.id !== app.id)
-      .filter(item => item.category === app.category);
-
-    if (sameCategory.length >= 3) {
-      return sameCategory.slice(0, 3);
-    }
-
     return allApps
       .filter(item => item.id !== app.id)
+      .filter(item => item.category === app.category)
       .slice(0, 3);
   }
 
