@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="알파카 이미지 편집기(WEB) - 이미지 병합, 뒤집기, 회전, 크기 조정, 자르기, ICO 변환을 브라우저에서 처리하는 웹 이미지 편집 도구">
+  <title>알파카 이미지 편집기(WEB) | ALPACA TOOLS</title>
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    .breadcrumb{padding-top:28px;font-size:13px;color:var(--muted)}.breadcrumb a:hover{color:var(--ink)}.breadcrumb-separator{margin:0 7px;color:#B7B8B5}
+    .app-hero{display:flex;align-items:center;gap:24px;padding:30px 0 28px}.app-icon{width:88px;height:88px;flex:0 0 88px;object-fit:contain;border:1px solid var(--line);border-radius:20px;background:var(--surface)}.app-hero-content{min-width:0}.app-hero h1{margin:0 0 8px;font-size:clamp(30px,4.2vw,44px);font-weight:800;letter-spacing:-.025em;line-height:1.2}.app-description{margin:0 0 13px;max-width:700px;color:var(--muted);font-size:16px}.app-meta{display:flex;flex-wrap:wrap;gap:5px 12px;color:var(--muted);font-size:13px}.app-meta-item + .app-meta-item::before{content:"·";margin-right:12px;color:#B7B8B5}
+    .app-actions{display:flex;flex-wrap:wrap;gap:9px;padding:0 0 46px}.app-button{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:40px;padding:9px 16px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink);font-size:13.5px;font-weight:700;transition:background .15s,border-color .15s,color .15s}.app-button:hover{border-color:#B9B9B5}.app-button.primary{background:var(--ink);color:var(--paper);border-color:var(--ink)}.app-button.primary:hover{background:var(--accent);border-color:var(--accent)}
+    .detail-section{border-top:1px solid var(--line);padding:48px 0}.detail-section h2{margin:0 0 15px;font-size:21px;font-weight:800;letter-spacing:-.01em}.detail-content{max-width:720px;color:var(--muted);font-size:14.5px}.detail-content p{margin:0 0 12px}.detail-content p:last-child{margin-bottom:0}
+    .feature-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:20px}.feature-card{padding:18px;border:1px solid var(--line);border-radius:12px;background:var(--surface)}.feature-card h3{margin:0 0 7px;font-size:15px;font-weight:800}.feature-card p{margin:0;color:var(--muted);font-size:13.5px}
+    .steps{max-width:720px;margin:20px 0 0;padding:0;list-style:none;counter-reset:step}.steps li{position:relative;min-height:26px;padding:1px 0 16px 40px;color:var(--muted);font-size:14px}.steps li::before{content:counter(step);counter-increment:step;position:absolute;left:0;top:0;width:26px;height:26px;display:flex;align-items:center;justify-content:center;border-radius:50%;background:var(--ink);color:var(--paper);font-size:12px;font-weight:800}
+    .environment{max-width:720px;margin-top:18px;border-top:1px solid var(--line)}.environment-item{display:flex;justify-content:space-between;gap:20px;padding:13px 4px;border-bottom:1px solid var(--line);font-size:14px}.environment-label{color:var(--muted)}.environment-value{text-align:right;font-weight:700}
+    .notice-list{max-width:820px;margin-top:18px;border-top:1px solid var(--line)}.notice-item{display:grid;grid-template-columns:92px minmax(0,1fr) 18px;align-items:center;gap:14px;padding:14px 4px;border-bottom:1px solid var(--line);font-size:14px}.notice-date{color:var(--muted);font-size:12.5px}.notice-title{min-width:0;font-weight:700}.notice-arrow{color:var(--muted);text-align:right}.notice-item:hover .notice-title{color:var(--accent)}
+    .related-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:20px}.related-card{display:block;padding:17px;border:1px solid var(--line);border-radius:12px;background:var(--surface)}.related-card:hover{border-color:#B9B9B5}.related-card h3{margin:0 0 6px;font-size:14.5px}.related-card p{margin:0;color:var(--muted);font-size:12.5px}
+    .bottom-cta{border-top:1px solid var(--line);padding:48px 0 56px;text-align:center}.bottom-cta h2{margin:0 0 17px;font-size:21px;font-weight:800}.bottom-cta .app-actions{justify-content:center;padding-bottom:0}.back-link{display:inline-flex;align-items:center;gap:5px;margin:0 0 54px;color:var(--muted);font-size:13.5px;font-weight:700}.back-link:hover{color:var(--ink)}.loading,.error-message{padding:80px 0;text-align:center;color:var(--muted);font-size:14px}
+    @media(max-width:700px){.app-hero{align-items:flex-start;gap:17px}.app-icon{width:70px;height:70px;flex-basis:70px;border-radius:16px}.feature-grid,.related-grid{grid-template-columns:1fr}.environment{max-width:none}}@media(max-width:500px){.breadcrumb{padding-top:20px;font-size:12px}.app-hero{display:block;padding-top:22px}.app-icon{margin-bottom:15px}.app-description{font-size:14.5px}.app-actions .app-button{flex:1}.notice-item{grid-template-columns:72px minmax(0,1fr) 14px;gap:9px}.notice-title{font-size:13.5px}.environment-item{font-size:13.5px}}
+  </style>
+</head>
+<body>
+<!--#include header-->
+<main id="app-detail"><div class="wrap"><div class="loading">앱 정보를 불러오는 중입니다.</div></div></main>
+<!--#include footer-->
+<script>
+const APP_ID="aie-web";
+const APP_CONTENT={
+  intro:`<p>알파카 이미지 편집기(WEB)는 별도의 프로그램 설치 없이 웹 브라우저에서 이미지 편집 기능을 사용할 수 있도록 만든 온라인 도구입니다.</p><p>이미지 병합, 뒤집기, 회전, 크기 조정, 자르기, ICO 변환 등 알파카 이미지 편집기(EXE)에서 제공하는 주요 기능을 브라우저에서 간편하게 사용할 수 있습니다.</p><p>업무용 PC에 프로그램을 설치하기 어렵거나 다른 컴퓨터에서 간단한 이미지 편집이 필요한 경우에도 웹 브라우저만 있으면 바로 이용할 수 있습니다.</p>`,
+  features:[
+    {title:"이미지 병합",description:"여러 이미지 파일을 하나로 합쳐 자료나 캡처 화면을 하나의 이미지로 정리할 수 있습니다."},
+    {title:"뒤집기·회전",description:"이미지를 가로 또는 세로 방향으로 뒤집고 필요한 방향으로 회전할 수 있습니다."},
+    {title:"크기 조정",description:"이미지의 가로·세로 크기를 조정하여 문서나 웹 페이지에 적합한 크기로 만들 수 있습니다."},
+    {title:"이미지 자르기",description:"필요한 영역만 남기도록 이미지를 잘라 불필요한 부분을 손쉽게 제거할 수 있습니다."},
+    {title:"ICO 변환",description:"이미지를 ICO 형식으로 변환하여 Windows 아이콘 제작 등에 활용할 수 있습니다."},
+    {title:"설치 없는 웹 도구",description:"별도의 EXE 설치 과정 없이 최신 웹 브라우저에서 바로 실행할 수 있어 여러 PC에서 편리하게 사용할 수 있습니다."}
+  ],
+  usage:[
+    "알파카 이미지 편집기(WEB) 페이지를 엽니다.",
+    "편집하려는 이미지 파일을 브라우저에서 불러옵니다.",
+    "이미지 병합, 뒤집기, 회전, 크기 조정, 자르기 또는 ICO 변환 등 필요한 기능을 선택합니다.",
+    "편집 결과를 확인한 후 결과 이미지를 PC에 저장합니다."
+  ],
+  additional:`<p>알파카 이미지 편집기(WEB)는 브라우저에서 실행되는 웹 버전이며, 프로그램 설치가 필요하지 않습니다.</p><p>현재 <strong>v1.0</strong>으로 제공되고 있습니다. Windows에 프로그램을 설치하여 사용하려는 경우에는 EXE 버전을 이용할 수 있습니다.</p>`
+};
+const $=s=>document.querySelector(s);
+function escapeHtml(v){return String(v??"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/\"/g,"&quot;").replace(/'/g,"&#039;")}
+function formatDate(v){return v?String(v).replace(/-/g,"."):"-"}
+function categoryName(v){return ({work:"업무",life:"생활",dev:"개발자"}[v]||v||"-")}
+function platformName(v){return ({web:"Web",windows:"Windows"}[v]||v||"-")}
+function getPrimaryAction(app){if(app.platform==="web"&&app.url)return{text:"바로 열기 ↗",url:app.url};if(app.platform==="windows"&&app.downloadUrl)return{text:"다운로드 ↗",url:app.downloadUrl};return null}
+function getRelatedApps(app,all){return all.filter(x=>x.id!==app.id&&x.category===app.category).slice(0,3)}
+function render(app,all,notices){
+  const primary=getPrimaryAction(app),related=getRelatedApps(app,all),appNotices=notices.filter(n=>n.appId===app.id).sort((a,b)=>String(b.date).localeCompare(String(a.date)));
+  const primaryButton=primary?`<a class="app-button primary" href="${escapeHtml(primary.url)}" target="_blank" rel="noopener">${primary.text}</a>`:"";
+  const github=app.github?`<a class="app-button" href="${escapeHtml(app.github)}" target="_blank" rel="noopener">GitHub ↗</a>`:"";
+  const repo=app.repoUrl?`<a class="app-button" href="${escapeHtml(app.repoUrl)}" target="_blank" rel="noopener">소개 글 ↗</a>`:"";
+  const features=APP_CONTENT.features.map(x=>`<article class="feature-card"><h3>${escapeHtml(x.title)}</h3><p>${escapeHtml(x.description)}</p></article>`).join("");
+  const steps=APP_CONTENT.usage.map(x=>`<li>${escapeHtml(x)}</li>`).join("");
+  const noticeHtml=appNotices.length?`<div class="notice-list">${appNotices.map(n=>`<a class="notice-item" href="${escapeHtml(n.url)}" target="_blank" rel="noopener"><span class="notice-date">${formatDate(n.date)}</span><span class="notice-title">${escapeHtml(n.title)}</span><span class="notice-arrow">↗</span></a>`).join("")}</div>`:`<div class="notice-list"><div class="notice-item"><span class="notice-title">등록된 관련 공지사항이 없습니다.</span></div></div>`;
+  const relatedHtml=related.length?`<div class="related-grid">${related.map(x=>`<a class="related-card" href="./${escapeHtml(x.id)}.html"><h3>${escapeHtml(x.name)}</h3><p>${escapeHtml(x.description)}</p></a>`).join("")}</div>`:`<p class="detail-content">같은 카테고리의 관련 도구가 없습니다.</p>`;
+  $("#app-detail").innerHTML=`<div class="wrap"><div class="breadcrumb"><a href="../tools.html">도구</a><span class="breadcrumb-separator">/</span><span>${escapeHtml(app.name)}</span></div><section class="app-hero"><img class="app-icon" src="../${escapeHtml(app.icon)}" alt="${escapeHtml(app.name)} 아이콘"><div class="app-hero-content"><h1>${escapeHtml(app.name)}</h1><p class="app-description">${escapeHtml(app.description)}</p><div class="app-meta"><span class="app-meta-item">${categoryName(app.category)}</span><span class="app-meta-item">${platformName(app.platform)}</span><span class="app-meta-item">v${escapeHtml(app.version)}</span><span class="app-meta-item">${formatDate(app.updatedAt)} 업데이트</span></div></div></section><div class="app-actions">${primaryButton}${github}${repo}</div><section class="detail-section"><h2>앱 소개</h2><div class="detail-content">${APP_CONTENT.intro}</div></section><section class="detail-section"><h2>주요 기능</h2><div class="feature-grid">${features}</div></section><section class="detail-section"><h2>사용 방법</h2><ol class="steps">${steps}</ol></section><section class="detail-section"><h2>실행 환경</h2><div class="environment"><div class="environment-item"><span class="environment-label">플랫폼</span><span class="environment-value">${platformName(app.platform)}</span></div><div class="environment-item"><span class="environment-label">버전</span><span class="environment-value">v${escapeHtml(app.version)}</span></div><div class="environment-item"><span class="environment-label">최근 업데이트</span><span class="environment-value">${formatDate(app.updatedAt)}</span></div><div class="environment-item"><span class="environment-label">실행 방식</span><span class="environment-value">웹 브라우저</span></div></div></section><section class="detail-section"><h2>추가 안내</h2><div class="detail-content">${APP_CONTENT.additional}</div></section><section class="detail-section"><h2>관련 공지사항</h2>${noticeHtml}</section><section class="detail-section"><h2>관련 도구</h2>${relatedHtml}</section><div class="bottom-cta"><h2>알파카 이미지 편집기(WEB) 사용하기</h2><div class="app-actions">${primaryButton}${github}</div></div><a class="back-link" href="../tools.html">← 도구 목록으로 돌아가기</a></div>`;
+}
+async function load(){try{const [appsRes,noticeRes]=await Promise.all([fetch("../apps.json"),fetch("../notice.json")]);if(!appsRes.ok||!noticeRes.ok)throw new Error("데이터를 불러오지 못했습니다.");const appsData=await appsRes.json(),noticeData=await noticeRes.json(),apps=appsData.apps||[],notices=noticeData.notices||[],app=apps.find(x=>x.id===APP_ID);if(!app)throw new Error("앱 정보를 찾을 수 없습니다.");render(app,apps,notices)}catch(e){$("#app-detail").innerHTML=`<div class="wrap"><div class="error-message">앱 정보를 불러오지 못했습니다.<small>${escapeHtml(e.message)}</small></div></div>`}}
+load();
+</script>
+</body>
+</html>
