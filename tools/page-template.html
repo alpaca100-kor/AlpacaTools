@@ -535,9 +535,9 @@
   }
 
   /*
-   * 관련 도구 링크는 tools.html을 통해 이동합니다.
-   * tools.html에서 앱 id를 읽도록 구현하면
-   * 특정 앱을 바로 선택하는 것도 가능합니다.
+   * 관련 도구 선정 규칙
+   * - 현재 앱을 제외한 같은 category의 앱 최대 3개
+   * - 같은 category 앱이 3개 미만이면 현재 앱을 제외한 앞쪽 3개
    */
   function getRelatedApps(app, allApps) {
     const sameCategory = allApps
@@ -553,12 +553,51 @@
       .slice(0, 3);
   }
 
+  /*
+   * 관련 도구 링크 규칙 (tools.html과 동일)
+   * - tools/{id}.html 상세 페이지가 있으면 해당 페이지로 이동
+   * - 없으면 repoUrl → url → downloadUrl → GitHub 저장소 순서로 이동
+   */
+  function getFallbackHref(item) {
+    return item.repoUrl
+      || item.url
+      || item.downloadUrl
+      || "https://github.com/alpaca100-kor/AlpacaTools";
+  }
+
+  async function resolveRelatedLink(item) {
+    const detailPath = `../tools/${encodeURIComponent(item.id)}.html`;
+
+    try {
+      const response = await fetch(detailPath, {
+        method: "HEAD",
+        cache: "no-store"
+      });
+
+      if (response.ok) {
+        return { href: detailPath, internal: true };
+      }
+    } catch (error) {
+      console.warn("상세 페이지 확인 실패:", item.id, error);
+    }
+
+    return { href: getFallbackHref(item), internal: false };
+  }
+
+  async function resolveRelatedLinks(relatedApps) {
+    const results = await Promise.all(
+      relatedApps.map(async item => [item.id, await resolveRelatedLink(item)])
+    );
+
+    return new Map(results);
+  }
+
 
   /* ==========================================================
      페이지 렌더링
      ========================================================== */
 
-  function renderPage(app, notices, allApps) {
+  function renderPage(app, notices, allApps, relatedLinks) {
     document.title = `${app.name} | ALPACA TOOLS`;
 
     const primary = getPrimaryAction(app);
@@ -644,13 +683,23 @@
     const relatedApps = getRelatedApps(app, allApps);
 
     const relatedHtml = relatedApps
-      .map(item => `
+      .map(item => {
+        const link = (relatedLinks && relatedLinks.get(item.id))
+          || { href: getFallbackHref(item), internal: false };
+
+        const targetAttr = link.internal
+          ? 'target="_self"'
+          : 'target="_blank" rel="noopener"';
+
+        return `
         <a class="related-card"
-           href="../tools.html?app=${encodeURIComponent(item.id)}">
+           href="${escapeHtml(link.href)}"
+           ${targetAttr}>
           <h3>${escapeHtml(item.name)}</h3>
           <p>${escapeHtml(item.description || "")}</p>
         </a>
-      `)
+      `;
+      })
       .join("");
 
     const additionalHtml = APP_CONTENT.additional
@@ -925,7 +974,11 @@
           String(b.date || "").localeCompare(String(a.date || ""))
         );
 
-      renderPage(app, relatedNotices, apps);
+      const relatedLinks = await resolveRelatedLinks(
+        getRelatedApps(app, apps)
+      );
+
+      renderPage(app, relatedNotices, apps, relatedLinks);
 
     } catch (error) {
       console.error(error);
