@@ -388,41 +388,7 @@
 
 <body>
 
-<header>
-  <div class="wrap header-inner">
-
-    <!-- 현재 저장소의 공통 Header 구조를 유지합니다. -->
-    <a class="logo" href="../index.html" aria-label="ALPACA TOOLS 메인">
-      <img src="../assets/logo.png" alt="ALPACA TOOLS">
-      <span>ALPACA TOOLS</span>
-    </a>
-
-    <nav aria-label="주요 메뉴">
-      <a href="../index.html">홈</a>
-      <a href="../tools.html" class="active">모든 도구</a>
-      <a href="../notice.html">공지사항</a>
-    </nav>
-
-    <a class="gh-btn"
-       href="https://github.com/alpaca100-kor/AlpacaTools"
-       target="_blank"
-       rel="noopener">
-      GitHub ↗
-    </a>
-
-    <!-- style.css의 모바일 메뉴를 사용하는 경우 필요합니다. -->
-    <button class="menu-toggle"
-            type="button"
-            aria-label="메뉴 열기"
-            aria-expanded="false"
-            aria-controls="main-nav">
-      <span></span>
-      <span></span>
-      <span></span>
-    </button>
-
-  </div>
-</header>
+<!--#include header-->
 
 <main id="app-detail">
   <div class="wrap">
@@ -430,16 +396,7 @@
   </div>
 </main>
 
-<footer>
-  <div class="wrap footer-inner">
-    <div>© ALPACA TOOLS</div>
-    <div>
-      <a href="../index.html">홈</a>
-      <a href="../tools.html">모든 도구</a>
-      <a href="../notice.html">공지사항</a>
-    </div>
-  </div>
-</footer>
+<!--#include footer-->
 
 <script>
   /*
@@ -978,27 +935,12 @@
   }
 
 
-  /* ==========================================================
-     모바일 메뉴
-     style.css에 정의된 .menu-toggle / nav.nav-open 활용
-     ========================================================== */
-
-  const menuToggle = document.querySelector(".menu-toggle");
-  const mainNav = document.querySelector("header nav");
-
-  if (menuToggle && mainNav) {
-    menuToggle.addEventListener("click", () => {
-      const isOpen = mainNav.classList.toggle("nav-open");
-
-      menuToggle.classList.toggle("is-active", isOpen);
-      menuToggle.setAttribute("aria-expanded", String(isOpen));
-      menuToggle.setAttribute(
-        "aria-label",
-        isOpen ? "메뉴 닫기" : "메뉴 열기"
-      );
-    });
-  }
-
+  /*
+   * 모바일 햄버거 메뉴 토글은 partials/header.html에 포함된
+   * 공통 스크립트(#menu-toggle, #site-nav)가 처리합니다.
+   * 여기서 별도로 처리하면 같은 버튼에 클릭 이벤트가 두 번 걸려
+   * 토글이 서로 상쇄되므로 중복 구현하지 않습니다.
+   */
 
   loadData();
 </script>
