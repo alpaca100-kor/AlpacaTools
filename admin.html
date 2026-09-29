@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex,nofollow">
+<title>관리자 | ALPACA TOOLS</title>
+<link rel="icon" type="image/png" href="./assets/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./style.css">
+<!-- no-ads -->
+<style>
+.ad-group{padding:0 0 34px}
+.ad-group h2{font-size:13px;font-weight:700;color:var(--muted);margin:0 0 12px}
+.ad-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.ad-card{display:flex;flex-direction:column;gap:8px;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:20px;transition:border-color .15s ease}
+.ad-card:hover{border-color:var(--accent)}
+.ad-card b{font-size:16px;font-weight:800;letter-spacing:-0.01em}
+.ad-card span{font-size:13.5px;color:var(--muted)}
+.ad-card code{font-size:12px;color:var(--muted)}
+.ad-links{display:flex;flex-wrap:wrap;gap:8px}
+@media(max-width:700px){.ad-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<section class="page-hero">
+  <h1>관리자</h1>
+  <p>ALPACA TOOLS 데이터 편집기를 한곳에서 여는 페이지입니다.</p>
+</section>
+
+<section class="ad-group" aria-label="편집기">
+  <h2>편집기</h2>
+  <div class="ad-grid">
+    <a class="ad-card" href="./apps-editor.html">
+      <b>앱 목록 편집기</b>
+      <span>앱을 추가·수정·삭제하고 표시 순서를 바꿉니다.</span>
+      <code>apps.json</code>
+    </a>
+    <a class="ad-card" href="./notice-editor.html">
+      <b>공지사항 편집기</b>
+      <span>공지를 추가·수정·삭제합니다.</span>
+      <code>notice.json</code>
+    </a>
+    <a class="ad-card" href="./tips-editor.html">
+      <b>정보와 팁 편집기</b>
+      <span>정보와 팁 게시글 목록을 관리합니다.</span>
+      <code>tips.json</code>
+    </a>
+  </div>
+</section>
+
+<section class="ad-group" style="padding-bottom:64px" aria-label="바로가기">
+  <h2>바로가기</h2>
+  <div class="ad-links">
+    <a class="chip" href="./index.html">홈</a>
+    <a class="chip" href="./tools.html">도구</a>
+    <a class="chip" href="./notice.html">공지사항</a>
+    <a class="chip" href="https://github.com/alpaca100-kor/AlpacaTools" target="_blank" rel="noopener">GitHub ↗</a>
+  </div>
+</section>
+
+</div>
+</body>
+</html>

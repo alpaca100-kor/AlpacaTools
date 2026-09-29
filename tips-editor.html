@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex,nofollow">
+<title>정보와 팁 편집기 | ALPACA TOOLS</title>
+<link rel="icon" type="image/png" href="./assets/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./style.css">
+<!-- no-ads -->
+<style>
+.ed-bar{display:flex;flex-wrap:wrap;align-items:center;gap:8px;padding:0 0 18px}.ed-status{margin-left:auto;font-size:13px;color:var(--muted)}.ed-status[data-dirty="true"]{color:#C0392B;font-weight:700}
+.ed-panel{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:20px;margin:0 0 28px}.ed-panel h2{font-size:17px;font-weight:800;margin:0 0 16px}
+.ed-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.ed-grid .full{grid-column:1/-1}
+.ed-field label{display:block;font-size:12.5px;font-weight:700;color:var(--muted);margin:0 0 6px}
+.ed-field input,.ed-field select{width:100%;border:1px solid var(--line);border-radius:9px;background:var(--paper);color:var(--ink);font:inherit;font-size:14.5px;padding:10px 12px}
+.ed-field input:focus,.ed-field select:focus{border-color:#B9C2F3;outline:none}
+.ed-actions{display:flex;align-items:center;gap:8px;margin-top:16px;flex-wrap:wrap}.ed-err{color:#C0392B;font-size:13px;font-weight:700}
+.ed-list{border-top:1px solid var(--line)}.ed-table{width:100%;border-collapse:collapse}.ed-table th,.ed-table td{border-bottom:1px solid var(--line);padding:13px 10px;vertical-align:middle;text-align:left}.ed-table th{background:var(--surface);color:var(--muted);font-size:12.5px;font-weight:700}.ed-table tbody tr:hover{background:var(--surface)}.ed-table tr.bad{background:#FFF3F1}
+.ed-table th:first-child,.ed-table td:first-child{width:60px;text-align:center;color:var(--muted);font-size:13px}.ed-table th:nth-child(2),.ed-table td:nth-child(2),.ed-table th:nth-child(4),.ed-table td:nth-child(4){width:110px;text-align:center}.ed-table th:last-child,.ed-table td:last-child{width:130px;text-align:right;white-space:nowrap}
+.ed-badge{display:inline-block;background:var(--accent-tint);color:var(--accent);font-size:12px;font-weight:700;padding:4px 10px;border-radius:999px;white-space:nowrap}.ed-date{color:var(--muted);font-size:12.5px;white-space:nowrap}.ed-title{font-size:14.5px;font-weight:700;word-break:break-all}
+.ed-del:hover{color:#C0392B;border-color:#C0392B}.ed-empty{padding:38px 4px 44px;text-align:center;color:var(--muted);font-size:14px;border-bottom:1px solid var(--line)}
+#toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--ink);color:var(--paper);padding:11px 18px;border-radius:10px;font-size:13.5px;font-weight:600;z-index:10;max-width:90vw}#toast[data-error="true"]{background:#C0392B;color:#fff}
+body[data-drag="true"]{outline:3px dashed var(--accent);outline-offset:-10px}
+@media(max-width:700px){.ed-grid{grid-template-columns:1fr}.ed-status{width:100%;margin-left:0}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<section class="page-hero"><h1>정보와 팁 편집기</h1><p>tips.json을 불러와 글을 추가·수정·삭제하고, 완성된 파일을 내려받으세요. 쉼표와 따옴표는 자동으로 처리됩니다.</p></section>
+<div class="ed-bar">
+<button class="search-button" id="btnOpen" type="button">파일 열기</button>
+<button class="search-button" id="btnDownload" type="button">tips.json 다운로드</button>
+<button class="chip" id="btnCopy" type="button">JSON 복사</button>
+<input id="fileInput" type="file" accept=".json,application/json" hidden>
+<span class="ed-status" id="status" data-dirty="false">불러온 글 없음</span>
+</div>
+<section class="ed-panel" aria-label="글 입력">
+<h2 id="formTitle">새 글 추가</h2>
+<div class="ed-grid">
+<div class="ed-field full"><label for="fTitle">제목</label><input id="fTitle" type="text" autocomplete="off" placeholder="티스토리 글 제목"></div>
+<div class="ed-field"><label for="fCat">분류</label><select id="fCat"></select></div>
+<div class="ed-field" id="newCatBox" hidden><label for="fNewCat">새 분류 이름</label><input id="fNewCat" type="text" autocomplete="off" placeholder="예: 엑셀"></div>
+<div class="ed-field"><label for="fDate">날짜</label><input id="fDate" type="date"></div>
+<div class="ed-field full"><label for="fUrl">글 주소 (URL)</label><input id="fUrl" type="url" autocomplete="off" placeholder="https://alpaca100.tistory.com/000"></div>
+</div>
+<div class="ed-actions"><button class="search-button" id="btnSave" type="button">글 추가</button><button class="chip" id="btnCancel" type="button" hidden>수정 취소</button><span class="ed-err" id="formErr" role="alert"></span></div>
+</section>
+<section aria-label="글 목록" style="padding-bottom:60px">
+<div class="search-panel" style="margin-bottom:14px"><input id="q" type="search" autocomplete="off" placeholder="제목 또는 분류로 찾기" aria-label="글 찾기"></div>
+<div class="result-summary"><span>전체 <b id="cntAll">0</b>건 · 현재 <b id="cntNow">0</b>건</span><span>최신 글부터 표시</span></div>
+<div class="ed-list" id="list"></div>
+</section>
+</div>
+<div id="toast" hidden></div>
+<script>
+const $=id=>document.getElementById(id),NEW="__new";
+let tips=[],cats=[],meta={},editing=-1,dirty=false,tt;
+function esc(v){return String(v??"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/\"/g,"&quot;").replace(/'/g,"&#39;")}
+function today(){const d=new Date();return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0")}
+function toast(m,err){const t=$("toast");t.textContent=m;t.dataset.error=!!err;t.hidden=false;clearTimeout(tt);tt=setTimeout(()=>t.hidden=true,err?6000:2500)}
+function check(t){
+if(!t||typeof t!=="object")return"글 정보가 올바르지 않습니다.";
+if(!String(t.title||"").trim())return"제목을 입력해주세요.";
+if(!String(t.category||"").trim())return"분류를 선택하거나 입력해주세요.";
+if(!/^https?:\/\/[^\s]+\.[^\s]+$/.test(String(t.url||"").trim()))return"글 주소는 https://로 시작하는 올바른 URL이어야 합니다.";
+if(!/^\d{4}-\d{2}-\d{2}$/.test(t.date||"")||Number.isNaN(new Date(t.date).getTime()))return"날짜를 선택해주세요.";
+return""}
+function setDirty(v){dirty=v;const s=$("status");s.dataset.dirty=v;s.textContent=tips.length?(v?"저장하지 않은 변경 있음 · ":"")+"총 "+tips.length+"건":"불러온 글 없음"}
+function sorted(){return tips.map((t,i)=>[t,i]).sort((a,b)=>new Date(b[0].date)-new Date(a[0].date)||a[1]-b[1])}
+function output(){const list=sorted().map(x=>x[0]);return JSON.stringify({...meta,categories:cats.filter(c=>list.some(t=>t.category===c)),tips:list},null,2)+"\n"}
+function loadText(text){
+let d;try{d=JSON.parse(text)}catch(e){toast("JSON 문법 오류로 열 수 없습니다: "+e.message,true);return false}
+if(!d||!Array.isArray(d.tips)){toast('"tips" 배열이 없는 파일입니다. tips.json이 맞는지 확인해주세요.',true);return false}
+meta=Object.fromEntries(Object.entries(d).filter(([k])=>k!=="categories"&&k!=="tips"));
+tips=d.tips;cats=Array.isArray(d.categories)?d.categories.filter(c=>typeof c==="string"):[];
+tips.forEach(t=>{if(t&&t.category&&!cats.includes(t.category))cats.push(t.category)});
+const bad=tips.filter(t=>check(t)).length;
+resetForm();fillCats();render();setDirty(false);
+if(bad)toast("확인이 필요한 글 "+bad+"건이 있습니다. 붉은 배경의 글을 수정해주세요.",true);else toast(tips.length+"건을 불러왔습니다.");
+return true}
+function fillCats(sel){
+const s=$("fCat");s.innerHTML=cats.map(c=>'<option value="'+esc(c)+'">'+esc(c)+'</option>').join("")+'<option value="'+NEW+'">+ 새 분류 추가…</option>';
+s.value=sel&&cats.includes(sel)?sel:(cats[0]||NEW);catChange()}
+function catChange(){const n=$("fCat").value===NEW;$("newCatBox").hidden=!n;if(n)$("fNewCat").focus()}
+function resetForm(){editing=-1;$("fTitle").value="";$("fUrl").value="";$("fNewCat").value="";$("fDate").value=$("fDate").value||today();$("formTitle").textContent="새 글 추가";$("btnSave").textContent="글 추가";$("btnCancel").hidden=true;$("formErr").textContent=""}
+function save(){
+const t={title:$("fTitle").value.trim(),category:$("fCat").value===NEW?$("fNewCat").value.trim():$("fCat").value,url:$("fUrl").value.trim(),date:$("fDate").value},err=check(t);
+$("formErr").textContent=err;if(err)return;
+const dup=tips.findIndex((x,i)=>x.url===t.url&&i!==editing);
+if(dup>-1&&!confirm('같은 URL의 글이 이미 있습니다.\n("'+tips[dup].title+'")\n그래도 저장할까요?'))return;
+if(!cats.includes(t.category))cats.push(t.category);
+const wasEdit=editing>-1;
+if(wasEdit)tips[editing]={...tips[editing],...t};else tips.push(t);
+const keep=t.category,date=t.date;resetForm();fillCats(keep);$("fDate").value=date;render();setDirty(true);
+toast(wasEdit?"수정했습니다. 다운로드를 눌러 파일을 저장하세요.":"추가했습니다. 다운로드를 눌러 파일을 저장하세요.");if(!wasEdit)$("fTitle").focus()}
+function render(){
+const q=$("q").value.trim().toLowerCase(),all=sorted(),n=all.length,box=$("list");
+const rows=all.map((x,r)=>({t:x[0],i:x[1],no:n-r})).filter(o=>!q||((o.t.title||"")+" "+(o.t.category||"")).toLowerCase().includes(q));
+$("cntAll").textContent=n;$("cntNow").textContent=rows.length;
+if(!rows.length){box.innerHTML='<div class="ed-empty">'+(n?"조건에 맞는 글이 없습니다.":"표시할 글이 없습니다. tips.json을 열거나 위 양식으로 글을 추가하세요.")+'</div>';return}
+box.innerHTML='<table class="ed-table board-table"><thead><tr><th scope="col">번호</th><th scope="col">분류</th><th scope="col">제목</th><th scope="col">날짜</th><th scope="col">관리</th></tr></thead><tbody>'+rows.map(o=>'<tr'+(check(o.t)?' class="bad" title="'+esc(check(o.t))+'"':'')+'><td data-label="번호">'+o.no+'</td><td data-label="분류"><span class="ed-badge">'+esc(o.t.category)+'</span></td><td data-label="제목" data-full="true"><span class="ed-title">'+esc(o.t.title)+'</span></td><td class="ed-date" data-label="날짜">'+esc(o.t.date)+'</td><td data-label="관리"><button class="chip" type="button" data-act="edit" data-i="'+o.i+'">수정</button> <button class="chip ed-del" type="button" data-act="del" data-i="'+o.i+'">삭제</button></td></tr>').join("")+'</tbody></table>'}
+$("list").addEventListener("click",e=>{
+const b=e.target.closest("[data-act]");if(!b)return;const i=Number(b.dataset.i),t=tips[i];
+if(b.dataset.act==="del"){if(!confirm('"'+t.title+'" 글을 삭제할까요?'))return;tips.splice(i,1);if(editing===i)resetForm();else if(editing>i)editing--;render();setDirty(true);toast("삭제했습니다.")}
+else{editing=i;fillCats(t.category);$("fTitle").value=t.title||"";$("fUrl").value=t.url||"";$("fDate").value=t.date||today();$("formTitle").textContent="글 수정";$("btnSave").textContent="수정 저장";$("btnCancel").hidden=false;$("formErr").textContent="";$("formTitle").scrollIntoView({behavior:"smooth",block:"center"});$("fTitle").focus()}});
+$("fCat").addEventListener("change",catChange);
+$("btnSave").addEventListener("click",save);
+$("btnCancel").addEventListener("click",()=>{const c=$("fCat").value;resetForm();fillCats(c)});
+["fTitle","fUrl","fNewCat","fDate"].forEach(id=>$(id).addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();save()}}));
+$("q").addEventListener("input",render);
+$("btnOpen").addEventListener("click",()=>$("fileInput").click());
+$("fileInput").addEventListener("change",e=>{const f=e.target.files[0];if(f)f.text().then(loadText);e.target.value=""});
+$("btnDownload").addEventListener("click",()=>{
+if(!tips.length&&!confirm("글이 없는 빈 파일을 내려받을까요?"))return;
+const bad=tips.findIndex(t=>check(t));if(bad>-1){toast((bad+1)+"번째 글에 문제가 있습니다: "+check(tips[bad]),true);return}
+const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([output()],{type:"application/json"}));a.download="tips.json";a.click();URL.revokeObjectURL(a.href);setDirty(false);toast("tips.json을 내려받았습니다. 저장소의 파일을 교체해주세요.")});
+$("btnCopy").addEventListener("click",()=>{navigator.clipboard.writeText(output()).then(()=>toast("JSON을 복사했습니다."),()=>toast("복사하지 못했습니다. 다운로드를 이용해주세요.",true))});
+["dragenter","dragover"].forEach(ev=>document.addEventListener(ev,e=>{e.preventDefault();document.body.dataset.drag="true"}));
+["dragleave","drop"].forEach(ev=>document.addEventListener(ev,e=>{e.preventDefault();document.body.dataset.drag="false"}));
+document.addEventListener("drop",e=>{const f=e.dataTransfer.files[0];if(f)f.text().then(loadText)});
+window.addEventListener("beforeunload",e=>{if(dirty){e.preventDefault();e.returnValue=""}});
+$("fDate").value=today();fillCats();render();
+fetch("./tips.json",{cache:"no-store"}).then(r=>r.ok?r.text():Promise.reject()).then(loadText).catch(()=>{});
+</script>
+</body>
+</html>
