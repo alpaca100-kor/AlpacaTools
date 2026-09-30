@@ -60,7 +60,7 @@ for (const filePath of targets) {
   const depth = path.relative(SITE_DIR, filePath).split(path.sep).length - 1;
   const prefix = '../'.repeat(depth);
 
-  const updated = original.replace(/<!--#include (\w+)-->/g, (match, name) => {
+  const included = original.replace(/<!--#include (\w+)-->/g, (match, name) => {
     if (!partials[name]) {
       missing.push(name);
       return match;
@@ -69,6 +69,15 @@ for (const filePath of targets) {
       ? partials[name].replace(/(href|src)="\.\//g, `$1="${prefix}`)
       : partials[name];
   });
+
+  // 모든 배포 페이지에서 공통 파비콘을 사용합니다. 이미 같은 경로의
+  // 파비콘 선언이 있는 원본 페이지에는 중복해서 추가하지 않습니다.
+  const faviconPath = `${depth > 0 ? prefix : './'}assets/logo.png`;
+  const faviconTag = `<link rel="icon" type="image/png" href="${faviconPath}">`;
+  const hasFavicon = /<link\b[^>]*\brel=["'][^"']*\bicon\b[^"']*["'][^>]*>/i.test(included);
+  const updated = hasFavicon
+    ? included
+    : included.replace(/<\/head\s*>/i, `${faviconTag}\n</head>`);
 
   if (missing.length) {
     console.warn(`[build-includes] ${filePath}: partial을 찾지 못함 - ${missing.join(', ')}`);
