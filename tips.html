@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>정보와 팁 | ALPACA TOOLS</title>
+<meta name="description" content="업무와 일상에 도움이 되는 정보와 팁을 분류별로 모아 확인하세요.">
+<meta name="keywords" content="ALPACA TOOLS, 알파카 툴즈, 정보, 팁, 티스토리">
+<link rel="icon" type="image/png" href="./assets/logo.png">
+<meta property="og:title" content="정보와 팁 | ALPACA TOOLS">
+<meta property="og:description" content="업무와 일상에 도움이 되는 정보와 팁을 분류별로 모아 확인하세요.">
+<meta property="og:image" content="./assets/logo.png">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./style.css">
+<style>
+.tip-list{border-top:1px solid var(--line)}.tip-table{width:100%;border-collapse:collapse;table-layout:auto}.tip-table th,.tip-table td{border-bottom:1px solid var(--line);padding:15px 12px;vertical-align:middle;text-align:left}.tip-table th{background:var(--surface);color:var(--muted);font-size:12.5px;font-weight:700}.tip-table tbody tr:hover{background:var(--surface)}.tip-table th:first-child,.tip-table td:first-child{width:72px;text-align:center}.tip-table th:nth-child(2),.tip-table td:nth-child(2){width:120px;text-align:center}.tip-table th:nth-child(4),.tip-table td:nth-child(4){width:110px;text-align:center}.tip-number{color:var(--muted);font-size:13px;font-variant-numeric:tabular-nums}.tip-category{border:none;background:var(--accent-tint);color:var(--accent);font:inherit;font-size:12px;font-weight:700;padding:4px 10px;border-radius:999px;cursor:pointer;white-space:nowrap}.tip-category:hover{background:var(--accent);color:#fff}.tip-title{color:var(--ink);font-size:14.5px;font-weight:700;line-height:1.5}.tip-title:hover{color:var(--accent);text-decoration:underline;text-underline-offset:3px}.tip-date{color:var(--muted);font-size:12.5px;font-variant-numeric:tabular-nums;white-space:nowrap}.tip-empty{padding:38px 4px 44px;text-align:center;color:var(--muted);font-size:14px;border-bottom:1px solid var(--line)}
+@media(max-width:700px){.tip-table th,.tip-table td{padding:13px 8px}.tip-table th:first-child,.tip-table td:first-child{width:54px}.tip-table th:nth-child(2),.tip-table td:nth-child(2){width:90px}.tip-table th:nth-child(4),.tip-table td:nth-child(4){width:88px}.tip-title{font-size:14px}}
+/* 500px 이하는 style.css의 .board-table 카드 뷰가 자동 적용됩니다 (4열이므로 자동 감지) */
+</style>
+</head>
+<body>
+<!--#include header-->
+<main>
+<div class="wrap">
+<section class="page-hero"><h1>정보와 팁</h1><p>업무와 일상에 도움이 되는 정보와 팁을 티스토리 블로그에서 모아 보여드립니다.</p></section>
+<section class="search-section search-section--spacious" aria-label="정보와 팁 검색">
+<div class="search-panel"><input id="tipSearchInput" type="search" autocomplete="off" placeholder="제목 또는 분류로 검색" aria-label="정보와 팁 검색"><button id="tipClear" class="search-clear" type="button" hidden>지우기</button><button id="tipSearchButton" class="search-button" type="button">검색</button></div>
+</section>
+<section id="tipListSection" aria-label="정보와 팁 목록">
+<div class="filter-row" id="tipFilter" role="group" aria-label="분류 선택"></div>
+<div class="result-summary" aria-live="polite"><span>전체 <b id="tipTotalCount">-</b>건 · 현재 <b id="tipVisibleCount">-</b>건</span><span>최신 글부터 표시</span></div>
+<div class="tip-list" id="tipList"></div>
+<div class="pagination pagination--spacious" id="tipPagination" aria-label="정보와 팁 페이지"></div>
+</section>
+<section class="about"><h2>ALPACA TOOLS 정보와 팁 소개</h2>
+<p>'정보와 팁'은 IT 분야의 정보와 팁을 정리한 내용을 모아 둔 공간입니다. 티스토리 블로그에 작성한 글을 분류별로 한곳에서 찾아볼 수 있도록 게시판 형태로 제공합니다.</p>
+<p style="margin-top:12px">업무에 쓰는 프로그램의 사용법, 반복 작업을 빠르게 처리하는 요령, 일상생활에 도움이 되는 정보처럼 실제로 겪은 문제와 해결 과정을 중심으로 정리합니다. 각 글은 필요한 내용을 처음부터 끝까지 확인할 수 있도록 블로그 본문에 자세히 담았습니다.</p>
+<p style="margin-top:12px">원하는 글은 분류 버튼이나 검색창으로 찾을 수 있고, 제목을 누르면 티스토리 블로그의 해당 글이 새 탭에서 열립니다. 선택한 분류와 페이지가 주소에 그대로 반영되므로, 주소를 복사해 두거나 다른 사람에게 공유해도 같은 목록 화면을 볼 수 있습니다.</p>
+<p style="margin-top:12px">글에서 소개하는 웹 애플리케이션과 Windows 프로그램은 <a href="./tools.html" style="text-decoration:underline;text-underline-offset:3px">도구</a> 메뉴에서 바로 실행하거나 내려받을 수 있습니다. 새로운 도구의 출시와 업데이트 소식은 <a href="./notice.html" style="text-decoration:underline;text-underline-offset:3px">공지사항</a>에서 확인하세요.</p>
+</section>
+</div>
+</main>
+<!--#include footer-->
+<script>
+const PER_PAGE=10,ALL="전체",$=id=>document.getElementById(id);
+let tips=[],cats=[],filtered=[],st={category:ALL,page:1,q:""};
+function esc(v){return String(v??"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/\"/g,"&quot;").replace(/'/g,"&#39;")}
+function fmt(v){const d=new Date(v);if(Number.isNaN(d.getTime()))return v||"";return d.getFullYear()+"."+String(d.getMonth()+1).padStart(2,"0")+"."+String(d.getDate()).padStart(2,"0")}
+/* URL 파라미터: ?category=분류&page=번호&q=검색어 (기본값은 URL에 표시하지 않음) */
+function readUrl(){const p=new URLSearchParams(location.search),c=p.get("category")||ALL,n=parseInt(p.get("page"),10);st.category=cats.includes(c)?c:ALL;st.q=(p.get("q")||"").trim();st.page=n>0?n:1}
+function writeUrl(push){const p=new URLSearchParams();if(st.category!==ALL)p.set("category",st.category);if(st.q)p.set("q",st.q);if(st.page>1)p.set("page",st.page);const s=p.toString(),url=location.pathname+(s?"?"+s:"");history[push&&url!==location.pathname+location.search?"pushState":"replaceState"](null,"",url)}
+/* mode: "push"(뒤로가기 기록 추가) / "replace"(기록 없이 URL만 갱신) / null(URL 변경 없음) */
+function go(ch,mode){
+Object.assign(st,ch);const q=st.q.toLowerCase();
+filtered=tips.filter(t=>(st.category===ALL||t.category===st.category)&&(!q||(t.title+" "+t.category).toLowerCase().includes(q)));
+const pages=Math.max(1,Math.ceil(filtered.length/PER_PAGE));st.page=Math.min(Math.max(st.page,1),pages);
+render(pages);if(mode)writeUrl(mode==="push")}
+function render(pages){
+$("tipFilter").innerHTML=[ALL,...cats].map(c=>'<button class="chip" type="button" data-cat="'+esc(c)+'" data-active="'+(c===st.category)+'">'+esc(c)+'</button>').join("");
+$("tipVisibleCount").textContent=String(filtered.length);$("tipClear").hidden=!st.q;
+const list=$("tipList");
+if(!filtered.length){list.innerHTML='<div class="tip-empty">조건에 맞는 글이 없습니다.</div>';$("tipPagination").innerHTML="";return}
+const s=(st.page-1)*PER_PAGE;
+list.innerHTML='<table class="tip-table board-table"><thead><tr><th scope="col">번호</th><th scope="col">분류</th><th scope="col">제목</th><th scope="col">날짜</th></tr></thead><tbody>'+filtered.slice(s,s+PER_PAGE).map(t=>'<tr><td class="tip-number" data-label="번호">'+t.number+'</td><td data-label="분류"><button class="tip-category" type="button" data-cat="'+esc(t.category)+'">'+esc(t.category)+'</button></td><td data-label="제목" data-full="true"><a class="tip-title" href="'+esc(t.url)+'" target="_blank" rel="noopener">'+esc(t.title)+'</a></td><td class="tip-date" data-label="날짜"><time datetime="'+esc(t.date)+'">'+esc(fmt(t.date))+'</time></td></tr>').join("")+'</tbody></table>';
+renderPagination(pages)}
+function renderPagination(pages){
+const box=$("tipPagination");if(pages<=1){box.innerHTML="";return}
+const keep=new Set([1,pages,st.page-1,st.page,st.page+1]),out=['<button type="button" data-nav="-1"'+(st.page===1?" disabled":"")+'>이전</button>'];let prev=0;
+for(let p=1;p<=pages;p++){if(!keep.has(p))continue;if(prev&&p-prev>1)out.push('<span class="page-ellipsis">…</span>');out.push('<button type="button" data-page="'+p+'" data-active="'+(p===st.page)+'">'+p+'</button>');prev=p}
+out.push('<button type="button" data-nav="1"'+(st.page===pages?" disabled":"")+'>다음</button>');box.innerHTML=out.join("")}
+function runSearch(){go({q:$("tipSearchInput").value.trim(),page:1},"replace");$("tipListSection").scrollIntoView({behavior:"smooth",block:"start"})}
+document.addEventListener("click",e=>{const b=e.target.closest("[data-cat]");if(b)go({category:b.dataset.cat,page:1},"push")});
+$("tipPagination").addEventListener("click",e=>{const b=e.target.closest("button");if(!b||b.disabled)return;go({page:b.dataset.page?Number(b.dataset.page):st.page+Number(b.dataset.nav)},"push")});
+$("tipSearchButton").addEventListener("click",runSearch);
+$("tipSearchInput").addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();runSearch()}});
+$("tipSearchInput").addEventListener("input",()=>go({q:$("tipSearchInput").value.trim(),page:1},"replace"));
+$("tipClear").addEventListener("click",()=>{const i=$("tipSearchInput");i.value="";i.focus();go({q:"",page:1},"replace")});
+window.addEventListener("popstate",()=>{readUrl();$("tipSearchInput").value=st.q;go({},null)});
+async function load(){try{
+const r=await fetch("./tips.json",{cache:"no-store"});if(!r.ok)throw Error("tips.json load failed");
+const d=await r.json(),arr=Array.isArray(d.tips)?[...d.tips].sort((a,b)=>new Date(b.date)-new Date(a.date)):[];
+tips=arr.map((t,i)=>({...t,number:arr.length-i}));
+cats=Array.isArray(d.categories)?[...d.categories]:[];tips.forEach(t=>{if(t.category&&!cats.includes(t.category))cats.push(t.category)});
+cats=cats.filter(c=>tips.some(t=>t.category===c));
+$("tipTotalCount").textContent=String(tips.length);
+readUrl();$("tipSearchInput").value=st.q;go({},"replace")
+}catch(e){console.error(e);$("tipList").innerHTML='<div class="tip-empty">글 목록을 불러오지 못했습니다. tips.json 파일을 확인해주세요.</div>'}}
+load();
+</script>
+</body>
+</html>

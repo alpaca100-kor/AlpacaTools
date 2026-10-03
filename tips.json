@@ -1,0 +1,284 @@
+{
+  "categories": [
+    "PC",
+    "Mobile",
+    "AI",
+    "Web",
+    "Windows",
+    "MacOS",
+    "Excel",
+    "Others"
+  ],
+  "tips": [
+    {
+      "title": "엑셀의 흥미로운 윤달 버그 관련 정보 총정리",
+      "category": "Excel",
+      "url": "https://alpaca100.tistory.com/223",
+      "date": "2026-01-05"
+    },
+    {
+      "title": "1년치 달력을 한 페이지에 담아낸 미니달력(A4달력)",
+      "category": "Excel",
+      "url": "https://alpaca100.tistory.com/212",
+      "date": "2025-12-17"
+    },
+    {
+      "title": "NH농협은행 인터넷뱅킹 보안 프로그램 반복설치 오류 해결하는 법",
+      "category": "Web",
+      "url": "https://alpaca100.tistory.com/210",
+      "date": "2025-12-11"
+    },
+    {
+      "title": "구글 제미나이(Gemini)로 이미지 편집하기 (with 나노바나나 Pro)",
+      "category": "AI",
+      "url": "https://alpaca100.tistory.com/208",
+      "date": "2025-12-10"
+    },
+    {
+      "title": "국민/우리/신한은행 인터넷 뱅킹 보안 프로그램 무한반복설치 오류 해결법",
+      "category": "Web",
+      "url": "https://alpaca100.tistory.com/206",
+      "date": "2025-12-09"
+    },
+    {
+      "title": "윈도우11 화면캡처 단축키(Print Screen) 설정하기 (캡처 도구 비활성화)",
+      "category": "Windows",
+      "url": "https://alpaca100.tistory.com/204",
+      "date": "2025-12-08"
+    },
+    {
+      "title": "윈도우11 바탕화면 아이콘 설정으로 내맘대로 바탕화면 꾸미기",
+      "category": "Windows",
+      "url": "https://alpaca100.tistory.com/197",
+      "date": "2025-11-21"
+    },
+    {
+      "title": "윈도우11 시작메뉴 고정됨 영역에 자주 사용하는 프로그램 추가하기",
+      "category": "Windows",
+      "url": "https://alpaca100.tistory.com/194",
+      "date": "2025-11-19"
+    },
+    {
+      "title": "AI를 활용하여 원리금균등상환 대출 월 납부액 계산하기",
+      "category": "AI",
+      "url": "https://alpaca100.tistory.com/179",
+      "date": "2025-11-04"
+    },
+    {
+      "title": "윈도우11 파일 탐색기 아이콘 간격 줄이기",
+      "category": "Windows",
+      "url": "https://alpaca100.tistory.com/158",
+      "date": "2025-09-25"
+    },
+    {
+      "title": "윈도우11 작업표시줄에 초단위 시간까지 표시하기",
+      "category": "Windows",
+      "url": "https://alpaca100.tistory.com/156",
+      "date": "2025-09-23"
+    },
+    {
+      "title": "윈도우11 작업표시줄 시작버튼 앱 아이콘 가운데→왼쪽 이동 방법",
+      "category": "Windows",
+      "url": "https://alpaca100.tistory.com/154",
+      "date": "2025-09-18"
+    },
+    {
+      "title": "윈도우11 엣지(Edge) 브라우저에서 알트탭 단축키(멀티테스킹 동작)가 이상하게 동작할 때 해결 법",
+      "category": "Windows",
+      "url": "https://alpaca100.tistory.com/150",
+      "date": "2025-09-16"
+    },
+    {
+      "title": "윈도우10과 윈도우11의 차이점은 무엇일까?",
+      "category": "Windows",
+      "url": "https://alpaca100.tistory.com/142",
+      "date": "2025-08-28"
+    },
+    {
+      "title": "윈도우10 지원 종료, 어떻게 대응해야 할까?",
+      "category": "Windows",
+      "url": "https://alpaca100.tistory.com/141",
+      "date": "2025-08-27"
+    },
+    {
+      "title": "보고서도 회의록도 이젠 마크다운으로! 직장인 필수 문서 포맷 마크다운의 모든 것",
+      "category": "Others",
+      "url": "https://alpaca100.tistory.com/134",
+      "date": "2025-08-08"
+    },
+    {
+      "title": "국산 AI 없으면 위험하다? 소버린 AI로 지키는 디지털 주권",
+      "category": "AI",
+      "url": "https://alpaca100.tistory.com/110",
+      "date": "2025-07-08"
+    },
+    {
+      "title": "코알못 직장인이 구글 제미나이(Gemini)를 이용해 만든 이미지 병합 프로그램",
+      "category": "AI",
+      "url": "https://alpaca100.tistory.com/96",
+      "date": "2025-06-17"
+    },
+    {
+      "title": "챗지피티(ChatGPT)를 활용한 이미지 생성부터 편집까지 완벽 정리",
+      "category": "AI",
+      "url": "https://alpaca100.tistory.com/93",
+      "date": "2025-06-05"
+    },
+    {
+      "title": "챗지피티(ChatGPT)로 사진 속 특정 요소 제거하기",
+      "category": "AI",
+      "url": "https://alpaca100.tistory.com/85",
+      "date": "2025-05-29"
+    },
+    {
+      "title": "비 오는 날 인터넷 느려짐 현상을 경험한다면... 과연 기분탓일까?",
+      "category": "Others",
+      "url": "https://alpaca100.tistory.com/82",
+      "date": "2025-05-15"
+    },
+    {
+      "title": "직접 써보고 느낀 Touch ID와 Face ID 장단점 비교",
+      "category": "Mobile",
+      "url": "https://alpaca100.tistory.com/79",
+      "date": "2025-05-13"
+    },
+    {
+      "title": "챗지피티(ChatGPT)로 프로필 사진 수정하기",
+      "category": "AI",
+      "url": "https://alpaca100.tistory.com/80",
+      "date": "2025-05-13"
+    },
+    {
+      "title": "윈도우 가상 데스크톱 기능으로 모니터 1대를 듀얼 모니터처럼 사용하기",
+      "category": "Windows",
+      "url": "https://alpaca100.tistory.com/75",
+      "date": "2025-05-07"
+    },
+    {
+      "title": "모르면 손해! Windows 단축키 [Win + X]의 모든 것",
+      "category": "Windows",
+      "url": "https://alpaca100.tistory.com/73",
+      "date": "2025-04-25"
+    },
+    {
+      "title": "이제 윈도우 바탕화면 직접 만들어서 사용하세요! (with ChatGPT)",
+      "category": "AI",
+      "url": "https://alpaca100.tistory.com/72",
+      "date": "2025-04-24"
+    },
+    {
+      "title": "내가 찍은 사진을 챗지피티(ChatGPT)로 편집해보기",
+      "category": "AI",
+      "url": "https://alpaca100.tistory.com/65",
+      "date": "2025-04-09"
+    },
+    {
+      "title": "챗지피티(ChatGPT)가 알려주는 지브리와 디즈니 스타일의 차이점",
+      "category": "AI",
+      "url": "https://alpaca100.tistory.com/63",
+      "date": "2025-04-04"
+    },
+    {
+      "title": "엣지(Edge) 브라우저에서 알트탭(Alt+Tab) 단축키가 이상하게 동작할 때 해결 법",
+      "category": "Web",
+      "url": "https://alpaca100.tistory.com/59",
+      "date": "2025-04-02"
+    },
+    {
+      "title": "1년치 달력을 10초만에 만들어 주는 만능달력 (v2)",
+      "category": "Excel",
+      "url": "https://alpaca100.tistory.com/56",
+      "date": "2025-04-01"
+    },
+    {
+      "title": "빙 이미지 생성기로 내가 상상하는 이미지 빠르게 만들기",
+      "category": "AI",
+      "url": "https://alpaca100.tistory.com/55",
+      "date": "2025-03-30"
+    },
+    {
+      "title": "리본메뉴와 빠른실행 도구모음 설정을 백업하여 나에게 익숙한 환경에서 작업하기",
+      "category": "Excel",
+      "url": "https://alpaca100.tistory.com/50",
+      "date": "2025-03-25"
+    },
+    {
+      "title": "엣지(Edge) 브라우저 분할화면 기능으로 웹페이지 빠르게 탐색하기",
+      "category": "Web",
+      "url": "https://alpaca100.tistory.com/49",
+      "date": "2025-03-24"
+    },
+    {
+      "title": "키보드 방향키로 셀 커서 이동이 안될 때 이것을 확인해보세요",
+      "category": "Excel",
+      "url": "https://alpaca100.tistory.com/45",
+      "date": "2025-03-12"
+    },
+    {
+      "title": "알아두면 유용한 Excel 단축키 추천",
+      "category": "Excel",
+      "url": "https://alpaca100.tistory.com/44",
+      "date": "2025-03-11"
+    },
+    {
+      "title": "작업영역을 넓게 만들어 보기 (리본메뉴 숨기기 등 활용)",
+      "category": "Excel",
+      "url": "https://alpaca100.tistory.com/43",
+      "date": "2025-03-06"
+    },
+    {
+      "title": "PC와 스마트폰에서 자료를 주고받는 세 가지 방법",
+      "category": "PC",
+      "url": "https://alpaca100.tistory.com/42",
+      "date": "2025-03-05"
+    },
+    {
+      "title": "직장동료들과 공동작업을 할 때 셀 메모와 데이터 유효성 검사 기능 활용하기",
+      "category": "Excel",
+      "url": "https://alpaca100.tistory.com/39",
+      "date": "2025-02-23"
+    },
+    {
+      "title": "엣지(Edge) 모바일 앱에서 아래로 내려간 주소창 되돌리기",
+      "category": "Mobile",
+      "url": "https://alpaca100.tistory.com/23",
+      "date": "2025-01-19"
+    },
+    {
+      "title": "검색만 했을 뿐인데 돈을 번다고? 여기서 가능합니다!",
+      "category": "Web",
+      "url": "https://alpaca100.tistory.com/22",
+      "date": "2025-01-18"
+    },
+    {
+      "title": "WEEKDAY 함수와 조건부 서식을 활용한 만능달력",
+      "category": "Excel",
+      "url": "https://alpaca100.tistory.com/12",
+      "date": "2025-01-09"
+    },
+    {
+      "title": "목돈으로 대출을 상환할까? 저축을 할까? (목표값 찾기)",
+      "category": "Excel",
+      "url": "https://alpaca100.tistory.com/11",
+      "date": "2025-01-08"
+    },
+    {
+      "title": "셀에 이름을 부여하기 (이름 정의)",
+      "category": "Excel",
+      "url": "https://alpaca100.tistory.com/8",
+      "date": "2025-01-07"
+    },
+    {
+      "title": "화면에 보이는 값과 셀에 입력된 값(셀 서식_표시 형식)",
+      "category": "Excel",
+      "url": "https://alpaca100.tistory.com/4",
+      "date": "2025-01-04"
+    },
+    {
+      "title": "엑셀의 기본은 데이터의 종류를 이해하는 것",
+      "category": "Excel",
+      "url": "https://alpaca100.tistory.com/3",
+      "date": "2025-01-03"
+    }
+  ]
+}
