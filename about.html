@@ -4,19 +4,19 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>소개 | ALPACA TOOLS</title>
+<title>ALPACA TOOLS 소개 | 도구와 정보와 팁</title>
 
 <meta name="description"
-      content="ALPACA TOOLS는 업무와 일상생활에 도움이 되는 웹 애플리케이션과 Windows용 프로그램을 직접 만들어 무료로 제공하는 개인 개발 프로젝트입니다.">
+      content="ALPACA TOOLS는 업무와 일상생활에 필요한 웹 애플리케이션과 Windows 프로그램을 제공하고, PC·모바일·인터넷·Word·Excel 등의 문제 해결 방법과 활용 팁을 함께 제공하는 개인 개발 프로젝트입니다.">
 
 <meta name="keywords"
-      content="ALPACA TOOLS, 알파카 툴즈, 웹 애플리케이션, Windows 프로그램, 업무용 도구, 생활용 도구, AI 코딩">
+      content="ALPACA TOOLS, 알파카 툴즈, 웹 애플리케이션, Windows 프로그램, 업무용 도구, 생활용 도구, 정보와 팁, PC 문제 해결, 모바일 문제 해결, 인터넷, Word, Excel, AI 코딩">
 
 <link rel="icon" type="image/png" href="./assets/logo.png">
 
 <meta property="og:title" content="ALPACA TOOLS 소개">
 <meta property="og:description"
-      content="업무와 일상생활에 도움이 되는 도구를 직접 만들고 공유합니다.">
+      content="업무와 일상생활에 필요한 도구와 정보를 제공합니다.">
 <meta property="og:image" content="./assets/logo.png">
 <meta property="og:type" content="website">
 
@@ -26,395 +26,135 @@
 <link rel="stylesheet" href="./style.css">
 
 <style>
-  /* ===== 이 페이지에서만 쓰는 스타일 ===== */
-  /* 공통 색상 변수 / 리셋 / 헤더 / 푸터는 style.css에 있습니다 */
+  body{line-height:1.7;}
 
-  body{
-    line-height:1.7;
-  }
-
-
-  /* ===== Hero ===== */
-
-  .hero{
-    padding:68px 0 52px;
-  }
-
+  .hero{padding:68px 0 52px;}
   .eyebrow{
-    display:inline-flex;
-    align-items:center;
-    gap:7px;
-    margin-bottom:16px;
-    padding:5px 10px;
-    border-radius:6px;
-    background:var(--accent-tint);
-    color:var(--accent);
-    font-size:12px;
-    font-weight:700;
+    display:inline-flex; align-items:center; gap:7px; margin-bottom:16px;
+    padding:5px 10px; border-radius:6px; background:var(--accent-tint);
+    color:var(--accent); font-size:12px; font-weight:700;
   }
-
   .hero h1{
-    font-size:clamp(32px,4.2vw,46px);
-    font-weight:800;
-    letter-spacing:-0.025em;
-    line-height:1.2;
-    margin:0 0 18px;
-    max-width:720px;
+    font-size:clamp(32px,4.2vw,46px); font-weight:800; letter-spacing:-0.025em;
+    line-height:1.2; margin:0 0 18px; max-width:760px;
   }
-
   .hero p{
-    font-size:16px;
-    color:var(--muted);
-    margin:0;
-    max-width:650px;
+    font-size:16px; color:var(--muted); margin:0; max-width:700px;
   }
 
-
-  /* ===== Intro statement ===== */
-
-  .intro{
-    padding:0 0 60px;
-  }
-
+  .intro{padding:0 0 60px;}
   .intro-box{
-    background:var(--surface);
-    border:1px solid var(--line);
-    border-radius:14px;
+    background:var(--surface); border:1px solid var(--line); border-radius:14px;
     padding:30px 32px;
   }
+  .intro-box p{margin:0; font-size:16px; color:var(--ink); line-height:1.85;}
 
-  .intro-box p{
-    margin:0;
-    font-size:16px;
-    color:var(--ink);
-    line-height:1.85;
-  }
-
-
-  /* ===== Section ===== */
-
-  .section{
-    border-top:1px solid var(--line);
-    padding:56px 0;
-  }
-
-  .section-head{
-    margin-bottom:26px;
-  }
-
+  .section{border-top:1px solid var(--line); padding:56px 0;}
+  .section-head{margin-bottom:26px;}
   .section-head h2{
-    font-size:21px;
-    font-weight:800;
-    letter-spacing:-0.01em;
-    margin:0 0 8px;
+    font-size:21px; font-weight:800; letter-spacing:-0.01em; margin:0 0 8px;
   }
-
-  .section-head p{
-    margin:0;
-    color:var(--muted);
-    font-size:14px;
-  }
-
-
-  /* ===== Feature grid ===== */
+  .section-head p{margin:0; color:var(--muted); font-size:14px;}
 
   .feature-grid{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:16px;
+    display:grid; grid-template-columns:repeat(4,1fr); gap:16px;
   }
-
   .feature{
-    background:var(--surface);
-    border:1px solid var(--line);
-    border-radius:14px;
-    padding:24px;
-    transition:border-color .15s ease;
+    background:var(--surface); border:1px solid var(--line); border-radius:14px;
+    padding:24px; transition:border-color .15s ease;
   }
-
-  .feature:hover{
-    border-color:var(--ink);
-  }
-
+  .feature:hover{border-color:var(--ink);}
   .feature-icon{
-    width:40px;
-    height:40px;
-    border-radius:9px;
-    background:var(--accent-tint);
-    color:var(--accent);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:18px;
-    font-weight:800;
-    margin-bottom:18px;
+    width:40px; height:40px; border-radius:9px; background:var(--accent-tint);
+    color:var(--accent); display:flex; align-items:center; justify-content:center;
+    font-size:17px; font-weight:800; margin-bottom:18px;
   }
+  .feature h3{font-size:16px; font-weight:700; margin:0 0 8px;}
+  .feature p{font-size:13.5px; color:var(--muted); margin:0; line-height:1.75;}
 
-  .feature h3{
-    font-size:16px;
-    font-weight:700;
-    margin:0 0 8px;
+  .service-grid{
+    display:grid; grid-template-columns:repeat(3,1fr); gap:16px;
   }
-
-  .feature p{
-    font-size:13.5px;
-    color:var(--muted);
-    margin:0;
-    line-height:1.75;
+  .service-card{
+    background:var(--surface); border:1px solid var(--line); border-radius:14px;
+    padding:26px; transition:border-color .15s ease;
   }
-
-
-  /* ===== Text content ===== */
-
-  .content{
-    max-width:760px;
+  .service-card:hover{border-color:var(--ink);}
+  .service-label{
+    display:inline-block; padding:4px 9px; border-radius:6px;
+    background:var(--accent-tint); color:var(--accent); font-size:11.5px;
+    font-weight:700; margin-bottom:15px;
   }
+  .service-card h3{font-size:18px; margin:0 0 10px; font-weight:800;}
+  .service-card p{font-size:13.5px; color:var(--muted); margin:0 0 18px; line-height:1.8;}
+  .service-link{font-size:13.5px; color:var(--accent); font-weight:700;}
+  .service-link:hover{text-decoration:underline;}
 
-  .content h3{
-    font-size:17px;
-    font-weight:700;
-    margin:30px 0 8px;
-  }
-
-  .content h3:first-child{
-    margin-top:0;
-  }
-
+  .content{max-width:760px;}
+  .content h3{font-size:17px; font-weight:700; margin:30px 0 8px;}
+  .content h3:first-child{margin-top:0;}
   .content p{
-    font-size:14.5px;
-    color:var(--muted);
-    margin:0 0 18px;
-    line-height:1.85;
+    font-size:14.5px; color:var(--muted); margin:0 0 18px; line-height:1.85;
   }
+  .content strong{color:var(--ink); font-weight:700;}
 
-  .content strong{
-    color:var(--ink);
-    font-weight:700;
-  }
-
-
-  /* ===== Process ===== */
-
-  .process{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:16px;
-  }
-
+  .process{display:grid; grid-template-columns:repeat(3,1fr); gap:16px;}
   .process-item{
-    background:var(--surface);
-    border:1px solid var(--line);
-    border-radius:14px;
-    padding:24px;
+    background:var(--surface); border:1px solid var(--line); border-radius:14px; padding:24px;
   }
+  .process-number{font-size:12px; font-weight:800; color:var(--accent); margin-bottom:12px;}
+  .process-item h3{font-size:16px; margin:0 0 8px; font-weight:700;}
+  .process-item p{margin:0; font-size:13.5px; color:var(--muted); line-height:1.75;}
 
-  .process-number{
-    font-size:12px;
-    font-weight:800;
-    color:var(--accent);
-    margin-bottom:12px;
-  }
-
-  .process-item h3{
-    font-size:16px;
-    margin:0 0 8px;
-    font-weight:700;
-  }
-
-  .process-item p{
-    margin:0;
-    font-size:13.5px;
-    color:var(--muted);
-    line-height:1.75;
-  }
-
-
-  /* ===== Usage ===== */
-
-  .usage-box{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:16px;
-  }
-
+  .usage-box{display:grid; grid-template-columns:1fr 1fr; gap:16px;}
   .usage-item{
-    background:var(--surface);
-    border:1px solid var(--line);
-    border-radius:14px;
-    padding:24px;
+    background:var(--surface); border:1px solid var(--line); border-radius:14px; padding:24px;
   }
-
-  .usage-item h3{
-    margin:0 0 8px;
-    font-size:16px;
-  }
-
-  .usage-item p{
-    margin:0;
-    font-size:13.5px;
-    color:var(--muted);
-    line-height:1.75;
-  }
-
-
-  /* ===== GitHub CTA ===== */
+  .usage-item h3{margin:0 0 8px; font-size:16px;}
+  .usage-item p{margin:0; font-size:13.5px; color:var(--muted); line-height:1.75;}
 
   .cta{
-    background:var(--ink);
-    color:var(--paper);
-    border-radius:14px;
-    padding:34px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:30px;
+    background:var(--ink); color:var(--paper); border-radius:14px; padding:34px;
+    display:flex; align-items:center; justify-content:space-between; gap:30px;
   }
-
-  .cta-text h2{
-    font-size:21px;
-    margin:0 0 8px;
-    font-weight:800;
-  }
-
-  .cta-text p{
-    margin:0;
-    color:#B9BBC1;
-    font-size:14px;
-    line-height:1.7;
-  }
-
+  .cta-text h2{font-size:21px; margin:0 0 8px; font-weight:800;}
+  .cta-text p{margin:0; color:#B9BBC1; font-size:14px; line-height:1.7;}
   .cta-btn{
-    flex-shrink:0;
-    background:var(--paper);
-    color:var(--ink);
-    padding:11px 18px;
-    border-radius:8px;
-    font-size:13.5px;
-    font-weight:700;
+    flex-shrink:0; background:var(--paper); color:var(--ink); padding:11px 18px;
+    border-radius:8px; font-size:13.5px; font-weight:700;
   }
+  .cta-btn:hover{background:var(--accent); color:#fff;}
 
-  .cta-btn:hover{
-    background:var(--accent);
-    color:#fff;
+  .closing{border-top:1px solid var(--line); padding:56px 0 64px;}
+  .closing-inner{max-width:700px;}
+  .closing h2{font-size:21px; font-weight:800; margin:0 0 14px;}
+  .closing p{font-size:14.5px; color:var(--muted); margin:0 0 12px; line-height:1.85;}
+
+  @media (max-width:1000px){
+    .feature-grid{grid-template-columns:repeat(2,1fr);}
+    .service-grid{grid-template-columns:1fr 1fr;}
   }
-
-
-  /* ===== Closing ===== */
-
-  .closing{
-    border-top:1px solid var(--line);
-    padding:56px 0 64px;
-  }
-
-  .closing-inner{
-    max-width:700px;
-  }
-
-  .closing h2{
-    font-size:21px;
-    font-weight:800;
-    margin:0 0 14px;
-  }
-
-  .closing p{
-    font-size:14.5px;
-    color:var(--muted);
-    margin:0 0 12px;
-    line-height:1.85;
-  }
-
-
-  /* ===== Responsive ===== */
-
-  @media (max-width:900px){
-
-    .feature-grid{
-      grid-template-columns:repeat(2,1fr);
-    }
-
-    .process{
-      grid-template-columns:repeat(2,1fr);
-    }
-  }
-
 
   @media (max-width:700px){
-
-    .header-inner{
-      gap:18px;
-    }
-
-    nav{
-      gap:14px;
-      margin-left:0;
-    }
-
-    .gh-btn{
-      padding:8px 12px;
-    }
-
-    .hero{
-      padding:52px 0 42px;
-    }
-
-    .intro-box{
-      padding:24px;
-    }
-
-    .feature-grid,
-    .process,
-    .usage-box{
-      grid-template-columns:1fr;
-    }
-
-    .cta{
-      flex-direction:column;
-      align-items:flex-start;
-      padding:28px;
-    }
+    .header-inner{gap:18px;}
+    nav{gap:14px; margin-left:0;}
+    .gh-btn{padding:8px 12px;}
+    .hero{padding:52px 0 42px;}
+    .intro-box{padding:24px;}
+    .feature-grid,.service-grid,.process,.usage-box{grid-template-columns:1fr;}
+    .cta{flex-direction:column; align-items:flex-start; padding:28px;}
   }
 
-
   @media (max-width:520px){
-
-    .wrap{
-      padding:0 20px;
-    }
-
-    .header-inner{
-      flex-wrap:wrap;
-    }
-
-    .logo{
-      flex:1;
-    }
-
-    nav{
-      order:3;
-      width:100%;
-      padding-top:4px;
-      padding-bottom:2px;
-    }
-
-    .hero h1{
-      font-size:32px;
-    }
-
-    .hero p{
-      font-size:15px;
-    }
-
-    .section{
-      padding:44px 0;
-    }
-
-    .closing{
-      padding:44px 0 52px;
-    }
-
-    .footer-inner{
-      flex-direction:column;
-    }
+    .wrap{padding:0 20px;}
+    .header-inner{flex-wrap:wrap;}
+    .logo{flex:1;}
+    nav{order:3; width:100%; padding-top:4px; padding-bottom:2px;}
+    .hero h1{font-size:32px;}
+    .hero p{font-size:15px;}
+    .section{padding:44px 0;}
+    .closing{padding:44px 0 52px;}
+    .footer-inner{flex-direction:column;}
   }
 </style>
 </head>
@@ -423,371 +163,246 @@
 
 <!--#include header-->
 
-
 <main>
-
-  <!-- ===== Hero ===== -->
-
   <div class="wrap">
 
     <section class="hero">
-
-      <div class="eyebrow">
-        ALPACA TOOLS
-      </div>
-
-      <h1>
-        업무와 일상생활의 작은 불편을<br>
-        직접 해결하는 도구를 만듭니다
-      </h1>
-
+      <div class="eyebrow">ALPACA TOOLS</div>
+      <h1>업무와 일상생활에 필요한<br>도구와 정보를 제공합니다</h1>
       <p>
-        ALPACA TOOLS는 업무와 일상생활에서 유용하게 사용할 수 있는
-        웹 애플리케이션과 Windows용 프로그램을 직접 만들고 공유하는
-        개인 개발 프로젝트입니다.
+        ALPACA TOOLS는 업무와 일상생활에서 유용하게 사용할 수 있는 웹 애플리케이션과
+        Windows용 프로그램을 만들고, PC·모바일·인터넷·Word·Excel 등 다양한 환경에서
+        발생하는 문제를 해결할 수 있는 정보와 팁을 함께 제공하는 개인 개발 프로젝트입니다.
       </p>
-
     </section>
-
-
-    <!-- ===== Intro ===== -->
 
     <section class="intro">
-
       <div class="intro-box">
-
         <p>
-          일하다 보면 반복적으로 해야 하는 작은 작업이 생기고,
-          일상생활에서도 특정 기능 하나가 필요해서 인터넷을 검색하는
-          경우가 있습니다. ALPACA TOOLS는 이런 <strong>작지만 번거로운 작업을
-          조금 더 간단하게 해결할 수 있는 도구</strong>를 직접 만들어보자는
-          생각에서 시작했습니다.
-          필요한 기능을 하나씩 구현하고 실제로 사용하면서 개선한 결과물을
-          누구나 이용할 수 있도록 모아 제공하고 있습니다.
+          일하다 보면 반복적으로 해야 하는 작은 작업이 생기고, PC나 스마트폰을 사용하다 보면
+          갑자기 문제가 발생하거나 특정 기능을 어떻게 사용하는지 몰라 검색하게 되는 경우가 있습니다.
+          ALPACA TOOLS는 이러한 상황에서 <strong>필요한 기능을 직접 사용할 수 있는 도구와 문제를 해결하는 데
+          참고할 수 있는 정보를 한곳에서 제공</strong>하는 것을 목표로 합니다. 필요한 기능을 하나씩 구현하고,
+          실제 사용 과정에서 발견되는 문제를 개선하며, 도움이 될 만한 정보와 활용 방법도 함께 정리하고 있습니다.
         </p>
-
       </div>
-
     </section>
 
+    <section class="section">
+      <div class="section-head">
+        <h2>ALPACA TOOLS에서 제공하는 것</h2>
+        <p>필요한 도구를 찾거나, 사용 중인 프로그램과 기기의 문제 해결 방법을 찾아볼 수 있습니다.</p>
+      </div>
 
-    <!-- ===== Purpose ===== -->
+      <div class="service-grid">
+        <article class="service-card">
+          <span class="service-label">TOOLS</span>
+          <h3>웹 애플리케이션과 프로그램</h3>
+          <p>
+            업무, 생활, 개발 등에 필요한 기능을 직접 사용할 수 있는 웹 애플리케이션과
+            Windows용 프로그램을 제공합니다. 웹 도구는 가능한 경우 별도의 설치 없이 브라우저에서 바로 사용할 수 있습니다.
+          </p>
+          <a class="service-link" href="./tools.html">도구 찾아보기 →</a>
+        </article>
+
+        <article class="service-card">
+          <span class="service-label">INFORMATION</span>
+          <h3>정보와 팁</h3>
+          <p>
+            PC, 모바일, 인터넷, Word, Excel 등 일상적으로 사용하는 기기와 프로그램에서
+            발생할 수 있는 문제의 해결 방법과 기능 활용 방법을 정리합니다. 사용자가 실제 문제를 해결하는 데 도움이 되는 정보를 중심으로 제공합니다.
+          </p>
+          <a class="service-link" href="#information">정보와 팁 알아보기 →</a>
+        </article>
+
+        <article class="service-card">
+          <span class="service-label">DEVELOPMENT</span>
+          <h3>AI를 활용한 개발</h3>
+          <p>
+            아이디어를 정리하고 프로그램을 설계한 뒤 AI를 활용해 코드를 작성하고 직접 테스트합니다.
+            완성된 결과물은 GitHub를 통해 공개하고 지속적으로 수정·개선합니다.
+          </p>
+          <a class="service-link" href="#development">개발 과정 알아보기 →</a>
+        </article>
+      </div>
+    </section>
 
     <section class="section">
-
       <div class="section-head">
         <h2>ALPACA TOOLS가 만들어진 이유</h2>
-        <p>복잡한 프로그램보다 필요한 기능을 간단하게 사용할 수 있는 도구를 지향합니다.</p>
+        <p>복잡한 프로그램보다 실제로 필요한 기능과 이해하기 쉬운 정보를 지향합니다.</p>
       </div>
-
 
       <div class="feature-grid">
-
         <article class="feature">
-
           <div class="feature-icon">01</div>
-
           <h3>작은 불편을 해결합니다</h3>
-
           <p>
-            업무나 일상에서 반복적으로 발생하는 번거로운 작업을
-            발견하고, 실제로 사용할 수 있는 간단한 프로그램으로
-            만들어 해결합니다.
+            업무나 일상에서 반복적으로 발생하는 번거로운 작업을 발견하고 실제로 사용할 수 있는 간단한 도구로 만들어 해결합니다.
           </p>
-
         </article>
 
-
         <article class="feature">
-
           <div class="feature-icon">02</div>
-
-          <h3>바로 사용할 수 있게 만듭니다</h3>
-
+          <h3>필요한 정보를 제공합니다</h3>
           <p>
-            웹에서 사용할 수 있는 도구는 별도의 설치 없이
-            브라우저에서 바로 사용할 수 있도록 만들고 있습니다.
-            Windows용 프로그램도 필요한 경우 다운로드하여 사용할 수 있습니다.
+            PC, 모바일, 인터넷, Word, Excel 등 다양한 환경에서 문제가 발생했을 때 참고할 수 있는 해결 방법과 활용 팁을 제공합니다.
           </p>
-
         </article>
-
 
         <article class="feature">
-
           <div class="feature-icon">03</div>
-
-          <h3>계속 개선합니다</h3>
-
+          <h3>바로 사용할 수 있게 만듭니다</h3>
           <p>
-            프로그램을 한 번 배포하고 끝내는 것이 아니라 실제 사용 과정에서
-            발견되는 오류와 불편한 부분을 수정하고 새로운 기능을
-            추가하면서 계속 발전시킵니다.
+            웹 도구는 별도의 설치 없이 사용할 수 있도록 하고, Windows용 프로그램은 필요한 경우 다운로드하여 사용할 수 있도록 제공합니다.
           </p>
-
         </article>
 
+        <article class="feature">
+          <div class="feature-icon">04</div>
+          <h3>계속 개선합니다</h3>
+          <p>
+            실제 사용 과정에서 발견되는 오류와 불편한 부분을 수정하고 새로운 기능과 정보를 추가하면서 계속 발전시킵니다.
+          </p>
+        </article>
       </div>
-
     </section>
 
-
-    <!-- ===== AI Development ===== -->
-
-    <section class="section">
-
+    <section class="section" id="information">
       <div class="section-head">
-        <h2>AI와 함께 만드는 소프트웨어</h2>
-        <p>AI를 개발 과정에 적극적으로 활용하여 아이디어를 실제 프로그램으로 구현합니다.</p>
+        <h2>정보와 팁</h2>
+        <p>사용 중 문제가 생겼을 때 해결 방법을 찾을 수 있는 실용적인 정보를 제공합니다.</p>
       </div>
 
+      <div class="content">
+        <h3>문제가 생겼을 때 찾아오는 공간</h3>
+        <p>
+          컴퓨터나 스마트폰을 사용하다 보면 설정 하나를 찾지 못하거나, 평소와 다르게 동작하는 기능 때문에
+          해결 방법을 검색하게 되는 경우가 있습니다. ALPACA TOOLS의 <strong>정보와 팁</strong>은 이런 상황에서
+          필요한 내용을 쉽게 확인할 수 있도록 문제 상황과 해결 방법을 중심으로 정보를 정리합니다.
+        </p>
+
+        <h3>PC와 모바일</h3>
+        <p>
+          Windows PC, 스마트폰 등 일상적으로 사용하는 기기의 설정과 기능을 활용하는 방법부터
+          사용 중 발생할 수 있는 문제를 해결하는 방법까지 실용적인 내용을 다룹니다.
+        </p>
+
+        <h3>인터넷과 프로그램</h3>
+        <p>
+          인터넷 서비스를 이용하면서 발생하는 문제와 브라우저 활용 방법, 그리고 Word·Excel 같은
+          업무용 프로그램에서 자주 사용하는 기능과 문제 해결 방법도 함께 정리합니다.
+        </p>
+
+        <h3>도구와 정보의 연결</h3>
+        <p>
+          ALPACA TOOLS는 정보를 제공하는 데서 끝나지 않고, 필요한 경우 직접 사용할 수 있는 도구까지 연결하는 것을 목표로 합니다.
+          문제의 원인과 해결 방법을 확인한 뒤 반복 작업을 줄이거나 특정 기능을 간단하게 처리할 수 있는 도구가 있다면 함께 찾아볼 수 있도록 구성해 나가고 있습니다.
+        </p>
+      </div>
+    </section>
+
+    <section class="section" id="development">
+      <div class="section-head">
+        <h2>AI를 활용해 직접 만드는 도구</h2>
+        <p>AI를 개발 과정에 적극적으로 활용하면서도 결과물은 직접 실행하고 검증합니다.</p>
+      </div>
 
       <div class="content">
-
         <h3>아이디어에서 프로그램까지</h3>
-
         <p>
-          최근 생성형 AI의 발전으로 개인이 소프트웨어를 만드는 방법도
-          크게 달라지고 있습니다. ALPACA TOOLS 역시 이러한 변화에 맞춰
+          생성형 AI의 발전으로 개인이 소프트웨어를 만드는 방법도 달라지고 있습니다. ALPACA TOOLS 역시
           <strong>AI를 활용한 코딩과 개발</strong>을 적극적으로 활용하고 있습니다.
         </p>
 
         <p>
-          필요한 기능을 정리하고 프로그램의 구조를 설계한 뒤 AI의 도움을 받아
-          코드를 작성합니다. 이후 직접 프로그램을 실행하고 테스트하면서
-          오류를 확인하고 필요한 부분을 다시 수정합니다.
+          필요한 기능을 정리하고 프로그램의 구조를 설계한 뒤 AI의 도움을 받아 코드를 작성합니다.
+          이후 직접 프로그램을 실행하고 테스트하면서 오류와 사용상의 문제를 확인하고 필요한 부분을 다시 수정합니다.
         </p>
 
         <p>
-          중요한 것은 AI가 만들어준 결과물을 그대로 사용하는 것이 아니라
-          실제 사용 목적에 맞게 검토하고 수정하면서 하나의 완성된 도구로
-          만들어가는 과정입니다.
+          중요한 것은 AI가 만들어준 결과물을 그대로 사용하는 것이 아니라 실제 환경에서 동작하는지 확인하고,
+          사용 목적에 맞게 코드를 수정하며 지속적으로 개선하는 과정입니다. 완성된 프로그램과 웹 도구는 GitHub에 공개하여
+          소스코드와 개발 과정을 확인할 수 있도록 하고 있습니다.
         </p>
-
-
-        <h3>AI 코딩을 실용적인 개발에 활용합니다</h3>
-
-        <p>
-          ALPACA TOOLS는 AI 자체를 보여주기 위한 프로젝트가 아닙니다.
-          AI를 활용하여 실제로 사용할 수 있는 프로그램을 만드는 것을
-          목표로 합니다.
-        </p>
-
-        <p>
-          따라서 프로그램의 규모가 크지 않더라도 실제 사용 과정에서
-          충분한 가치가 있다고 판단되는 기능이라면 하나의 도구로
-          만들어 공유하고 있습니다.
-        </p>
-
       </div>
 
-    </section>
-
-
-    <!-- ===== Development Process ===== -->
-
-    <section class="section">
-
-      <div class="section-head">
-        <h2>도구를 만드는 과정</h2>
-        <p>필요성을 발견하고 직접 사용해보면서 프로그램을 발전시킵니다.</p>
-      </div>
-
-
-      <div class="process">
-
+      <div class="process" style="margin-top:28px;">
         <article class="process-item">
-
-          <div class="process-number">STEP 01</div>
-
-          <h3>필요한 기능 발견</h3>
-
-          <p>
-            업무나 일상에서 반복적으로 발생하는 불편한 작업을 발견하고
-            어떤 기능이 필요한지 구체적으로 정리합니다.
-          </p>
-
+          <div class="process-number">01</div>
+          <h3>아이디어와 설계</h3>
+          <p>어떤 문제를 해결할 것인지 정리하고 필요한 기능과 화면, 데이터 구조 등을 설계합니다.</p>
         </article>
-
-
         <article class="process-item">
-
-          <div class="process-number">STEP 02</div>
-
+          <div class="process-number">02</div>
           <h3>AI를 활용한 개발</h3>
-
-          <p>
-            프로그램의 구조와 화면을 설계하고 AI의 도움을 받아
-            실제로 동작하는 프로그램을 구현합니다.
-          </p>
-
+          <p>AI를 활용하여 코드를 작성하고 기능을 구현하면서 개발 속도를 높이고 다양한 해결 방법을 검토합니다.</p>
         </article>
-
-
         <article class="process-item">
-
-          <div class="process-number">STEP 03</div>
-
-          <h3>사용과 개선</h3>
-
-          <p>
-            직접 사용하면서 오류와 불편한 부분을 확인하고 기능을
-            수정하거나 추가하면서 프로그램을 개선합니다.
-          </p>
-
+          <div class="process-number">03</div>
+          <h3>테스트와 개선</h3>
+          <p>직접 실행하고 테스트하면서 오류와 불편한 부분을 찾아 수정하고 실제 사용에 맞게 개선합니다.</p>
         </article>
-
       </div>
-
     </section>
 
-
-    <!-- ===== Web / Windows ===== -->
-
     <section class="section">
-
       <div class="section-head">
-        <h2>어떤 형태의 도구를 제공하나요?</h2>
-        <p>사용 목적에 따라 웹 애플리케이션과 Windows용 프로그램으로 제공합니다.</p>
+        <h2>이런 분들에게 유용합니다</h2>
+        <p>업무와 일상에서 자주 사용하는 도구와 정보를 한곳에서 찾아볼 수 있습니다.</p>
       </div>
-
 
       <div class="usage-box">
-
         <article class="usage-item">
-
-          <h3>웹 애플리케이션</h3>
-
-          <p>
-            별도의 프로그램을 설치하지 않고 웹브라우저에서 바로 사용할 수 있는
-            도구입니다. PC뿐만 아니라 웹브라우저를 사용할 수 있는 다양한
-            환경에서 편리하게 이용할 수 있도록 만드는 것을 목표로 합니다.
-          </p>
-
+          <h3>업무 중 반복 작업을 줄이고 싶은 분</h3>
+          <p>반복적인 파일 관리, 문서 작업, 계산 등 번거로운 업무를 줄이는 데 활용할 수 있는 도구를 찾아볼 수 있습니다.</p>
         </article>
-
-
         <article class="usage-item">
-
-          <h3>Windows용 프로그램</h3>
-
-          <p>
-            웹브라우저보다 Windows 환경에서 직접 사용하는 것이 편리한
-            기능은 별도의 프로그램으로 제작합니다. 필요한 프로그램은
-            GitHub를 통해 배포하고 있습니다.
-          </p>
-
+          <h3>PC나 스마트폰 문제를 해결하고 싶은 분</h3>
+          <p>갑자기 발생한 오류나 설정 문제, 특정 기능의 사용 방법 등을 해결하기 위한 정보를 찾아볼 수 있습니다.</p>
         </article>
-
+        <article class="usage-item">
+          <h3>Word와 Excel을 자주 사용하는 직장인</h3>
+          <p>문서 작성과 데이터 처리 과정에서 자주 접하는 기능과 문제 해결 방법을 확인할 수 있습니다.</p>
+        </article>
+        <article class="usage-item">
+          <h3>설치 없이 간단한 도구를 사용하고 싶은 분</h3>
+          <p>가능한 경우 웹 브라우저에서 바로 사용할 수 있는 도구를 제공하여 별도의 프로그램 설치 부담을 줄입니다.</p>
+        </article>
       </div>
-
     </section>
 
-
-    <!-- ===== Free / Open Source ===== -->
-
     <section class="section">
-
-      <div class="section-head">
-        <h2>무료로 사용할 수 있습니다</h2>
-        <p>필요한 도구를 발견했다면 부담 없이 사용해보세요.</p>
-      </div>
-
-
-      <div class="content">
-
-        <p>
-          ALPACA TOOLS에서 제공하는 도구는 누구나 쉽게 사용할 수 있도록
-          <strong>무료 제공</strong>을 기본 방향으로 하고 있습니다.
-        </p>
-
-        <p>
-          복잡한 회원가입이나 별도의 이용 절차를 거치기보다는 필요한 도구를
-          찾아 바로 사용할 수 있도록 구성하고 있습니다.
-        </p>
-
-        <p>
-          프로그램의 소스코드는 GitHub를 중심으로 관리하고 있으며,
-          새로운 기능을 추가하거나 오류를 수정하면서 프로젝트를
-          계속 발전시켜 나가고 있습니다.
-        </p>
-
-      </div>
-
-    </section>
-
-
-    <!-- ===== GitHub ===== -->
-
-    <section class="section">
-
       <div class="cta">
-
         <div class="cta-text">
-
-          <h2>ALPACA TOOLS는 GitHub에서 만들어집니다</h2>
-
+          <h2>필요한 도구를 직접 찾아보세요</h2>
           <p>
-            프로그램의 소스코드와 개발 과정을 GitHub에서 확인할 수 있습니다.
-            새로운 도구와 업데이트도 계속 추가될 예정입니다.
+            업무·생활·개발자용 도구를 검색하고, 각 도구의 상세 페이지에서 기능과 사용 방법을 확인할 수 있습니다.
           </p>
-
         </div>
-
-        <a
-          class="cta-btn"
-          href="https://github.com/alpaca100-kor/AlpacaTools"
-          target="_blank"
-          rel="noopener"
-        >
-          GitHub 방문 ↗
-        </a>
-
+        <a class="cta-btn" href="./tools.html">ALPACA TOOLS 도구 보기 →</a>
       </div>
-
     </section>
-
-
-    <!-- ===== Closing ===== -->
 
     <section class="closing">
-
       <div class="closing-inner">
-
-        <h2>앞으로도 하나씩 만들어갑니다</h2>
-
+        <h2>마무리</h2>
         <p>
-          ALPACA TOOLS는 거창한 소프트웨어 플랫폼을 만드는 것을 목표로
-          시작한 프로젝트가 아닙니다.
+          ALPACA TOOLS는 단순히 프로그램을 모아놓은 공간을 넘어, 업무와 일상생활에서 발생하는 작은 문제를 해결하는 데 도움이 되는
+          <strong>도구와 정보가 함께 있는 공간</strong>을 만들어가고 있습니다.
         </p>
-
         <p>
-          업무를 하다가 필요한 작은 기능 하나, 일상생활에서 필요했던
-          간단한 도구 하나를 직접 만들어보고, 실제로 사용할 만하다면
-          다른 사람들과도 공유하는 것이 이 프로젝트의 출발점입니다.
+          필요한 기능이 있을 때는 사용할 수 있는 도구를 찾아보고, PC나 모바일, 인터넷, Word, Excel 등을 사용하다 문제가 생겼을 때는
+          '정보와 팁'에서 해결 방법을 찾아볼 수 있도록 서비스를 계속 확장해 나가겠습니다.
         </p>
-
         <p>
-          AI를 활용하면 이제 개인도 자신의 아이디어를 비교적 빠르게
-          실제 프로그램으로 구현할 수 있습니다. ALPACA TOOLS 역시
-          이러한 환경을 활용하여 <strong>필요하면 직접 만들고,
-          쓸 만하면 함께 공유하는 프로젝트</strong>로 계속 발전해 나가겠습니다.
+          앞으로도 실제 사용에 도움이 되는 도구와 정보를 하나씩 추가하고, 사용 과정에서 발견되는 문제를 반영하여 ALPACA TOOLS를 지속적으로 개선하겠습니다.
         </p>
-
-        <p>
-          필요한 도구가 있다면 ALPACA TOOLS에서 찾아보시기 바랍니다.
-          앞으로도 업무와 일상생활에 도움이 되는 다양한 도구를
-          하나씩 추가해 나가겠습니다.
-        </p>
-
       </div>
-
     </section>
 
   </div>
-
 </main>
-
 
 <!--#include footer-->
 
