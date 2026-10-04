@@ -11,6 +11,84 @@
   ],
   "tips": [
     {
+      "title": "클로드(Claude) 모델별 특징 비교, Haiku·Sonnet·Opus·Fable은 어떻게 다를까?",
+      "category": "AI",
+      "url": "https://alpaca100.tistory.com/407",
+      "date": "2026-09-21"
+    },
+    {
+      "title": "윈도우11 프로그램별로 한영키 입력 상태(한글/영어 전환 상태) 유지하기",
+      "category": "Windows",
+      "url": "https://alpaca100.tistory.com/401",
+      "date": "2026-09-11"
+    },
+    {
+      "title": "ChatGPT Work와 Codex 차이점 비교 - 특징과 활용 방법 총정리",
+      "category": "AI",
+      "url": "https://alpaca100.tistory.com/395",
+      "date": "2026-09-03"
+    },
+    {
+      "title": "챗지피티(ChatGPT) 요금제 비교 - Go, Plus, Pro 차이점과 나에게 맞는 요금제 선택 가이드 총정리",
+      "category": "AI",
+      "url": "https://alpaca100.tistory.com/372",
+      "date": "2026-07-16"
+    },
+    {
+      "title": "해외 eSIM 로밍망과 로컬망 무엇을 선택해야 할까?",
+      "category": "Mobile",
+      "url": "https://alpaca100.tistory.com/367",
+      "date": "2026-07-10"
+    },
+    {
+      "title": "맥북 초보자를 위한 macOS 필수 단축키 총정리",
+      "category": "MacOS",
+      "url": "https://alpaca100.tistory.com/350",
+      "date": "2026-06-05"
+    },
+    {
+      "title": "TEXT 함수와 IF 함수를 활용하여 조건부 표시 형식 만들기",
+      "category": "Excel",
+      "url": "https://alpaca100.tistory.com/342",
+      "date": "2026-05-24"
+    },
+    {
+      "title": "윈도우(Windows)와 맥OS(macOS) 운영체제 차이점 비교 총정리",
+      "category": "PC",
+      "url": "https://alpaca100.tistory.com/324",
+      "date": "2026-05-07"
+    },
+    {
+      "title": "스마트폰 배터리 100% 완충 vs 80% 충전, 어떤 방법이 더 오래 쓸 수 있을까?",
+      "category": "Mobile",
+      "url": "https://alpaca100.tistory.com/294",
+      "date": "2026-04-06"
+    },
+    {
+      "title": "아이폰 카메라 무음 촬영을 위해 해외 구매할 때 꼭 알아야 할 사항 총정리",
+      "category": "Mobile",
+      "url": "https://alpaca100.tistory.com/278",
+      "date": "2026-03-16"
+    },
+    {
+      "title": "알아두면 유용한 엣지(Edge) 브라우저 단축키 총정리",
+      "category": "Web",
+      "url": "https://alpaca100.tistory.com/257",
+      "date": "2026-02-12"
+    },
+    {
+      "title": "엣지(Edge) 브라우저 Copilot 기능 활용법 - 업무 효율 높이는 방법",
+      "category": "Web",
+      "url": "https://alpaca100.tistory.com/253",
+      "date": "2026-02-10"
+    },
+    {
+      "title": "윈도우11 시작메뉴 맞춤 영역에 최근 파일 및 자주 사용하는 앱 표시하지 않는 방법",
+      "category": "Windows",
+      "url": "https://alpaca100.tistory.com/240",
+      "date": "2026-01-27"
+    },
+    {
       "title": "엑셀의 흥미로운 윤달 버그 관련 정보 총정리",
       "category": "Excel",
       "url": "https://alpaca100.tistory.com/223",
