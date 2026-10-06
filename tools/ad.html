@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="알파카 다이어리 - 일반메모, 달력메모, 체크리스트, 컬렉션을 하나로 관리하는 Windows 프로그램">
+  <title>알파카 다이어리 | ALPACA TOOLS</title>
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    .breadcrumb{padding-top:28px;font-size:13px;color:var(--muted)}.breadcrumb a:hover{color:var(--ink)}.breadcrumb-separator{margin:0 7px;color:#B7B8B5}
+    .app-hero{display:flex;align-items:center;gap:24px;padding:30px 0 28px}.app-icon{width:88px;height:88px;flex:0 0 88px;object-fit:contain;border:1px solid var(--line);border-radius:20px;background:var(--surface)}.app-hero-content{min-width:0}.app-hero h1{margin:0 0 8px;font-size:clamp(30px,4.2vw,44px);font-weight:800;letter-spacing:-.025em;line-height:1.2}.app-description{margin:0 0 13px;max-width:700px;color:var(--muted);font-size:16px}.app-meta{display:flex;flex-wrap:wrap;gap:5px 12px;color:var(--muted);font-size:13px}.app-meta-item+.app-meta-item::before{content:"·";margin-right:12px;color:#B7B8B5}
+    .app-actions{display:flex;flex-wrap:wrap;gap:9px;padding:0 0 46px}.app-button{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:40px;padding:9px 16px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink);font-size:13.5px;font-weight:700;transition:background .15s,border-color .15s,color .15s}.app-button:hover{border-color:#B9B9B5}.app-button.primary{background:var(--ink);color:var(--paper);border-color:var(--ink)}.app-button.primary:hover{background:var(--accent);border-color:var(--accent)}
+    .detail-section{border-top:1px solid var(--line);padding:48px 0}.detail-section h2{margin:0 0 15px;font-size:21px;font-weight:800;letter-spacing:-.01em}.detail-content{max-width:720px;color:var(--muted);font-size:14.5px}.detail-content p{margin:0 0 12px}.detail-content p:last-child{margin-bottom:0}
+    .feature-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:20px}.feature-card{padding:18px;border:1px solid var(--line);border-radius:12px;background:var(--surface)}.feature-card h3{margin:0 0 7px;font-size:15px;font-weight:800}.feature-card p{margin:0;color:var(--muted);font-size:13.5px}
+    .steps{max-width:720px;margin:20px 0 0;padding:0;list-style:none;counter-reset:step}.steps li{position:relative;min-height:26px;padding:1px 0 16px 40px;color:var(--muted);font-size:14px}.steps li::before{content:counter(step);counter-increment:step;position:absolute;left:0;top:0;width:26px;height:26px;display:flex;align-items:center;justify-content:center;border-radius:50%;background:var(--ink);color:var(--paper);font-size:12px;font-weight:800}
+    .environment{max-width:720px;margin-top:18px;border-top:1px solid var(--line)}.environment-item{display:flex;justify-content:space-between;gap:20px;padding:13px 4px;border-bottom:1px solid var(--line);font-size:14px}.environment-label{color:var(--muted)}.environment-value{text-align:right;font-weight:700}
+    .notice-list{max-width:820px;margin-top:18px;border-top:1px solid var(--line)}.notice-item{display:grid;grid-template-columns:92px minmax(0,1fr) 18px;align-items:center;gap:14px;padding:14px 4px;border-bottom:1px solid var(--line);font-size:14px}.notice-date{color:var(--muted);font-size:12.5px}.notice-title{min-width:0;font-weight:700}.notice-arrow{color:var(--muted);text-align:right}.notice-empty{padding:24px 4px;color:var(--muted);font-size:14px}
+    .related-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:20px}.related-card{display:block;padding:17px;border:1px solid var(--line);border-radius:12px;background:var(--surface)}.related-card:hover{border-color:#B9B9B5}.related-card h3{margin:0 0 6px;font-size:14.5px}.related-card p{margin:0;color:var(--muted);font-size:12.5px}
+    .bottom-cta{border-top:1px solid var(--line);padding:48px 0 56px;text-align:center}.bottom-cta h2{margin:0 0 17px;font-size:21px;font-weight:800}.bottom-cta .app-actions{justify-content:center;padding-bottom:0}.back-link{display:inline-flex;align-items:center;gap:5px;margin:0 0 54px;color:var(--muted);font-size:13.5px;font-weight:700}.back-link:hover{color:var(--ink)}
+    .loading,.error-message{padding:80px 0;text-align:center;color:var(--muted);font-size:14px}.error-message small{display:block;margin-top:8px}
+    @media(max-width:700px){.app-hero{align-items:flex-start;gap:17px}.app-icon{width:70px;height:70px;flex-basis:70px;border-radius:16px}.feature-grid,.related-grid{grid-template-columns:1fr}}
+    @media(max-width:500px){.breadcrumb{padding-top:20px;font-size:12px}.app-hero{display:block;padding-top:22px}.app-icon{margin-bottom:15px}.app-description{font-size:14.5px}.app-actions .app-button{flex:1}.notice-item{grid-template-columns:72px minmax(0,1fr) 14px;gap:9px}.notice-title{font-size:13.5px}.environment-item{font-size:13.5px}}
+  </style>
+</head>
+<body>
+<!--#include header-->
+<main id="app-detail"><div class="wrap"><div class="loading">앱 정보를 불러오는 중입니다.</div></div></main>
+<!--#include footer-->
+<script>
+const APP_ID="ad";
+const APP_CONTENT={
+  intro:`
+    <p>알파카 다이어리는 Windows에서 메모와 일정, 체크리스트, 웹 자료를 한 프로그램에서 관리할 수 있도록 만든 통합형 개인 관리 프로그램입니다.</p>
+    <p>기존 알파카 메모장의 일반메모와 달력메모 기능을 확장하고, 체크리스트와 컬렉션 기능을 하나의 프로그램으로 통합했습니다. 각각의 기능은 독립된 탭으로 구성되어 필요한 작업에 바로 접근할 수 있습니다.</p>
+    <p>데이터는 기능별 JSON 파일로 분리하여 저장하며, 자동 저장과 백업·복원 기능을 제공해 일상적인 기록과 자료 관리에 활용할 수 있도록 구성했습니다.</p>
+  `,
+  features:[
+    {title:"일반메모",description:"제목과 내용을 자유롭게 작성하고 관리할 수 있습니다. 메모 작성 중에는 자동 저장이 적용되며 목록 탐색과 키보드 단축키를 지원합니다."},
+    {title:"달력메모",description:"특정 날짜에 메모를 기록하고 월별 보기, 1년 전체 보기, 목록 보기로 날짜별 기록을 확인할 수 있습니다. 공휴일 정보도 함께 표시할 수 있습니다."},
+    {title:"체크리스트",description:"쇼핑리스트나 할 일처럼 완료 여부를 관리해야 하는 항목을 별도로 기록하고 정리할 수 있습니다."},
+    {title:"컬렉션",description:"웹 주소와 관련 메모를 컬렉션별로 관리할 수 있습니다. URL을 추가하면 웹페이지 제목을 자동으로 가져오는 기능도 제공합니다."},
+    {title:"자동 저장",description:"메모 입력 내용을 일정 시간 동안 변경이 없을 때 자동으로 저장하며, 프로그램 종료 시에도 최신 데이터를 저장합니다."},
+    {title:"백업·복원",description:"각 탭의 데이터를 JSON, TXT, XLSX 형식으로 내보낼 수 있으며 전체 데이터를 ZIP 백업 파일로 저장하고 복원할 수 있습니다."},
+    {title:"라이트·다크 테마",description:"Windows 11 스타일의 화면 구성을 바탕으로 라이트 모드와 다크 모드를 선택할 수 있습니다."},
+    {title:"키보드 단축키",description:"탭 전환, 내용 입력창 이동, 빠른 입력, 날짜·시간 삽입, 복사, 항목 이동 등 다양한 작업을 키보드로 처리할 수 있습니다."}
+  ],
+  usage:[
+    "알파카 다이어리를 실행한 후 상단의 일반메모, 달력메모, 체크리스트, 컬렉션 탭 중 필요한 기능을 선택합니다.",
+    "일반메모에서는 제목과 내용을 작성하고, 달력메모에서는 기록할 날짜를 선택해 내용을 입력합니다.",
+    "할 일이나 쇼핑 목록은 체크리스트 탭에서 관리하고, 저장해 두고 싶은 웹 자료는 컬렉션 탭에서 컬렉션과 항목을 만들어 정리합니다.",
+    "필요한 경우 파일 메뉴의 내보내기 또는 전체 백업 기능을 이용해 데이터를 별도로 보관합니다.",
+    "설정 메뉴에서 글꼴, 테마, 빠른 입력 문구 및 관련 환경을 필요에 맞게 조정합니다."
+  ]
+};
+const $=selector=>document.querySelector(selector);
+function escapeHtml(value){return String(value??"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/\\/g,"&#039;").replace(/"/g,"&quot;");}
+function formatDate(value){return value?String(value).replace(/-/g,"."):"-";}
+function categoryName(value){return ({work:"업무",life:"생활",dev:"개발자"}[value]||value||"-");}
+function platformName(value){return ({web:"Web",windows:"Windows"}[value]||value||"-");}
+async function loadJson(path){const response=await fetch(path);if(!response.ok)throw new Error(`${path} 불러오기 실패`);return response.json();}
+function getRelatedApps(app,apps){return apps.filter(item=>item.id!==app.id&&item.category===app.category).slice(0,3);}
+function getRelatedLink(item){const internalIds=new Set(["ac","ae","aie-exe","aie-web","an","ad","EdgeCM","retirement-age-calc"]);return internalIds.has(item.id)?`./${encodeURIComponent(item.id)}.html`:(item.github||item.url||item.downloadUrl||"../tools.html");}
+function renderPage(app,apps,notices){
+  const github=app.github?`<a class="app-button primary" href="${escapeHtml(app.github)}" target="_blank" rel="noopener">GitHub ↗</a>`:"";
+  const relatedNotices=notices.filter(notice=>notice.appId===app.id).sort((a,b)=>String(b.date).localeCompare(String(a.date)));
+  const noticesHtml=relatedNotices.length?relatedNotices.map(notice=>`<a class="notice-item" href="${escapeHtml(notice.url)}" target="_blank" rel="noopener"><span class="notice-date">${escapeHtml(formatDate(notice.date))}</span><span class="notice-title">${escapeHtml(notice.title)}</span><span class="notice-arrow">↗</span></a>`).join(""):`<div class="notice-empty">등록된 관련 공지사항이 없습니다.</div>`;
+  const relatedHtml=getRelatedApps(app,apps).map(item=>{const href=getRelatedLink(item);const internal=/^\.\//.test(href);return `<a class="related-card" href="${escapeHtml(href)}" ${internal?'target="_self"':'target="_blank" rel="noopener"'}><h3>${escapeHtml(item.name)}</h3><p>${escapeHtml(item.description||"")}</p></a>`;}).join("");
+  const featureHtml=APP_CONTENT.features.map(feature=>`<article class="feature-card"><h3>${escapeHtml(feature.title)}</h3><p>${escapeHtml(feature.description)}</p></article>`).join("");
+  const usageHtml=APP_CONTENT.usage.map(step=>`<li>${escapeHtml(step)}</li>`).join("");
+  $("#app-detail").innerHTML=`
+    <div class="wrap">
+      <div class="breadcrumb" aria-label="현재 위치"><a href="../index.html">ALPACA TOOLS</a><span class="breadcrumb-separator">›</span><a href="../tools.html">모든 도구</a><span class="breadcrumb-separator">›</span><span>${escapeHtml(app.name)}</span></div>
+      <section class="app-hero">
+        <img class="app-icon" src="../${escapeHtml(app.icon||"")}" alt="${escapeHtml(app.name)} 아이콘" onerror="this.style.display='none';">
+        <div class="app-hero-content">
+          <h1>${escapeHtml(app.name)}</h1>
+          <p class="app-description">${escapeHtml(app.description||"")}</p>
+          <div class="app-meta"><span class="app-meta-item">${escapeHtml(categoryName(app.category))}</span><span class="app-meta-item">${escapeHtml(platformName(app.platform))}</span><span class="app-meta-item">v${escapeHtml(app.version||"-")}</span><span class="app-meta-item">${escapeHtml(formatDate(app.updatedAt))} 업데이트</span></div>
+        </div>
+      </section>
+      <div class="app-actions">${github}</div>
+      <section class="detail-section"><h2>앱 소개</h2><div class="detail-content">${APP_CONTENT.intro}</div></section>
+      <section class="detail-section"><h2>주요 기능</h2><div class="feature-grid">${featureHtml}</div></section>
+      <section class="detail-section"><h2>사용 방법</h2><ol class="steps">${usageHtml}</ol></section>
+      <section class="detail-section"><h2>실행 환경</h2><div class="environment">
+        <div class="environment-item"><span class="environment-label">플랫폼</span><span class="environment-value">Windows</span></div>
+        <div class="environment-item"><span class="environment-label">버전</span><span class="environment-value">v${escapeHtml(app.version||"-")}</span></div>
+        <div class="environment-item"><span class="environment-label">최근 업데이트</span><span class="environment-value">${escapeHtml(formatDate(app.updatedAt))}</span></div>
+        <div class="environment-item"><span class="environment-label">배포 형태</span><span class="environment-value">Windows 프로그램</span></div>
+      </div></section>
+      <section class="detail-section"><h2>데이터 관리</h2><div class="detail-content">
+        <p>일반메모, 달력메모, 체크리스트, 컬렉션은 각각 독립된 데이터 파일로 관리됩니다. 프로그램의 전체 백업 기능을 이용하면 여러 데이터 파일과 설정을 하나의 ZIP 파일로 보관할 수 있습니다.</p>
+        <p>각 기능은 JSON 기반으로 데이터를 저장하며 TXT와 XLSX 형식의 내보내기도 지원합니다. XLSX 내보내기는 <strong>openpyxl</strong>이 설치되어 있는 환경에서 사용할 수 있습니다.</p>
+      </div></section>
+      <section class="detail-section"><h2>관련 공지사항</h2><div class="notice-list">${noticesHtml}</div></section>
+      <section class="detail-section"><h2>관련 도구</h2><div class="related-grid">${relatedHtml||'<div class="detail-content"><p>같은 카테고리의 관련 도구가 없습니다.</p></div>'}</div></section>
+      <div class="bottom-cta"><h2>${escapeHtml(app.name)}의 소스코드를 확인해 보세요.</h2><div class="app-actions" style="justify-content:center;padding-bottom:0">${github}</div></div>
+      <a class="back-link" href="../tools.html">← 도구 목록으로 돌아가기</a>
+    </div>`;
+}
+Promise.all([loadJson("../apps.json"),loadJson("../notice.json")]).then(([appsData,noticesData])=>{
+  const apps=Array.isArray(appsData)?appsData:(appsData.apps||[]);
+  const notices=Array.isArray(noticesData)?noticesData:(noticesData.notices||[]);
+  const app=apps.find(item=>item.id===APP_ID);
+  if(!app)throw new Error(`apps.json에서 "${APP_ID}" 앱을 찾을 수 없습니다.`);
+  renderPage(app,apps,notices);
+}).catch(error=>{
+  console.error(error);
+  $("#app-detail").innerHTML=`<div class="wrap"><div class="error-message">앱 정보를 불러오지 못했습니다.<small>${escapeHtml(error.message)}</small></div></div>`;
+});
+</script>
+</body>
+</html>
