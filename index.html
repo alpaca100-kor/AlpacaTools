@@ -110,6 +110,8 @@ body{ line-height:1.5; }
 }
 .section-head h2{font-size:21px; font-weight:800; margin:0; letter-spacing:-0.01em;}
 .section-head span{font-size:13px; color:var(--muted);}
+.section-more{font-size:13px; font-weight:700; color:var(--accent);}
+.section-more:hover{text-decoration:underline;}
 .updates{border-top:1px solid var(--line); margin-bottom:0;}
 .update-row{
   display:flex; align-items:center; gap:18px; padding:16px 4px;
@@ -205,6 +207,16 @@ body{ line-height:1.5; }
     <div class="pagination" id="toolPagination"></div>
   </section>
 
+
+  <section id="tips">
+    <div class="section-head">
+      <h2>정보와 팁</h2>
+      <a class="section-more" href="./tips.html">전체 보기 →</a>
+    </div>
+    <div class="updates" id="tipList"></div>
+    <div class="pagination" id="tipPagination"></div>
+  </section>
+
   <section id="notices">
     <div class="section-head">
       <h2>공지사항</h2>
@@ -240,11 +252,14 @@ function isNewApp(updatedAt){
 
 // 페이지당 표시 개수
 const APPS_PER_PAGE = 6;
+const TIPS_PER_PAGE = 5;
 const NOTICES_PER_PAGE = 5;
 
 let APPS = [];
 let currentAppList = [];
 let currentAppPage = 1;
+let currentTipList = [];
+let currentTipPage = 1;
 let currentNoticeList = [];
 let currentNoticePage = 1;
 
@@ -397,6 +412,50 @@ function renderCards(list, page = 1){
   });
 }
 
+
+function renderTips(list, page = 1){
+  const sorted = [...list].sort((a,b)=> new Date(b.date) - new Date(a.date));
+  currentTipList = sorted;
+
+  const totalPages = Math.max(1, Math.ceil(sorted.length / TIPS_PER_PAGE));
+  if(page > totalPages) page = totalPages;
+  currentTipPage = page;
+
+  const start = (page - 1) * TIPS_PER_PAGE;
+  const pageItems = sorted.slice(start, start + TIPS_PER_PAGE);
+
+  document.getElementById("tipList").innerHTML = pageItems.map(t => {
+    const d = new Date(t.date);
+    const label = `${d.getFullYear()}.${String(d.getMonth()+1).padStart(2,"0")}.${String(d.getDate()).padStart(2,"0")}`;
+    return `
+    <a class="update-row" href="${escapeHtml(t.url)}" target="_blank" rel="noopener">
+      <div class="update-date">${label}</div>
+      <div class="update-desc" style="flex:1;">${escapeHtml(t.title)}</div>
+      <div class="update-badge">${escapeHtml(t.category)}</div>
+    </a>`;
+  }).join("");
+
+  renderPagination("tipPagination", sorted.length, TIPS_PER_PAGE, currentTipPage, (p)=>{
+    renderTips(currentTipList, p);
+    document.getElementById("tips").scrollIntoView({behavior:"smooth", block:"start"});
+  });
+}
+
+async function loadTips(){
+  try{
+    const res = await fetch("./tips.json");
+    if(!res.ok) throw new Error("tips.json fetch failed");
+    const data = await res.json();
+    const tips = Array.isArray(data.tips) ? data.tips : [];
+    renderTips(tips);
+  }catch(e){
+    console.error(e);
+    document.getElementById("tipList").innerHTML =
+      `<p style="color:var(--muted); font-size:14px; padding:16px 0;">정보와 팁을 불러오지 못했습니다. tips.json 파일 위치를 확인해주세요.</p>`;
+    document.getElementById("tipPagination").innerHTML = "";
+  }
+}
+
 function renderNotices(list, page = 1){
   const sorted = [...list].sort((a,b)=> new Date(b.date) - new Date(a.date));
   currentNoticeList = sorted;
@@ -483,6 +542,7 @@ async function loadNotices(){
 }
 
 loadApps();
+loadTips();
 loadNotices();
 </script>
 
