@@ -149,6 +149,21 @@
       "repoUrl": null,
       "tags": [],
       "github": "https://github.com/alpaca100-kor/ai-code-sample"
+    },
+    {
+      "id": "ad",
+      "name": "알파카 다이어리",
+      "description": "메모·달력메모·체크리스트·컬렉션을 하나로 관리하는 Windows 프로그램",
+      "icon": "assets/icons/ad.ico",
+      "category": "work",
+      "platform": "windows",
+      "version": "1.0",
+      "updatedAt": "2026-10-04",
+      "url": null,
+      "downloadUrl": null,
+      "repoUrl": null,
+      "tags": [],
+      "github": "https://github.com/alpaca100-kor/AlpacaDiary"
     }
   ]
 }
