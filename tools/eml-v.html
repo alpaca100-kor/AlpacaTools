@@ -58,14 +58,14 @@ const APP_CONTENT = {
 };
 
 const $ = selector => document.querySelector(selector);
-function escapeHtml(value){return String(value??"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/\\\"/g,"&quot;").replace(/'/g,"&#039;");}
+function escapeHtml(value){return String(value??"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#039;");}
 function formatDate(value){return value?String(value).replace(/-/g,"."): "-";}
 function categoryName(value){return ({work:"업무",life:"생활",dev:"개발자"})[value]||value||"-";}
 function platformName(value){return ({web:"Web",windows:"Windows"})[value]||value||"-";}
 function getPrimaryAction(app){return app.platform==="web"&&app.url?{text:"바로 열기 ↗",url:app.url}:null;}
 function getRelatedApps(app,apps){return apps.filter(item=>item.id!==app.id&&item.category===app.category).slice(0,3);}
 function getRelatedLink(item){
-  const internalIds=new Set(["ac","ad","ae","aie-exe","aie-web","an","EdgeCM","eml-v","md-ve","pdf2jpg","png-be","retirement-age-calc"]);
+  const internalIds=new Set(["ac","ad","ae","an","eml-v"]);
   return internalIds.has(item.id)?{href:`./${encodeURIComponent(item.id)}.html`,internal:true}:{href:item.repoUrl||item.url||item.downloadUrl||item.github||"../tools.html",internal:false};
 }
 function renderPage(app,apps,notices){
