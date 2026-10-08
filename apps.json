@@ -16,6 +16,21 @@
       "github": "https://github.com/alpaca100-kor/AlpacaCalendar"
     },
     {
+      "id": "ad",
+      "name": "알파카 다이어리",
+      "description": "메모·달력메모·체크리스트·컬렉션을 하나로 관리하는 Windows 프로그램",
+      "icon": "assets/icons/ad.ico",
+      "category": "work",
+      "platform": "windows",
+      "version": "1.0",
+      "updatedAt": "2026-10-04",
+      "url": null,
+      "downloadUrl": null,
+      "repoUrl": null,
+      "tags": [],
+      "github": "https://github.com/alpaca100-kor/AlpacaDiary"
+    },
+    {
       "id": "ae",
       "name": "알파카 파일 탐색기",
       "description": "macOS Finder 스타일의 윈도우 파일 탐색기",
@@ -91,6 +106,21 @@
       "github": "https://github.com/alpaca100-kor/EdgeCollectionManager"
     },
     {
+      "id": "eml-v",
+      "name": "EML Viewer",
+      "description": "EML(전자메일) 파일 뷰어",
+      "icon": "📧",
+      "category": "work",
+      "platform": "web",
+      "version": "0.1",
+      "updatedAt": "2026-10-07",
+      "url": "https://alpaca100-kor.github.io/ai-code-sample/EML/Claude-EML-Viewer.html",
+      "downloadUrl": null,
+      "repoUrl": null,
+      "tags": [],
+      "github": "https://github.com/alpaca100-kor/ai-code-sample"
+    },
+    {
       "id": "md-ve",
       "name": "Markdown Viewer & Editor",
       "description": "마크다운 파일 뷰어 및 편집기",
@@ -149,21 +179,6 @@
       "repoUrl": null,
       "tags": [],
       "github": "https://github.com/alpaca100-kor/ai-code-sample"
-    },
-    {
-      "id": "ad",
-      "name": "알파카 다이어리",
-      "description": "메모·달력메모·체크리스트·컬렉션을 하나로 관리하는 Windows 프로그램",
-      "icon": "assets/icons/ad.ico",
-      "category": "work",
-      "platform": "windows",
-      "version": "1.0",
-      "updatedAt": "2026-10-04",
-      "url": null,
-      "downloadUrl": null,
-      "repoUrl": null,
-      "tags": [],
-      "github": "https://github.com/alpaca100-kor/AlpacaDiary"
     }
   ]
 }
