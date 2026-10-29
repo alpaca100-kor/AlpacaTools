@@ -61,7 +61,8 @@ async function loadJson(path){const response=await fetch(path);if(!response.ok)t
 function getRelatedApps(app,apps){return apps.filter(item=>item.id!==app.id&&item.category===app.category).slice(0,3);}
 function getRelatedLink(item){const internalIds=new Set(["ac","ae","aie-exe","aie-web","an","ad","EdgeCM","retirement-age-calc"]);return internalIds.has(item.id)?`./${encodeURIComponent(item.id)}.html`:(item.github||item.url||item.downloadUrl||"../tools.html");}
 function renderPage(app,apps,notices){
-  const github=app.github?`<a class="app-button primary" href="${escapeHtml(app.github)}" target="_blank" rel="noopener">GitHub ↗</a>`:"";
+  const download=app.downloadUrl?`<a class="app-button primary" href="${escapeHtml(app.downloadUrl)}" target="_blank" rel="noopener">다운로드 ↗</a>`:"";
+  const github=app.github?`<a class="app-button" href="${escapeHtml(app.github)}" target="_blank" rel="noopener">GitHub 소스코드 ↗</a>`:"";
   const relatedNotices=notices.filter(notice=>notice.appId===app.id).sort((a,b)=>String(b.date).localeCompare(String(a.date)));
   const noticesHtml=relatedNotices.length?relatedNotices.map(notice=>`<a class="notice-item" href="${escapeHtml(notice.url)}" target="_blank" rel="noopener"><span class="notice-date">${escapeHtml(formatDate(notice.date))}</span><span class="notice-title">${escapeHtml(notice.title)}</span><span class="notice-arrow">↗</span></a>`).join(""):`<div class="notice-empty">등록된 관련 공지사항이 없습니다.</div>`;
   const relatedHtml=getRelatedApps(app,apps).map(item=>{const href=getRelatedLink(item);const internal=/^\.\//.test(href);return `<a class="related-card" href="${escapeHtml(href)}" ${internal?'target="_self"':'target="_blank" rel="noopener"'}><h3>${escapeHtml(item.name)}</h3><p>${escapeHtml(item.description||"")}</p></a>`;}).join("");
@@ -78,7 +79,7 @@ function renderPage(app,apps,notices){
           <div class="app-meta"><span class="app-meta-item">${escapeHtml(categoryName(app.category))}</span><span class="app-meta-item">${escapeHtml(platformName(app.platform))}</span><span class="app-meta-item">v${escapeHtml(app.version||"-")}</span><span class="app-meta-item">${escapeHtml(formatDate(app.updatedAt))} 업데이트</span></div>
         </div>
       </section>
-      <div class="app-actions">${github}</div>
+      <div class="app-actions">${download}${github}</div>
       <section class="detail-section"><h2>앱 소개</h2><div class="detail-content">${APP_CONTENT.intro}</div></section>
       <section class="detail-section"><h2>주요 기능</h2><div class="feature-grid">${featureHtml}</div></section>
       <section class="detail-section"><h2>사용 방법</h2><ol class="steps">${usageHtml}</ol></section>
@@ -94,7 +95,7 @@ function renderPage(app,apps,notices){
       </div></section>
       <section class="detail-section"><h2>관련 공지사항</h2><div class="notice-list">${noticesHtml}</div></section>
       <section class="detail-section"><h2>관련 도구</h2><div class="related-grid">${relatedHtml||'<div class="detail-content"><p>같은 카테고리의 관련 도구가 없습니다.</p></div>'}</div></section>
-      <div class="bottom-cta"><h2>${escapeHtml(app.name)}의 소스코드를 확인해 보세요.</h2><div class="app-actions" style="justify-content:center;padding-bottom:0">${github}</div></div>
+      <div class="bottom-cta"><h2>${escapeHtml(app.name)}를 다운로드하거나 소스코드를 확인해 보세요.</h2><div class="app-actions" style="justify-content:center;padding-bottom:0">${download}${github}</div></div>
       <a class="back-link" href="../tools.html">← 도구 목록으로 돌아가기</a>
     </div>`;
 }
